@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 're
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Sword, Cpu, Link2, Sparkles, Wrench } from 'lucide-react';
 import { cn } from './src/lib/utils';
+import { TooltipProvider } from './src/components/ui/tooltip';
 import { TIMING, EASE } from './src/lib/animations';
 import { AnimatedBackground } from './src/components/AnimatedBackground';
 import { HomeScreen } from './src/screens/HomeScreen';
@@ -111,14 +112,16 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="relative flex h-screen overflow-hidden bg-background">
-        <AnimatedBackground />
-        <Sidebar />
-        <main className="relative z-10 flex-1 overflow-y-auto scroll-smooth">
-          <AnimatedRoutes />
-        </main>
-      </div>
-    </BrowserRouter>
+    <TooltipProvider>
+      <BrowserRouter>
+        <div className="relative flex h-screen overflow-hidden bg-background">
+          <AnimatedBackground />
+          <Sidebar />
+          <main className="relative z-10 flex-1 overflow-y-auto scroll-smooth">
+            <AnimatedRoutes />
+          </main>
+        </div>
+      </BrowserRouter>
+    </TooltipProvider>
   );
 }
