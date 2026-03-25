@@ -20,6 +20,11 @@ dist-ssr
 *.log
 npm-debug.log*
 
+# Asset source folders (used locally for data, not needed in repo)
+assets/Icons/
+assets/Chips/
+assets/Skill Cards/
+
 # Admin
 admin/node_modules
 admin/dist
