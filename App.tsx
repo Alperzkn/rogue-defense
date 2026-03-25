@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Sword, Cpu, Link2, Sparkles, Wrench } from 'lucide-react';
+import { Home, Sword, Cpu, Link2, Sparkles, Wrench, Coffee } from 'lucide-react';
 import { cn } from './src/lib/utils';
 import { TooltipProvider } from './src/components/ui/tooltip';
 import { TIMING, EASE } from './src/lib/animations';
@@ -73,7 +73,16 @@ function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4">
+      <div className="p-4 space-y-3">
+        <a
+          href="https://buymeacoffee.com/alperzkn"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-2.5 text-[11px] font-semibold text-yellow-400 transition-all hover:bg-yellow-500/20 hover:border-yellow-500/50"
+        >
+          <Coffee className="h-4 w-4" />
+          Buy me a coffee
+        </a>
         <div className="rounded-lg border border-border/40 bg-muted/30 px-4 py-3">
           <p className="text-[11px] font-semibold text-foreground/80">Rogue Defense</p>
           <p className="text-[10px] text-muted-foreground">v2.0 &middot; Updated Mar 2026</p>
