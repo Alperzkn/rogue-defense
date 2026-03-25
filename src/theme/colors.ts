@@ -1,9 +1,9 @@
 export const Colors = {
   // Backgrounds
-  bg: '#050B1A',
-  bgCard: '#0A1628',
-  bgElevated: '#0D1E35',
-  bgBorder: '#1A3A5C',
+  bg: '#08090E',
+  bgCard: '#0E1017',
+  bgElevated: '#14161F',
+  bgBorder: '#1E2030',
 
   // Primary neon palette
   cyan: '#00C8FF',
@@ -19,7 +19,6 @@ export const Colors = {
   electricDim: '#7A6500',
   energy: '#B44FFF',
   physical: '#3B82F6',
-  gravity: '#6366F1',
   field: '#00FF88',
   fieldDim: '#007A42',
 
@@ -64,7 +63,7 @@ export const Colors = {
   transparent: 'transparent',
 };
 
-export type SkillType = 'fire' | 'electric' | 'energy' | 'physical' | 'gravity' | 'field';
+export type SkillType = 'fire' | 'electric' | 'energy' | 'physical' | 'field';
 export type ChipSocket = 'emitter' | 'lidar' | 'processor' | 'controller' | 'database' | 'battery';
 export type StatusEffect = 'burn' | 'slow' | 'paralyze' | 'disruption' | 'vulnerable' | 'physicalVulnerable' | 'injured';
 
@@ -73,7 +72,6 @@ export const SkillTypeColors: Record<SkillType, string> = {
   electric: Colors.electric,
   energy: Colors.energy,
   physical: Colors.physical,
-  gravity: Colors.gravity,
   field: Colors.field,
 };
 

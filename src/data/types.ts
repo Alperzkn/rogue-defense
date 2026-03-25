@@ -1,4 +1,4 @@
-export type SkillType = 'fire' | 'electric' | 'energy' | 'physical' | 'gravity' | 'field';
+export type SkillType = 'fire' | 'electric' | 'energy' | 'physical' | 'field';
 export type CardTag = 'Chain' | 'Combo' | 'Standard';
 export type CardTier = 1 | 2 | 3;
 export type ChipSocket = 'emitter' | 'lidar' | 'processor' | 'controller' | 'database' | 'battery';
@@ -9,6 +9,11 @@ export interface SkillCard {
   tag: CardTag;
   tier: CardTier;
   lockedLevel?: number;
+  isSpecial?: boolean; // purple/pink card in game — powerful standalone effect
+  // Chain: other cards from the SAME skill that must be selected first
+  requiresCards?: string[];
+  // Combo: another SKILL that must be in the build for this card to be available
+  requiredSkillId?: string;
 }
 
 export interface Skill {
@@ -17,6 +22,8 @@ export interface Skill {
   description: string;
   type: SkillType;
   icon: string; // emoji fallback
+  iconImage?: string; // path to image icon (overrides emoji)
+  iconScale?: number; // custom scale for iconImage (default 2.1)
   cards: SkillCard[];
   tips?: string[];
 }

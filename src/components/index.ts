@@ -1,5 +1,6 @@
 export { AnimatedBackground } from './AnimatedBackground';
 export { SkillTypeBadge } from './SkillTypeBadge';
+export { SkillIcon } from './SkillIcon';
 export { RarityBadge } from './RarityBadge';
 
 // UI components

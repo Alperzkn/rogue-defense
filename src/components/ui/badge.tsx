@@ -15,7 +15,6 @@ const badgeVariants = cva(
         electric: 'border-[#FFD700]/50 bg-[#FFD700]/10 text-[#FFD700]',
         energy: 'border-[#B44FFF]/50 bg-[#B44FFF]/10 text-[#B44FFF]',
         physical: 'border-[#3B82F6]/50 bg-[#3B82F6]/10 text-[#3B82F6]',
-        gravity: 'border-[#6366F1]/50 bg-[#6366F1]/10 text-[#6366F1]',
         field: 'border-[#00FF88]/50 bg-[#00FF88]/10 text-[#00FF88]',
         // Card tags
         chain: 'border-[#00C8FF]/50 bg-[#00C8FF]/10 text-[#00C8FF]',

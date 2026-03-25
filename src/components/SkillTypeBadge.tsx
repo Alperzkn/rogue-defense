@@ -4,7 +4,7 @@ import type { SkillType } from '../data/types';
 
 const TYPE_LABELS: Record<SkillType, string> = {
   fire: 'FIRE', electric: 'ELECTRIC', energy: 'ENERGY',
-  physical: 'PHYSICAL', gravity: 'GRAVITY', field: 'FIELD',
+  physical: 'PHYSICAL', field: 'FIELD',
 };
 
 export function SkillTypeBadge({ type }: { type: SkillType }) {

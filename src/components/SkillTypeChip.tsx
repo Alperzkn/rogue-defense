@@ -7,7 +7,6 @@ const TYPE_LABELS: Record<SkillType, string> = {
   electric: 'ELECTRIC',
   energy: 'ENERGY',
   physical: 'PHYSICAL',
-  gravity: 'GRAVITY',
   field: 'FIELD',
 };
 

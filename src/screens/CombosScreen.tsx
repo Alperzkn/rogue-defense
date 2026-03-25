@@ -1,15 +1,23 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, Star, Zap, Gamepad2, CreditCard, Lightbulb, ChevronRight } from 'lucide-react';
+import { ChevronDown, Star, Zap, Gamepad2, Layers, Lightbulb, ChevronRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Badge } from '../components/ui/badge';
 import { Card, CardContent } from '../components/ui/card';
 import { Separator } from '../components/ui/separator';
-import { SkillTypeBadge } from '../components';
+import { SkillTypeBadge, SkillIcon } from '../components';
 import { COMBOS, SKILLS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import type { Combo } from '../data/types';
+import { fadeUp, TIMING, EASE } from '../lib/animations';
+
+function getComboColor(combo: Combo): string {
+  const skills = combo.skills.map(id => SKILLS.find(s => s.id === id)).filter(Boolean);
+  if (skills.length === 0) return '#00C8FF';
+  // Use the first skill's type color as the dominant accent
+  return SkillTypeColors[skills[0]!.type];
+}
 
 function SkillPill({ skillId, onClick }: { skillId: string; onClick?: () => void }) {
   const skill = SKILLS.find(s => s.id === skillId);
@@ -19,12 +27,12 @@ function SkillPill({ skillId, onClick }: { skillId: string; onClick?: () => void
   return (
     <button
       type="button"
-      onClick={onClick}
-      className="flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-semibold transition-colors duration-150 hover:opacity-80"
-      style={{ borderColor: `${color}40`, backgroundColor: `${color}12`, color }}
+      onClick={e => { e.stopPropagation(); onClick?.(); }}
+      className="flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition-all duration-200 hover:brightness-125"
+      style={{ borderColor: `${color}25`, backgroundColor: `${color}08` }}
     >
-      <span>{skill.icon}</span>
-      <span>{skill.name}</span>
+      <SkillIcon skill={skill} size={16} />
+      <span className="text-foreground">{skill.name}</span>
       <SkillTypeBadge type={skill.type} />
     </button>
   );
@@ -36,8 +44,7 @@ function StarRow({ rating }: { rating: number }) {
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
-          className={cn('h-3.5 w-3.5', i < rating ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border')}
-          style={i < rating ? { filter: 'drop-shadow(0 0 3px #FFD70080)' } : {}}
+          className={cn('h-3 w-3', i < rating ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border/50')}
         />
       ))}
     </div>
@@ -48,24 +55,21 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const isTop = combo.rating === 5;
+  const accentColor = getComboColor(combo);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: TIMING.normal, delay: index * TIMING.stagger, ease: EASE.spring }}
     >
-      <Card className={cn(
-        'relative overflow-hidden border-border/60 bg-card/80 transition-all duration-200',
-        isTop && 'border-[#B44FFF]/20 hover:border-[#B44FFF]/40',
-        !isTop && 'hover:border-border/80',
-      )}>
-        {isTop && (
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{ background: 'linear-gradient(135deg, #B44FFF0D, #00C8FF06, transparent)' }}
-          />
-        )}
+      <Card
+        className="group relative overflow-hidden transition-all duration-200 hover:brightness-110"
+        style={{
+          border: `1px solid ${accentColor}25`,
+          background: `linear-gradient(135deg, ${accentColor}18, ${accentColor}08 50%, hsl(var(--card)) 100%)`,
+        }}
+      >
 
         <button
           type="button"
@@ -73,36 +77,27 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
           className="relative w-full text-left"
           aria-label={`Toggle ${combo.name} details`}
         >
-          <CardContent className="p-4">
-            <div className="mb-2 flex items-start gap-3">
+          <CardContent className="p-5 pl-5">
+            <div className="flex items-start gap-3">
               <div className="flex-1 min-w-0">
-                <div className="mb-1.5 flex items-center gap-2 flex-wrap">
+                <div className="mb-2 flex items-center gap-2.5 flex-wrap">
                   <StarRow rating={combo.rating} />
-                  {isTop && <Badge variant="mythic">TOP BUILD</Badge>}
+                  {isTop && <Badge variant="mythic" className="text-[9px]">TOP BUILD</Badge>}
                 </div>
-                <h3 className={cn(
-                  'text-base font-bold leading-tight',
-                  isTop ? 'text-[#B44FFF]' : 'text-foreground',
-                )}>
+                <h3 className="text-[15px] font-bold text-foreground leading-tight mb-2">
                   {combo.name}
                 </h3>
+                <p className="mb-3 text-[12px] text-muted-foreground leading-relaxed">{combo.description}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {combo.skills.map(id => (
+                    <SkillPill key={id} skillId={id} onClick={() => navigate(`/skills/${id}`)} />
+                  ))}
+                </div>
               </div>
               <ChevronDown className={cn(
-                'mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
+                'mt-1 h-4 w-4 shrink-0 text-muted-foreground/40 transition-transform duration-200',
                 open && 'rotate-180',
               )} />
-            </div>
-
-            <p className="mb-3 text-sm text-muted-foreground leading-relaxed">{combo.description}</p>
-
-            <div className="flex flex-wrap gap-1.5">
-              {combo.skills.map(id => (
-                <SkillPill
-                  key={id}
-                  skillId={id}
-                  onClick={() => navigate(`/skills/${id}`)}
-                />
-              ))}
             </div>
           </CardContent>
         </button>
@@ -113,70 +108,75 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.22, ease: 'easeInOut' }}
+              transition={{ duration: TIMING.expand, ease: 'easeInOut' }}
               style={{ overflow: 'hidden' }}
             >
-              <Separator />
-              <CardContent className="p-4 pt-4">
-                <div className="flex flex-col gap-4">
+              <div className="mx-5 ml-5 h-px bg-border/30" />
+              <CardContent className="p-5 pl-5 pt-4">
+                <div className="grid grid-cols-2 gap-5">
 
                   {/* Synergy */}
                   <div>
-                    <div className="mb-1.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      <Zap className="h-3.5 w-3.5 text-[#FFD700]" /> Synergy
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="flex h-5 w-5 items-center justify-center rounded" style={{ backgroundColor: `${accentColor}12` }}>
+                        <Zap className="h-3 w-3" style={{ color: accentColor }} />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Synergy</span>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{combo.synergy}</p>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed">{combo.synergy}</p>
                   </div>
-
-                  <Separator />
 
                   {/* Playstyle */}
                   <div>
-                    <div className="mb-1.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      <Gamepad2 className="h-3.5 w-3.5 text-[#00C8FF]" /> Playstyle
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="flex h-5 w-5 items-center justify-center rounded bg-primary/8">
+                        <Gamepad2 className="h-3 w-3 text-primary" />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Playstyle</span>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{combo.playstyle}</p>
+                    <p className="text-[12px] text-muted-foreground leading-relaxed">{combo.playstyle}</p>
                   </div>
+                </div>
 
-                  <Separator />
-
-                  {/* Key Cards */}
-                  <div>
-                    <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      <CreditCard className="h-3.5 w-3.5 text-[#B44FFF]" /> Key Cards
+                {/* Key Cards */}
+                <div className="mt-4">
+                  <div className="mb-2 flex items-center gap-2">
+                    <div className="flex h-5 w-5 items-center justify-center rounded bg-[#B44FFF]/8">
+                      <Layers className="h-3 w-3 text-[#B44FFF]" />
                     </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {combo.cards.map(card => (
-                        <span
-                          key={card}
-                          className="rounded border border-[#B44FFF]/30 bg-[#B44FFF]/10 px-2.5 py-0.5 text-xs font-semibold text-[#B44FFF]"
-                        >
-                          {card}
-                        </span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Key Cards</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {combo.cards.map(card => (
+                      <span
+                        key={card}
+                        className="rounded-md border border-[#B44FFF]/15 bg-[#B44FFF]/6 px-2.5 py-1 text-[11px] font-medium text-[#D4A0FF]"
+                      >
+                        {card}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tips */}
+                {combo.tips.length > 0 && (
+                  <div className="mt-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="flex h-5 w-5 items-center justify-center rounded bg-[#FFD700]/8">
+                        <Lightbulb className="h-3 w-3 text-[#FFD700]" />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Tips</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {combo.tips.map((tip, i) => (
+                        <div key={i} className="flex items-start gap-2.5">
+                          <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground/40" />
+                          <p className="text-[12px] text-muted-foreground leading-relaxed">{tip}</p>
+                        </div>
                       ))}
                     </div>
                   </div>
-
-                  {/* Tips */}
-                  {combo.tips.length > 0 && (
-                    <>
-                      <Separator />
-                      <div>
-                        <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                          <Lightbulb className="h-3.5 w-3.5 text-[#FFD700]" /> Tips
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          {combo.tips.map((tip, i) => (
-                            <div key={i} className="flex items-start gap-2.5">
-                              <ChevronRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#00C8FF]" />
-                              <p className="text-sm text-muted-foreground leading-relaxed">{tip}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
+                )}
               </CardContent>
             </motion.div>
           )}
@@ -191,33 +191,31 @@ export function CombosScreen() {
   const topCount = sorted.filter(c => c.rating === 5).length;
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-8">
+    <div className="mx-auto max-w-4xl px-6 py-10">
       {/* Header */}
-      <div className="mb-6">
+      <motion.div {...fadeUp(0)} className="mb-6">
         <h1 className="text-2xl font-black tracking-tight text-foreground">Synergy Builds</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {COMBOS.length} curated builds · {topCount} top-rated (5★) · Click skill pills to view details
+          {COMBOS.length} curated builds &middot; {topCount} top-rated (5★)
         </p>
-      </div>
+      </motion.div>
 
       {/* Legend */}
-      <Card className="mb-6 border-border/60 bg-card/80">
-        <CardContent className="flex flex-wrap items-center gap-x-6 gap-y-2 p-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Rating</span>
-          {[5, 4, 3].map(r => (
-            <div key={r} className="flex items-center gap-2">
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Star key={i} className={cn('h-3 w-3', i < r ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border')} />
-                ))}
-              </div>
-              <span className="text-xs text-muted-foreground">
-                {r === 5 ? 'Meta defining' : r === 4 ? 'Strong' : 'Viable'}
-              </span>
+      <motion.div {...fadeUp(0.04)} className="mb-6">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-xl border border-border/30 bg-card/40 px-5 py-3">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Rating</span>
+          {[
+            { rating: 5, label: 'Meta defining' },
+            { rating: 4, label: 'Strong' },
+            { rating: 3, label: 'Viable' },
+          ].map(({ rating, label }) => (
+            <div key={rating} className="flex items-center gap-2">
+              <StarRow rating={rating} />
+              <span className="text-[11px] text-muted-foreground">{label}</span>
             </div>
           ))}
-        </CardContent>
-      </Card>
+        </div>
+      </motion.div>
 
       {/* Combo list */}
       <div className="flex flex-col gap-3">
