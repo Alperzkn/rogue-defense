@@ -24,6 +24,7 @@ export interface Skill {
   icon: string; // emoji fallback
   iconImage?: string; // path to image icon (overrides emoji)
   iconScale?: number; // custom scale for iconImage (default 2.1)
+  isFixed?: boolean; // always present in build (e.g. Guardian Turret)
   cards: SkillCard[];
   tips?: string[];
 }

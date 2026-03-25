@@ -1,6 +1,17 @@
 {
   "skills": [
     {
+      "id": "guardian-turret",
+      "name": "Guardian Turret",
+      "description": "The Guardian's built-in turret that fires physical projectiles at enemies.",
+      "type": "physical",
+      "icon": "🔫",
+      "iconImage": "/icons/turret.png",
+      "isFixed": true,
+      "tips": [],
+      "cards": []
+    },
+    {
       "id": "flame-missile",
       "name": "Flame Missile",
       "description": "Releases fire missiles, causing impact and explosion damage.",

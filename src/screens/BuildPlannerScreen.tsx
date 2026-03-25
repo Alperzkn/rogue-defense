@@ -11,7 +11,7 @@ import { SkillTypeColors } from '../theme/colors';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
 import type { Skill, SkillCard, ChipSocketData, ChipStat, CardTier } from '../data/types';
 
-const MAX_SKILLS = 5;
+const MAX_SKILLS = 4;
 
 // ── Chip recommendation logic ──
 function getRecommendedChips(
@@ -186,14 +186,14 @@ function SkillPicker({
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h3 className="text-lg font-bold text-foreground">Select Skills</h3>
-            <p className="text-xs text-muted-foreground">{selected.length}/{MAX_SKILLS} selected &middot; Click to toggle</p>
+            <p className="text-xs text-muted-foreground">{selected.length}/{MAX_SKILLS} selected &middot; Guardian Turret is fixed</p>
           </div>
           <button type="button" onClick={onClose} className="rounded-md border border-border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-secondary">
             Done
           </button>
         </div>
         <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto">
-          {SKILLS.map(skill => {
+          {SKILLS.filter(s => !s.isFixed).map(skill => {
             const color = SkillTypeColors[skill.type];
             const isSelected = selectedIds.has(skill.id);
             const disabled = !isSelected && isFull;
@@ -638,35 +638,41 @@ function ChipSelector({
 
 // ── Main Screen ──
 export function BuildPlannerScreen() {
+  const fixedSkill = SKILLS.find(s => s.isFixed)!;
+  const selectableSkills = SKILLS.filter(s => !s.isFixed);
+
   const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [selectedCards, setSelectedCards] = useState<Record<string, SkillCard[]>>({});
   const [selectedChips, setSelectedChips] = useState<Record<string, ChipStat[]>>({});
+
+  // All skills in the build: fixed + user-selected
+  const allBuildSkills = [fixedSkill, ...selectedSkills];
 
   const excludedIds = selectedSkills.map(s => s.id);
 
   const recommendations = useMemo(() => {
     const rec: Record<string, (ChipStat & { score: number; reason: string })[]> = {};
     for (const socket of CHIP_SOCKETS) {
-      rec[socket.id] = getRecommendedChips(selectedSkills, socket);
+      rec[socket.id] = getRecommendedChips(allBuildSkills, socket);
     }
     return rec;
-  }, [selectedSkills]);
+  }, [allBuildSkills]);
 
-  const boosts = useMemo(() => getBoostSummary(selectedSkills, selectedChips), [selectedSkills, selectedChips]);
+  const boosts = useMemo(() => getBoostSummary(allBuildSkills, selectedChips), [allBuildSkills, selectedChips]);
 
   // Detect combos that match selected skills
   const matchedCombos = useMemo(() => {
-    if (selectedSkills.length < 2) return [];
-    const ids = new Set(selectedSkills.map(s => s.id));
+    if (allBuildSkills.length < 2) return [];
+    const ids = new Set(allBuildSkills.map(s => s.id));
     return COMBOS
       .filter(c => c.skills.every(sid => ids.has(sid)))
       .sort((a, b) => b.rating - a.rating);
-  }, [selectedSkills]);
+  }, [allBuildSkills]);
 
   const partialCombos = useMemo(() => {
-    if (selectedSkills.length === 0) return [];
-    const ids = new Set(selectedSkills.map(s => s.id));
+    if (allBuildSkills.length < 2) return [];
+    const ids = new Set(allBuildSkills.map(s => s.id));
     return COMBOS
       .filter(c => {
         const matchCount = c.skills.filter(sid => ids.has(sid)).length;
@@ -706,7 +712,7 @@ export function BuildPlannerScreen() {
             <div>
               <h1 className="text-2xl font-black tracking-tight text-foreground">Build Planner</h1>
               <p className="text-sm text-muted-foreground">
-                Craft your loadout &middot; {selectedSkills.length}/{MAX_SKILLS} skills
+                Craft your loadout &middot; {1 + selectedSkills.length}/{1 + MAX_SKILLS} skills
               </p>
             </div>
           </div>
@@ -731,6 +737,30 @@ export function BuildPlannerScreen() {
               <Shield className="h-3.5 w-3.5" /> Skill Loadout
             </h2>
             <div className="flex flex-wrap gap-2.5">
+              {/* Fixed Guardian Turret slot */}
+              {(() => {
+                const color = SkillTypeColors[fixedSkill.type];
+                return (
+                  <div
+                    className="relative flex items-center gap-2.5 rounded-xl border p-2.5 pr-3.5"
+                    style={{
+                      borderColor: `${color}35`,
+                      background: `linear-gradient(135deg, ${color}15, ${color}05 70%)`,
+                      boxShadow: `0 0 20px ${color}08`,
+                    }}
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full overflow-hidden"
+                      style={{ backgroundColor: `${color}12`, border: `1px solid ${color}25` }}>
+                      <SkillIcon skill={fixedSkill} size={44} />
+                    </span>
+                    <div>
+                      <div className="text-[13px] font-bold text-foreground">{fixedSkill.name}</div>
+                      <SkillTypeBadge type={fixedSkill.type} />
+                    </div>
+                  </div>
+                );
+              })()}
+
               {selectedSkills.map((skill, i) => {
                 const color = SkillTypeColors[skill.type];
                 return (
@@ -881,7 +911,7 @@ export function BuildPlannerScreen() {
           )}
 
           {/* Skill Cards */}
-          {selectedSkills.length > 0 && (
+          {allBuildSkills.some(s => s.cards.length > 0) && (
             <motion.div {...fadeUp(0.12)}>
               <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 <Sparkles className="h-3.5 w-3.5" /> Upgrade Cards
@@ -890,7 +920,7 @@ export function BuildPlannerScreen() {
                 Select 3 normal cards per tier to unlock 1 special card. Complete a tier to advance.
               </p>
               <div className="space-y-2">
-                {selectedSkills.map(skill => (
+                {allBuildSkills.filter(s => s.cards.length > 0).map(skill => (
                   <SkillCardSelector
                     key={skill.id}
                     skill={skill}
@@ -933,7 +963,7 @@ export function BuildPlannerScreen() {
                         return { ...prev, [socket.id]: [...current, stat] };
                       });
                     }}
-                    hasSkills={selectedSkills.length > 0}
+                    hasSkills={allBuildSkills.length > 0}
                   />
                 ))}
               </div>
@@ -960,7 +990,7 @@ export function BuildPlannerScreen() {
                     <div>
                       <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Skill Loadout</p>
                       <div className="flex flex-wrap gap-1.5">
-                        {selectedSkills.map(s => {
+                        {allBuildSkills.map(s => {
                           const color = SkillTypeColors[s.type];
                           return (
                             <span key={s.id} className="flex items-center gap-1.5 rounded-lg border px-2 py-1"
@@ -1025,7 +1055,7 @@ export function BuildPlannerScreen() {
                         <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                           Cards ({totalSelectedCards})
                         </p>
-                        {selectedSkills.map(skill => {
+                        {allBuildSkills.map(skill => {
                           const cards = selectedCards[skill.id] || [];
                           if (cards.length === 0) return null;
                           const color = SkillTypeColors[skill.type];
