@@ -1,6 +1,6 @@
 # Rogue Defense — Master Guide
 
-A comprehensive reference for all Skill Cards and Mythic Chips in Rogue Defense.
+A comprehensive reference for all Skill Cards, Synergy Builds, Status Effects, and Chip Sockets in Rogue Defense.
 
 Cards marked with ★ Special have a purple background in-game, indicating they are enhanced/rare variants.
 
@@ -20,25 +20,29 @@ Cards marked with ★ Special have a purple background in-game, indicating they 
   - [Mortar](#mortar)
   - [Focus Laser](#focus-laser)
   - [Traction Field](#traction-field)
-- [Mythic Chips](#mythic-chips)
+- [Synergy Builds](#synergy-builds)
+- [Status Effects](#status-effects)
+- [Chip Sockets](#chip-sockets)
   - [Database](#database)
   - [Emitter](#emitter)
   - [Processor](#processor)
   - [Controller](#controller)
-  - [Lidar](#lidar)
+  - [LiDAR](#lidar)
   - [Battery](#battery)
 
 ---
 
 # Skill Cards
 
-Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1, Star Tier 2, and Star Tier 3. Cards are typed as standard, **Chain** (triggering additional effects), or **Combo** (synergizing with other skills). Cards marked **★ Special** have a purple background in-game.
+Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2), and Tier 3 (Star Tier 3). Cards are typed as Standard, **Chain** (prerequisite cards within the same skill), or **Combo** (requires another skill in your build). Cards marked **★ Special** have a purple background in-game.
 
 ---
 
 ## Flame Missile
 
-**Skill Level:** Lv.14
+**Type:** Fire
+
+> Releases fire missiles, causing impact and explosion damage.
 
 ### Initial Unlocked
 
@@ -52,7 +56,7 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Burning Area | — | ★ Special | Flame Missiles leave a burning area that lasts for 5s after exploding |
 | Impact Multiplier | — | ★ Special | All Flame Missiles' impact DMG +200% |
 
-### Star Tier 1 Unlock
+### Star Tier 2 Unlock
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
@@ -60,17 +64,10 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Flame Missile +2 | — | ★ Special | Flame Missile +2 |
 | Close-range Explosion | — | ★ Special | Main missiles trigger a powerful explosion on hit |
 | Collapse Explosion | Combo | ★ Special | Creates a Small Gravity Hole after the Flame Missile exploded |
-
-### Star Tier 2 Unlock
-
-| Card Name | Type | Rarity | Effect |
-|-----------|------|--------|--------|
-| Missile Amplification | Chain | Normal | Small Flame Missile +3 |
+| Missile Amplification | Chain | Normal | Small Flame Missile +3 *(Requires: Impact Reinforcement)* |
 | Chain Reaction | Chain | Normal | Small Flame Missiles have a 60% chance to launch an additional Small Flame Missile upon hitting an enemy |
 | Ignition Amplification | Chain | Normal | [Burn] DMG +100% |
 | Strong Impact | — | ★ Special | Flame Missile +2 |
-| Close-range Explosion | — | ★ Special | Main missiles trigger a powerful explosion on hit |
-| Collapse Explosion | Combo | ★ Special | Creates a Small Gravity Hole after the Flame Missile exploded |
 
 ### Star Tier 3 Unlock
 
@@ -81,11 +78,18 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Lightning Link | Combo | Normal | All Flame Missiles have a 30% chance to trigger 1 Chain Lightning when hitting enemies |
 | Path Strike | Combo | Normal | Flame Missiles deal DMG to enemies along their path |
 
+**Tips:**
+- Ignition + Impact Multiplier is the core burn build.
+- Collapse Explosion adds a gravity hole — pair with Traction Field for maximum pull.
+- Lightning Link at Star Tier 3 turns every missile into chain lightning.
+
 ---
 
 ## Beam
 
-**Skill Level:** Lv.14
+**Type:** Energy
+
+> Fires a piercing beam that deals sustained energy damage.
 
 ### Initial Unlocked
 
@@ -107,7 +111,7 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Slow Beam | Chain | Normal | Deflected Beams inflict [Slow] on hit |
 | Energy Overload | — | ★ Special | Doubles debuff duration |
 | Tear Explosion | — | Normal | Has chance to trigger a Ripping Beam when main beam hits |
-| Energy Boost | — | Normal | Beam DMG +60% for each debuff on enemies (MAX: 300%) *(Unlock at Lv.18)* |
+| Energy Boost | — | Normal | Beam DMG +60% for each debuff on enemies (MAX: 300%) |
 | Energy Paralysis | Combo | Normal | Main beam inflicts [Paralyze] on hit |
 | Graviton Laser | Combo | Normal | Beam creates a pull effect in nearby enemies |
 
@@ -120,11 +124,18 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Energy Detonation | Combo | Normal | Hitting enemies with [Burn] will trigger Super Ignition Explosion |
 | Convergence Trigger | Combo | Normal | 30% chance to generate a Refracted Laser upon beam hitting enemies |
 
+**Tips:**
+- Energy Boost (Lv.18) gives Beam DMG +60% per debuff — stack Slow + Paralyze + Vulnerable for massive output.
+- Convergence Trigger + Energy Detonation combo melts burning enemies.
+- Graviton Laser pulls enemies into the beam path for sustained damage.
+
 ---
 
 ## Distortion Field
 
-**Skill Level:** Lv.14
+**Type:** Field
+
+> Deploys a circular deceleration force field that slows and disrupts enemies.
 
 ### Initial Unlocked
 
@@ -155,15 +166,22 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 |-----------|------|--------|--------|
 | Area Disruption | Chain | Normal | When Disruption effect reaches MAX stacks, deals 1 extra DMG |
 | Teleport Damage | Chain | Normal | Teleportation from the Distortion Field deals 3% of the target's MAX HP as DMG |
-| Converging Field | — | Normal | Distortion Field DMG +100%, each DMG pulls enemies toward the center *(Unlock at Lv.18)* |
+| Converging Field | — | Normal | Distortion Field DMG +100%, each DMG pulls enemies toward the center |
 | Field Support | Combo | Normal | Release an additional Distortion Field |
 | Field Replication | Combo | Normal | When Phantom Dart enters Distortion Field first time, it 100% splits into 1 additional Phantom Dart |
+
+**Tips:**
+- Field Suppression gives up to +200% bonus DMG based on slowness — stack Stasis Field first.
+- Field Replication (Tier 3) doubles your Phantom Darts every time they enter the field.
+- Quick Cooldown + Field Support gives almost permanent field coverage.
 
 ---
 
 ## Lightning Bomb
 
-**Skill Level:** Lv.18
+**Type:** Electric
+
+> Fires lightning bombs that bounce between enemies, releasing electric matrix explosions.
 
 ### Initial Unlocked
 
@@ -197,11 +215,18 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Cooperative Beam | Combo | Normal | Lightning Bomb releases 1 Focus Laser on hit |
 | Cyclotron Beam | Combo | Normal | Lightning Bomb releases 1 Cyclotron Beam on first hit |
 
+**Tips:**
+- Bomb Extension (Tier 3): each bounce increases DMG +30% — more bounces = exponential damage.
+- Cooperative Beam fires a Focus Laser on every hit — combines two S-tier skills.
+- Electric Enhancement (+80% Electric DMG) benefits all electric skills, not just Lightning Bomb.
+
 ---
 
 ## Thunder Core
 
-**Skill Level:** Lv.14
+**Type:** Electric
+
+> Launches a thunder core that moves through enemies, chaining lightning.
 
 ### Initial Unlocked
 
@@ -223,7 +248,7 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Paralysis Extension | Chain | Normal | Duration of [Paralyze] effect caused by the Thunder Core +100% |
 | Chain Expansion | Chain | Normal | Chain Lightning's target +4 |
 | Bounce Strike | — | ★ Special | Thunder Core has a 50% chance to bounce back |
-| Chain Strike | — | Normal | Enemies hit by Chain Lightning have a 25% chance to trigger a small thunder explosion *(Unlock at Lv.18)* |
+| Chain Strike | — | Normal | Enemies hit by Chain Lightning have a 25% chance to trigger a small thunder explosion |
 | Lightning Aftershock | Combo | Normal | There is a 50% chance to generate 1 Landmine by Thunder Core hits enemies |
 | Lightning Trail | Combo | Normal | Thunder Core leaves a flame trail during flight |
 
@@ -235,11 +260,18 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Chain Interference | Chain | Normal | Enemies hit by Chain Lightning receive [Paralyze] effect, Chain Lightning DMG +100% |
 | Lightning Teleportation | Combo | Normal | Enemies hit by Thunder Core or Chain Lightning have a 50% chance to be teleported back a certain distance |
 
+**Tips:**
+- Chain Lightning (Tier 1) + Chain Expansion (Tier 2) makes Thunder Core the best crowd clearer.
+- Life Erosion (Tier 3) deals 3% MAX HP — deadly on tanky bosses.
+- Lightning Teleportation sends enemies back — combine with Traction Field to keep resetting positions.
+
 ---
 
 ## Matrix Drone
 
-**Skill Level:** Lv.14
+**Type:** Field
+
+> Deploys multiple Matrix Drones to autonomously attack enemies.
 
 ### Initial Unlocked
 
@@ -264,7 +296,7 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Drone Mutation III | — | Normal | After 2 launches per round, 50% chance to deploy level 3 Matrix Drone for subsequent launches |
 | Drone Retrieval | — | Normal | Matrix Drone has a 50% chance to return when destroyed (MAX: 5 stored) |
 | Electroshock | Combo | Normal | Each Matrix Drone attack has a 50% chance to release an electroshock at enemies in close range |
-| Aero Split | — | Normal | 60% chance for Matrix Drone to split into 3 small darts upon hitting an enemy *(Unlock at Lv.22)* |
+| Aero Split | — | Normal | 60% chance for Matrix Drone to split into 3 small darts upon hitting an enemy |
 
 ### Star Tier 3 Unlock
 
@@ -274,11 +306,18 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Drone Salvo | Combo | Normal | Matrix Drone bullets +1 |
 | Raging Drone | Combo | Normal | Matrix Drone DMG +30% after each attack |
 
+**Tips:**
+- Drone Evolution (II -> III) drastically increases drone power — prioritize these.
+- Drone Retrieval gives up to 5 stored drones — combined with Mutation III, you have a constant drone swarm.
+- Raging Drone (Tier 3) stacks DMG +30% with each attack — devastating on bosses.
+
 ---
 
 ## Firewheel
 
-**Skill Level:** Lv.14
+**Type:** Fire
+
+> Deploys a firewheel that causes continuous fire area damage.
 
 ### Initial Unlocked
 
@@ -310,13 +349,20 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Mini Size Boost | Chain | Normal | Mini Firewheel DMG +50%, duration +50% |
 | Extended Trail | Chain | Normal | Flame Trail duration +2s |
 | Blazing Pulse | Combo | Normal | Firewheel releases a pulse wave every 1.5s |
-| Extra Barrage | — | ★ Special | For every 15 hits dealt by Firewheel, launch 1 ring of penetrating bullets *(Unlock at Lv.18)* |
+| Extra Barrage | — | ★ Special | For every 15 hits dealt by Firewheel, launch 1 ring of penetrating bullets |
+
+**Tips:**
+- Hold the Ground extends the Firewheel by 10s — massive value.
+- Vortex Firewheel creates a pull that funnels enemies into the wheel.
+- Blazing Pulse (Tier 3) creates pulse waves every 1.5s — great AoE coverage.
 
 ---
 
 ## Phantom Dart
 
-**Skill Level:** Lv.15
+**Type:** Physical
+
+> Fires piercing and splittable darts that penetrate through enemies.
 
 ### Initial Unlocked
 
@@ -348,13 +394,20 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 |-----------|------|--------|--------|
 | Split Mastery | Chain | Normal | All Phantom Darts split chance +40% |
 | Secondary Minefield | Combo | Normal | Phantom Dart releases 1 Landmine on hit |
-| Piercing Ricochet | — | Normal | All Phantom Darts penetration +1, reflection +1 *(Unlock at Lv.18)* |
+| Piercing Ricochet | — | Normal | All Phantom Darts penetration +1, reflection +1 |
+
+**Tips:**
+- Primary Splitting + Advanced Splitting create a branching dart storm.
+- Field Replication (from Distortion Field) doubles darts every pass through the field.
+- Piercing Ricochet at Lv.18 gives both penetration AND reflection.
 
 ---
 
 ## Mortar
 
-**Skill Level:** Lv.14
+**Type:** Physical
+
+> Fires heavy explosive missiles, dealing massive area damage.
 
 ### Initial Unlocked
 
@@ -377,7 +430,7 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Landmine Shockwave | Chain | Normal | Landmine +2, knockback +100% |
 | Chain Explosion | — | ★ Special | For each enemy hit by Mortar explosion, explosion DMG +20% (MAX: 200%) |
 | Range Extension | — | ★ Special | Mortar range +70% |
-| Secondary Explosion | — | Normal | Enemies hit by Mortar bullet will trigger an additional explosion after 1s *(Unlock at Lv.18)* |
+| Secondary Explosion | — | Normal | Enemies hit by Mortar bullet will trigger an additional explosion after 1s |
 | Piercing Blast | Combo | Normal | Mortar bullet penetration +1 |
 | Firewheel Summon | Combo | Normal | For each enemy hit by Mortar explosion, it generates a Small Firewheel |
 
@@ -389,11 +442,18 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Gravity Bomb | Combo | Normal | Mortar DMG +100%, pulls enemies to the center before the explosion |
 | Shatter Impact | Combo | Normal | Mortar creates two additional Ripping Beams upon impact |
 
+**Tips:**
+- Gravity Bomb (Tier 3) is the ultimate Mortar card — DMG +100% and pulls all enemies in before detonating.
+- Firewheel Summon + Massive Explosion creates a wave of Firewheels across the whole field.
+- Extra Loading snowballs fast: each kill fires more shotgun shells.
+
 ---
 
 ## Focus Laser
 
-**Skill Level:** Lv.13
+**Type:** Energy
+
+> A precision focus laser that deals increasing damage to the same target.
 
 ### Initial Unlocked
 
@@ -425,13 +485,20 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 | Extreme Focus | Chain | Normal | Damage stacking cap increased to 400% |
 | Refraction Explosion | Chain | Normal | Each hit by Refracted Laser will cause an explosion |
 | Laser Lightning | Combo | Normal | Each hit from Focus Laser has a 30% chance to trigger 1 Chain Lightning |
-| Matrix Resonance | — | ★ Special | Focus Laser releases an expanding Electric Matrix on hit *(Unlock at Lv.14)* |
+| Matrix Resonance | — | ★ Special | Focus Laser releases an expanding Electric Matrix on hit |
+
+**Tips:**
+- Damage Increase + Extreme Focus (400% cap) is the ultimate single-target DPS path.
+- Laser Refraction + Refraction Pull creates a multi-laser system that pulls enemies inward.
+- Matrix Resonance at Lv.14 is one of the strongest Combo cards in the game.
 
 ---
 
 ## Traction Field
 
-**Skill Level:** Lv.14
+**Type:** Field
+
+> Creates a Traction Field that deals damage and pulls enemies.
 
 ### Initial Unlocked
 
@@ -463,270 +530,523 @@ Each skill has cards organized into unlock tiers: Initial Unlocked, Star Tier 1,
 |-----------|------|--------|--------|
 | Destructive Hole | Chain | Normal | Gravity Hole DMG +250% |
 | Binary Split | Combo | Normal | Traction Field splits into a pair of spinning fields |
-| Double Fission | — | Normal | Traction Field splits into two small Traction Fields at the end *(Unlock at Lv.18)* |
+| Double Fission | — | Normal | Traction Field splits into two small Traction Fields at the end |
+
+**Tips:**
+- Gravity Hole leaves a 5-second black hole — stack with Distortion Field for crowd lockdown.
+- Binary Split (Tier 3) turns one field into two spinning fields.
+- Extended Pull + Extended Range creates an enormous gravity field that covers the entire map.
 
 ---
 
-# Mythic Chips
+# Synergy Builds
 
-Mythic Chips are randomized equipment modifiers. Each chip type has its own pool of possible effects with different drop rates. Rarer effects (0.05%) are significantly more powerful than common ones (0.51%).
+Curated skill combinations ranked by effectiveness.
 
----
+## Burn & Detonate (★★★★★)
 
-## Database
+**Skills:** Flame Missile, Beam
 
-| Effect | Drop Rate |
-|--------|-----------|
-| Guardian gains 10x Charge Points on kill | 0.25% |
-| Guardian DMG +30% | 0.51% |
-| Flame Missile releases 3 Small Flame Missiles on kill | 0.51% |
-| Flame Missile DMG +36% | 0.51% |
-| DMG +120% to Elites and Bosses | 0.25% |
-| DMG +36% to enemies with debuffs | 0.51% |
-| For every 20 enemies hit by Firewheel, explosion DMG equal to 200% of ATK | 0.51% |
-| Focus Laser duration +24% | 0.51% |
-| Distortion Field duration +1.5s | 0.51% |
-| Thunder Core DMG +42% | 0.51% |
-| Physical DMG +18% | 0.51% |
-| DMG +60% to enemies with HP above 70% | 0.51% |
-| Lightning Bomb DMG +42% | 0.51% |
-| DMG +12% | 0.51% |
-| ATK +60 | 0.51% |
-| Breakthrough card drop rate +100% | 0.25% |
-| 2% chance to deal 8x Crit DMG as additional DMG (except Elites and Bosses) | 0.05% |
-| Penetration +2 for all skills with penetration | 0.05% |
-| Crit DMG deals 6% of target's MAX HP as additional DMG (MAX: 3x Crit DMG) | 0.05% |
-| Beam DMG +42% | 0.51% |
-| Extend debuff duration on enemy by 40% | 0.51% |
-| DMG +36% to enemies within close range of shield | 0.51% |
-| Explosion DMG +18% | 0.51% |
-| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |
-| Force-field DMG +24% | 0.51% |
-| Energy DMG +24% | 0.51% |
-| Crit Rate +6% | 0.51% |
-| Beam damage times +4 | 0.51% |
-| Mortar releases 3 Landmines on hit | 0.51% |
-| Matrix Drone DMG +42% | 0.51% |
-| DMG +100% when shield HP is below 30% | 0.51% |
-| Traction Field releases 3 Small Chain Lightning when hitting paralyzed enemies | 0.25% |
-| Traction Field DMG +48% | 0.51% |
-| Phantom Dart DMG +36% | 0.51% |
-| Shield HP +1200, DMG received -12 | 0.51% |
-| Electric DMG +24% | 0.51% |
-| Fire DMG +24% | 0.51% |
-| Crit DMG +60% | 0.51% |
+> Use Flame Missile to apply [Burn] stacks, then trigger Beam's Energy Detonation for massive Super Ignition Explosions.
+
+**Synergy:** Energy Detonation (Beam Tier 3) detonates Burn-affected enemies for enormous AOE burst.
+
+**Playstyle:** Apply Burn with Ignition on Flame Missile, then let Beam trigger explosions on every hit.
+
+**Key Cards:** Ignition, Energy Detonation
+
+**Tips:**
+- Pick Ignition Amplification (+100% Burn DMG) to amplify detonation damage.
+- Equip chips with Fire DMG +% and Explosion DMG +% for maximum output.
+- Energy Overload doubles debuff duration — keeps Burn active longer.
 
 ---
 
-## Emitter
+## Gravity Swarm (★★★★★)
 
-| Effect | Drop Rate |
-|--------|-----------|
-| Mortar range +24% | 0.51% |
-| Shield HP +1200, DMG received -12 | 0.51% |
-| Beam DMG +42% | 0.51% |
-| Flame Missile explosion DMG +24%, range +18% | 0.51% |
-| Guardian bullet DMG converted to Force Field, DMG Unchanged | 0.25% |
-| DMG +60% to enemies with HP above 70% | 0.51% |
-| Physical DMG +18% | 0.51% |
-| ATK +60 | 0.51% |
-| Crit Rate +6% | 0.51% |
-| Fire DMG +24% | 0.51% |
-| Flame Missile +1, DMG +20% | 0.25% |
-| Flame Missile DMG +36% | 0.51% |
-| Gain 4 additional refresh chance(s) per battle | 0.10% |
-| Restore shield HP by 12% for each Elite or Boss killed | 0.25% |
-| Lightning Bomb explosion DMG +15% after each bounce | 0.51% |
-| Select 1 skill from 3 skills at the start of the stage | 0.05% |
-| Firewheel DMG +48% | 0.51% |
-| Traction Field pulling force +28% | 0.51% |
-| Phantom Dart DMG +36% | 0.51% |
-| Phantom Dart penetration +3 | 0.51% |
-| Matrix Drone DMG +42% | 0.51% |
-| Immune to all damage for 5s when shield HP below 25% for the first time | 0.51% |
-| Deals 3% of target's MAX HP as additional DMG (MAX: 1.5x Crit DMG) | 0.05% |
-| Guardian bullet penetration +1, DMG +10% | 0.51% |
-| Guardian DMG +30% | 0.51% |
-| Distortion Field DMG +48% | 0.51% |
-| Every 10% HP lost will instantly release Thunder Core once | 0.25% |
-| Mortar fires 1 extra shot, DMG Unchanged | 0.25% |
-| Extend debuff duration on enemy by 40% | 0.51% |
-| DMG +72% for the first 2 minutes | 0.51% |
-| Electric DMG +24% | 0.51% |
-| Energy DMG +24% | 0.51% |
-| Explosion DMG +18% | 0.51% |
-| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |
+**Skills:** Traction Field, Mortar, Distortion Field
+
+> Pull all enemies into a tight cluster with Traction Field and Distortion Field, then obliterate them with Mortar's Gravity Bomb.
+
+**Synergy:** Gravity Bomb pulls enemies to center AND deals +100% DMG — layered with Gravity Hole from Traction Field, enemies never escape.
+
+**Playstyle:** Use fields to clump enemies, then drop Mortar for chain explosions.
+
+**Key Cards:** Gravity Bomb, Gravity Hole, Converging Field
+
+**Tips:**
+- Stasis Field on Distortion Field slows enemies up to 90% for Field Suppression bonus.
+- Field Suppression gives up to +200% extra DMG based on slowness.
+- Collapse Explosion on Flame Missile adds another gravity hole to the cluster.
 
 ---
 
-## Processor
+## Laser Web (★★★★★)
 
-| Effect | Drop Rate |
-|--------|-----------|
-| Flame Missile DMG +36% | 0.51% |
-| ATK from chips +150% | 0.25% |
-| Energy DMG +24% | 0.51% |
-| Force-field DMG +24% | 0.51% |
-| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |
-| Explosion DMG +18% | 0.51% |
-| Mortar range +24% | 0.51% |
-| Matrix Drone has a 10% chance to release 1 Pulse Wave on hit | 0.25% |
-| Phantom Dart +1 | 0.51% |
-| Phantom Dart DMG +36% | 0.51% |
-| Lightning Bomb bounces +1 on first hit, DMG Unchanged | 0.51% |
-| Traction Field pulling force +28% | 0.51% |
-| Lightning Bomb DMG +42% | 0.51% |
-| ATK +60 | 0.51% |
-| Fire DMG +24% | 0.51% |
-| Crit Rate +6% | 0.51% |
-| Guardian DMG +30% | 0.51% |
-| Distortion Field DMG +48% | 0.51% |
-| Thunder Core inflicts 4s [Slow] effect | 0.51% |
-| Mortar DMG +42% | 0.51% |
-| Shield HP +1200, DMG received -12 | 0.51% |
-| Firewheel DMG +48% | 0.51% |
-| DMG +72% for the first 2 minutes | 0.51% |
-| Each shot of Focus Laser has 40% chance to release a secondary Laser | 0.51% |
-| Matrix Drone DMG +42% | 0.51% |
-| Beam DMG +42% | 0.51% |
-| DMG +12%, and for each card selected in battle, DMG +3% | 0.05% |
-| DMG +60% to enemies with HP above 70% | 0.51% |
-| Traction Field flight distance +20% | 0.51% |
-| DMG +36% to enemies within close range of shield | 0.51% |
-| Physical DMG +18% | 0.51% |
-| Electric DMG +24% | 0.51% |
+**Skills:** Focus Laser, Distortion Field
+
+> Focus Laser's Disruptive Field creates a Distortion Field on every hit, while Refraction Pull chains lasers through the field endlessly.
+
+**Synergy:** Every laser hit spawns a Distortion Field — more fields = more slowed enemies = more targets for refracted lasers.
+
+**Playstyle:** Fire Focus Laser into groups to rapidly spawn Distortion Fields and chain lasers.
+
+**Key Cards:** Laser Refraction, Disruptive Field, Refraction Pull, Extreme Focus
+
+**Tips:**
+- Extreme Focus increases damage cap to 400% — stay on one target for maximum DPS.
+- Matrix Resonance releases Electric Matrix on every hit for extra AOE.
+- Field Suppression gives +200% bonus DMG on slowed enemies — stack with Stasis Field.
 
 ---
 
-## Controller
+## Debuff Sniper (★★★★★)
 
-| Effect | Drop Rate |
-|--------|-----------|
-| Guardian DMG +30% | 0.51% |
-| When Shield HP below 20%, reduce DMG taken by 15% | 0.51% |
-| Matrix Drone penetration +3 | 0.51% |
-| Crit DMG deals 6% of target's MAX HP as additional DMG (MAX: 3x Crit DMG) | 0.05% |
-| Skills have 60% chance to ignore enemies' DMG Reduction | 0.51% |
-| DMG +100% when shield HP is below 30% | 0.51% |
-| Lightning Bomb DMG +42% | 0.51% |
-| Focus Laser DMG +48% | 0.51% |
-| Every 10 Mortar shots, next shot fires 4 additional bullets | 0.25% |
-| Mortar DMG +42% | 0.51% |
-| Phantom Dart DMG +30%, knockback +60% | 0.51% |
-| Guardian bullet has 2% chance to paralyze enemies for 1s | 0.51% |
-| For each wall bounce, Firewheel DMG +18% (MAX: 90%) | 0.51% |
-| Distortion Field range +24% | 0.51% |
-| When Traction Field hits [Vulnerable] enemy, all nearby enemies become [Vulnerable] +20% | 0.25% |
-| Traction Field DMG +48% | 0.51% |
-| Shield HP +1200, DMG received -12 | 0.51% |
-| DMG +60% to enemies with HP above 70% | 0.51% |
-| Physical DMG +18% | 0.51% |
-| Electric DMG +24% | 0.51% |
-| DMG +120% to Elites and Bosses | 0.25% |
-| DMG +36% to enemies with debuffs | 0.51% |
-| Extend debuff duration on enemy by 40% | 0.51% |
-| Explosion DMG +18% | 0.51% |
-| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |
-| Force-field DMG +24% | 0.51% |
-| Energy DMG +24% | 0.51% |
-| Crit Rate +6% | 0.51% |
-| Fire DMG +24% | 0.51% |
-| ATK +60 | 0.51% |
-| Beam has 50% chance to release additional Sweeping Beam | 0.25% |
-| Beam damage times +4 | 0.51% |
-| Thunder Core DMG width +24% | 0.51% |
-| Thunder Core DMG +42% | 0.51% |
-| Flame Missiles have 50% chance to bounce once after first target | 0.25% |
-| Flame Missile DMG +36% | 0.51% |
-| Guaranteed Crit hit on full-HP enemies, dealing 1x Crit DMG | 0.25% |
-| ATK +60, and for each player level gained, +2 additional ATK (MAX: +60) | 0.51% |
-| DMG randomly fluctuates between -20% to +60% | 0.51% |
-| Restore shield HP by 4 for each enemy killed | 0.31% |
+**Skills:** Beam, Thunder Core
+
+> Stack Slow (Beam), Paralyze (Thunder Core), and Vulnerable on enemies to maximize Beam's Energy Boost (+60% per debuff, up to 300%).
+
+**Synergy:** Energy Boost at Lv.18 gives +60% DMG for EACH debuff on an enemy. With Slow + Paralyze + Vulnerable = +180% (or 300% cap).
+
+**Playstyle:** Apply as many different debuffs as possible, then fire Beam for massive scaling damage.
+
+**Key Cards:** Slow Beam, Energy Paralysis, Energy Boost, Laser Penetration
+
+**Tips:**
+- Energy Overload doubles debuff duration — keep all debuffs active simultaneously.
+- Extend debuff duration chips amplify this synergy enormously.
+- Graviton Laser pulls debuffed enemies into the beam path.
 
 ---
 
-## Lidar
+## Lightning Storm (★★★★☆)
 
-| Effect | Drop Rate |
-|--------|-----------|
-| Phantom Dart DMG +36% | 0.51% |
-| Firewheel duration +5s | 0.25% |
-| Focus Laser DMG +48% | 0.51% |
-| Guardian bullet +1, DMG +20% | 0.51% |
-| Distortion Field DMG +48% | 0.51% |
-| Traction Field flight distance +20% | 0.51% |
-| DMG +72% for the first 2 minutes | 0.51% |
-| Debuff duration from Beam +0.75s | 0.51% |
-| Beam DMG +42% | 0.51% |
-| Distortion Field DMG interval -25% | 0.25% |
-| Thunder Core DMG +42% | 0.51% |
-| Focus Laser refracts 1 additional Laser when hitting slowed targets | 0.25% |
-| Mortar DMG +42% | 0.51% |
-| All damage dealt by Matrix Drone inflicts [Injured] for 4s | 0.25% |
-| Shield HP +1200, DMG received -12 | 0.51% |
-| DMG +60% to enemies with HP above 70% | 0.51% |
-| Physical DMG +18% | 0.51% |
-| Electric DMG +24% | 0.51% |
-| ATK +60 | 0.51% |
-| Crit Rate +6% | 0.51% |
-| Fire DMG +24% | 0.51% |
-| Flame Missile explosion DMG +24%, range +18% | 0.51% |
-| Flame Missile inflicts [Burn] effect for 3s | 0.51% |
-| For each enemy near the Shield, deal +1.5% DMG | 0.51% |
-| For each new skill gained in battle, DMG +14% | 0.25% |
-| Extend debuff duration on enemy by 40% | 0.51% |
-| Force-field DMG +24% | 0.51% |
-| Energy DMG +24% | 0.51% |
-| Explosion DMG +18% | 0.51% |
-| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |
-| Guardian DMG +30% | 0.51% |
-| Phantom Dart has 80% chance to fire twice consecutively | 0.51% |
-| Matrix Drone attack count +4 | 0.51% |
-| Thunder Core DMG width +24% | 0.51% |
-| Lightning Bomb has 10% chance to bounce once on hit | 0.51% |
-| Lightning Bomb explosion range +60% | 0.51% |
-| Firewheel DMG +48% | 0.51% |
-| Phantom Dart Reflection +2 | 0.25% |
+**Skills:** Thunder Core, Lightning Bomb
+
+> Combine Thunder Core's chain lightning with Lightning Bomb's bouncing electro matrix for full-screen electric saturation.
+
+**Synergy:** Electric Enhancement (+80% Electric DMG) boosts both skills simultaneously. Chain Expansion lets each Thunder Core chain to 9 targets.
+
+**Playstyle:** Spam both skills for constant chain lightning across the entire wave.
+
+**Key Cards:** Chain Lightning, Chain Expansion, Electric Enhancement, Bomb Extension
+
+**Tips:**
+- Electro Interference paralysis + Chain Interference from Thunder Core locks enemies in place.
+- Equip Electric DMG chips on all sockets for massive multiplier.
+- Continuous Bomb chains Lightning Bomb indefinitely — great for long waves.
 
 ---
 
-## Battery
+## Dart Splitter (★★★★☆)
 
-| Effect | Drop Rate |
-|--------|-----------|
-| DMG +12% | 0.51% |
-| Crit Rate +6% | 0.51% |
-| ATK +60 | 0.51% |
-| Deal DMG +40% when elites and bosses are present | 0.51% |
-| Penetration +2 for all skills with penetration | 0.05% |
-| Core skills have 4% chance to fire once more | 0.05% |
-| Crit DMG deals 6% of target's MAX HP as additional DMG (MAX: 3x Crit DMG) | 0.05% |
-| DMG +36% to enemies with debuffs | 0.51% |
-| DMG +120% to Elites and Bosses | 0.25% |
-| DMG +36% to enemies within close range of shield | 0.51% |
-| Extend debuff duration on enemy by 40% | 0.51% |
-| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |
-| Explosion DMG +18% | 0.51% |
-| Energy DMG +24% | 0.51% |
-| Force-field DMG +24% | 0.51% |
-| Main beam reflection +1, DMG Unchanged | 0.51% |
-| Flame Missile DMG +36% | 0.51% |
-| Thunder Core DMG +42% | 0.51% |
-| Matrix Drone has 50% chance to evolve to level 2 with each attack | 0.51% |
-| Crit DMG +60% | 0.51% |
-| Firewheel speed +40% | 0.51% |
-| Mortar DMG +42% | 0.51% |
-| Shield HP +1200, DMG received -12 | 0.51% |
-| Fire DMG +24% | 0.51% |
-| Guardian bullet penetration +1, DMG +10% | 0.51% |
-| Traction Field DMG +48% | 0.51% |
-| Matrix Drone DMG +42% | 0.51% |
-| Distortion Field range +24% | 0.51% |
-| Focus Laser DMG +48% | 0.51% |
-| Lightning Bomb DMG +42% | 0.51% |
-| DMG +100% when shield HP is below 30% | 0.51% |
-| Phantom Dart DMG +36% | 0.51% |
-| Guardian DMG +30% | 0.51% |
-| DMG +60% to enemies with HP above 70% | 0.51% |
-| Physical DMG +18% | 0.51% |
-| Electric DMG +24% | 0.51% |
+**Skills:** Phantom Dart, Distortion Field
+
+> Phantom Darts split and multiply every time they pass through a Distortion Field via Field Replication.
+
+**Synergy:** Field Replication (Distortion Field Tier 3) duplicates Phantom Darts on entry — combine with splitting cards to flood the screen.
+
+**Playstyle:** Place Distortion Fields strategically on enemy paths so every dart multiplies.
+
+**Key Cards:** Primary Splitting, Advanced Splitting, Field Replication, Split Mastery
+
+**Tips:**
+- Execution Penetration stacks penetration on kills — darts pierce more as the wave progresses.
+- Piercing Ricochet at Lv.18 adds both penetration and reflection for even more coverage.
+- Shell Crit Boost gives Crit Rate +30% — pair with Crit DMG chips for burst.
+
+---
+
+## Drone Swarm (★★★★☆)
+
+**Skills:** Matrix Drone, Lightning Bomb
+
+> Lightning Bomb's Drone Mirage summons Echo Drones on every hit, while Matrix Drone evolves to Tier 3 for devastating power.
+
+**Synergy:** Drone Mirage creates Echo Drones from Lightning Bombs — combined with Drone Evolution II/III, your entire army is max-level.
+
+**Playstyle:** Let Lightning Bombs fill the field with Echo Drones while Matrix Drone levels up.
+
+**Key Cards:** Drone Evolution III, Drone Mutation III, Drone Mirage, Raging Drone
+
+**Tips:**
+- Drone Retrieval stores returning drones — up to 5 spares always ready.
+- Raging Drone stacks DMG +30% per attack — bosses melt quickly.
+- Electroshock adds AoE on every drone attack for crowd control.
+
+---
+
+## Firewheel Inferno (★★★★☆)
+
+**Skills:** Firewheel, Mortar
+
+> Mortar's Firewheel Summon spawns a Firewheel on every explosion hit, while Hold the Ground extends every wheel by 10 extra seconds.
+
+**Synergy:** One Mortar shot into a group creates multiple Firewheels. Vortex Firewheel pulls enemies into each spinning wheel.
+
+**Playstyle:** Drop Mortar into enemy clusters to spawn a field of persistent Firewheels.
+
+**Key Cards:** Firewheel Summon, Hold the Ground, Vortex Firewheel, Blazing Pulse
+
+**Tips:**
+- Smart Acceleration gives Firewheel +60% DMG and +30% speed — great base card.
+- Mini Firewheel generates 2 mini wheels every 3s for persistent coverage.
+- Firewheel Ignition adds Burn stacks for extra DoT damage.
+
+---
+
+# Status Effects
+
+## 🔥 Burn
+
+Deals fire damage over time. Can be amplified by Ignition Amplification (+100% Burn DMG). Enemies with Burn explode on death (Death Ignition card).
+
+**Sources:**
+- Flame Missile (Ignition card)
+- Firewheel (Firewheel Ignition)
+- Beam (Energy Detonation trigger)
+- LiDAR chip: Flame Missile inflicts Burn for 3s
+
+---
+
+## 🌊 Slow
+
+Reduces enemy movement speed. Stacks up to 90% slow with Stasis Field. Increases Distortion Field damage via Field Suppression (up to +200% bonus DMG).
+
+**Sources:**
+- Distortion Field (Stasis Field card)
+- Beam (Slow Beam on Deflected Beams)
+- Matrix Drone (Amplified Pulse card)
+- Thunder Core chip: inflicts 4s Slow
+- Processor chip: Thunder Core inflicts Slow
+
+---
+
+## ⚡ Paralyze
+
+Stuns enemies, preventing movement and attacks. Paralyzed enemies trigger small Chain Lightning with Paralysis Chain. Life Erosion deals 3% MAX HP when paralyzing.
+
+**Sources:**
+- Thunder Core (Lightning Paralysis card)
+- Beam (Energy Paralysis Combo card)
+- Distortion Field (Electric Field Combo card)
+- Lightning Bomb (Electro Interference card)
+- Guardian bullet chip effect
+
+---
+
+## 🌀 Disruption
+
+Stackable debuff. Reaching MAX stacks triggers a high burst of damage (Disruption Burst). At Tier 3, Area Disruption deals extra DMG at max stacks.
+
+**Sources:**
+- Distortion Field (Disruption Force card)
+- Traction Field (Field Disruption Combo card)
+
+---
+
+## 💢 Vulnerable
+
+Increases damage taken by the enemy. Applied by Focus Laser's Laser Penetration and Beam's Vulnerable Beam (on Sweeping Beams).
+
+**Sources:**
+- Focus Laser (Laser Penetration card)
+- Beam (Vulnerable Beam on Sweeping Beams)
+- Traction Field chip: Vulnerable spreads to nearby enemies
+
+---
+
+## 🎯 Physical Vulnerable
+
+Increases physical damage taken. Applied by Phantom Dart's Piercing Mark. Especially powerful when combined with Matrix Drone and Mortar.
+
+**Sources:**
+- Phantom Dart (Piercing Mark Combo card)
+
+---
+
+## 🩸 Injured
+
+Damage-over-time debuff applied to enemies. All Matrix Drone damage can inflict Injured via a LiDAR chip effect.
+
+**Sources:**
+- LiDAR chip: Matrix Drone damage inflicts Injured for 4s
+
+---
+
+# Chip Sockets
+
+Each socket holds up to 6 chips. Stats are obtained randomly with the listed drop rates.
+
+## 🖥️ Database
+
+Contains utility, kill-trigger effects, and powerful conditional mechanics.
+
+| Stat | Drop Rate | Ultra Rare |
+|------|-----------|------------|
+| Guardian gains 10x Charge Points on kill | 0.25% |  |
+| Guardian DMG +30% | 0.51% |  |
+| Flame Missile releases 3 Small Flame Missiles on kill | 0.51% |  |
+| Flame Missile DMG +36% | 0.51% |  |
+| DMG +120% to Elites and Bosses | 0.25% |  |
+| DMG +36% to enemies with debuffs | 0.51% |  |
+| For every 20 enemies hit by Firewheel, explosion DMG equal to 200% of ATK | 0.51% |  |
+| Focus Laser duration +24% | 0.51% |  |
+| Distortion Field duration +1.5s | 0.51% |  |
+| Thunder Core DMG +42% | 0.51% |  |
+| Physical DMG +18% | 0.51% |  |
+| DMG +60% to enemies with HP above 70% | 0.51% |  |
+| Lightning Bomb DMG +42% | 0.51% |  |
+| DMG +12% | 0.51% |  |
+| ATK +60 | 0.51% |  |
+| Breakthrough card drop rate +100% | 0.25% |  |
+| 2% chance to deal 8x Crit DMG as additional DMG (except Elites and Bosses) | 0.05% | ⭐ |
+| Penetration +2 for all skills with penetration | 0.05% | ⭐ |
+| Crit DMG deals 6% of target's MAX HP as additional DMG (MAX: 3x Crit DMG) | 0.05% | ⭐ |
+| Beam DMG +42% | 0.51% |  |
+| Extend debuff duration on enemy by 40% | 0.51% |  |
+| DMG +36% to enemies within close range of shield | 0.51% |  |
+| Explosion DMG +18% | 0.51% |  |
+| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |  |
+| Force-field DMG +24% | 0.51% |  |
+| Energy DMG +24% | 0.51% |  |
+| Crit Rate +6% | 0.51% |  |
+| Beam damage times +4 | 0.51% |  |
+| Mortar releases 3 Landmines on hit | 0.51% |  |
+| Matrix Drone DMG +42% | 0.51% |  |
+| DMG +100% when shield HP is below 30% | 0.51% |  |
+| Traction Field releases 3 Small Chain Lightning when hitting paralyzed enemies | 0.25% |  |
+| Traction Field DMG +48% | 0.51% |  |
+| Phantom Dart DMG +36% | 0.51% |  |
+| Shield HP +1200, DMG received -12 | 0.51% |  |
+| Electric DMG +24% | 0.51% |  |
+| Fire DMG +24% | 0.51% |  |
+| Crit DMG +60% | 0.51% |  |
+
+---
+
+## 📡 Emitter
+
+Boosts elemental damage types and debuff duration. Best for debuff-heavy builds.
+
+| Stat | Drop Rate | Ultra Rare |
+|------|-----------|------------|
+| Mortar range +24% | 0.51% |  |
+| Shield HP +1200, DMG received -12 | 0.51% |  |
+| Beam DMG +42% | 0.51% |  |
+| Flame Missile explosion DMG +24%, range +18% | 0.51% |  |
+| Guardian bullet DMG converted to Force Field, DMG Unchanged | 0.25% |  |
+| DMG +60% to enemies with HP above 70% | 0.51% |  |
+| Physical DMG +18% | 0.51% |  |
+| ATK +60 | 0.51% |  |
+| Crit Rate +6% | 0.51% |  |
+| Fire DMG +24% | 0.51% |  |
+| Flame Missile +1, DMG +20% | 0.25% |  |
+| Flame Missile DMG +36% | 0.51% |  |
+| Gain 4 additional refresh chance(s) per battle | 0.1% |  |
+| Restore shield HP by 12% for each Elite or Boss killed | 0.25% |  |
+| Lightning Bomb explosion DMG +15% after each bounce | 0.51% |  |
+| Select 1 skill from 3 skills at the start of the stage | 0.05% | ⭐ |
+| Firewheel DMG +48% | 0.51% |  |
+| Traction Field pulling force +28% | 0.51% |  |
+| Phantom Dart DMG +36% | 0.51% |  |
+| Phantom Dart penetration +3 | 0.51% |  |
+| Matrix Drone DMG +42% | 0.51% |  |
+| Immune to all damage for 5s when shield HP below 25% for the first time | 0.51% |  |
+| Deals 3% of target's MAX HP as additional DMG (MAX: 1.5x Crit DMG) | 0.05% | ⭐ |
+| Guardian bullet penetration +1, DMG +10% | 0.51% |  |
+| Guardian DMG +30% | 0.51% |  |
+| Distortion Field DMG +48% | 0.51% |  |
+| Every 10% HP lost will instantly release Thunder Core once | 0.25% |  |
+| Mortar fires 1 extra shot, DMG Unchanged | 0.25% |  |
+| Extend debuff duration on enemy by 40% | 0.51% |  |
+| DMG +72% for the first 2 minutes | 0.51% |  |
+| Electric DMG +24% | 0.51% |  |
+| Energy DMG +24% | 0.51% |  |
+| Explosion DMG +18% | 0.51% |  |
+| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |  |
+
+---
+
+## 💾 Processor
+
+Amplifies ATK scaling from chips and provides unique scaling mechanics.
+
+| Stat | Drop Rate | Ultra Rare |
+|------|-----------|------------|
+| Flame Missile DMG +36% | 0.51% |  |
+| ATK from chips +150% | 0.25% |  |
+| Energy DMG +24% | 0.51% |  |
+| Force-field DMG +24% | 0.51% |  |
+| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |  |
+| Explosion DMG +18% | 0.51% |  |
+| Mortar range +24% | 0.51% |  |
+| Matrix Drone has a 10% chance to release 1 Pulse Wave on hit | 0.25% |  |
+| Phantom Dart +1 | 0.51% |  |
+| Phantom Dart DMG +36% | 0.51% |  |
+| Lightning Bomb bounces +1 on first hit, DMG Unchanged | 0.51% |  |
+| Traction Field pulling force +28% | 0.51% |  |
+| Lightning Bomb DMG +42% | 0.51% |  |
+| ATK +60 | 0.51% |  |
+| Fire DMG +24% | 0.51% |  |
+| Crit Rate +6% | 0.51% |  |
+| Guardian DMG +30% | 0.51% |  |
+| Distortion Field DMG +48% | 0.51% |  |
+| Thunder Core inflicts 4s [Slow] effect | 0.51% |  |
+| Mortar DMG +42% | 0.51% |  |
+| Shield HP +1200, DMG received -12 | 0.51% |  |
+| Firewheel DMG +48% | 0.51% |  |
+| DMG +72% for the first 2 minutes | 0.51% |  |
+| Each shot of Focus Laser has 40% chance to release a secondary Laser | 0.51% |  |
+| Matrix Drone DMG +42% | 0.51% |  |
+| Beam DMG +42% | 0.51% |  |
+| DMG +12%, and for each card selected in battle, DMG +3% | 0.05% | ⭐ |
+| DMG +60% to enemies with HP above 70% | 0.51% |  |
+| Traction Field flight distance +20% | 0.51% |  |
+| DMG +36% to enemies within close range of shield | 0.51% |  |
+| Physical DMG +18% | 0.51% |  |
+| Electric DMG +24% | 0.51% |  |
+
+---
+
+## 🎮 Controller
+
+Provides boss damage, conditional damage spikes, and ATK scaling bonuses.
+
+| Stat | Drop Rate | Ultra Rare |
+|------|-----------|------------|
+| Guardian DMG +30% | 0.51% |  |
+| When Shield HP below 20%, reduce DMG taken by 15% | 0.51% |  |
+| Matrix Drone penetration +3 | 0.51% |  |
+| Crit DMG deals 6% of target's MAX HP as additional DMG (MAX: 3x Crit DMG) | 0.05% | ⭐ |
+| Skills have 60% chance to ignore enemies' DMG Reduction | 0.51% |  |
+| DMG +100% when shield HP is below 30% | 0.51% |  |
+| Lightning Bomb DMG +42% | 0.51% |  |
+| Focus Laser DMG +48% | 0.51% |  |
+| Every 10 Mortar shots, next shot fires 4 additional bullets | 0.25% |  |
+| Mortar DMG +42% | 0.51% |  |
+| Phantom Dart DMG +30%, knockback +60% | 0.51% |  |
+| Guardian bullet has 2% chance to paralyze enemies for 1s | 0.51% |  |
+| For each wall bounce, Firewheel DMG +18% (MAX: 90%) | 0.51% |  |
+| Distortion Field range +24% | 0.51% |  |
+| When Traction Field hits [Vulnerable] enemy, all nearby enemies become [Vulnerable] +20% | 0.25% |  |
+| Traction Field DMG +48% | 0.51% |  |
+| Shield HP +1200, DMG received -12 | 0.51% |  |
+| DMG +60% to enemies with HP above 70% | 0.51% |  |
+| Physical DMG +18% | 0.51% |  |
+| Electric DMG +24% | 0.51% |  |
+| DMG +120% to Elites and Bosses | 0.25% |  |
+| DMG +36% to enemies with debuffs | 0.51% |  |
+| Extend debuff duration on enemy by 40% | 0.51% |  |
+| Explosion DMG +18% | 0.51% |  |
+| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |  |
+| Force-field DMG +24% | 0.51% |  |
+| Energy DMG +24% | 0.51% |  |
+| Crit Rate +6% | 0.51% |  |
+| Fire DMG +24% | 0.51% |  |
+| ATK +60 | 0.51% |  |
+| Beam has 50% chance to release additional Sweeping Beam | 0.25% |  |
+| Beam damage times +4 | 0.51% |  |
+| Thunder Core DMG width +24% | 0.51% |  |
+| Thunder Core DMG +42% | 0.51% |  |
+| Flame Missiles have 50% chance to bounce once after first target | 0.25% |  |
+| Flame Missile DMG +36% | 0.51% |  |
+| Guaranteed Crit hit on full-HP enemies, dealing 1x Crit DMG | 0.25% |  |
+| ATK +60, and for each player level gained, +2 additional ATK (MAX: +60) | 0.51% |  |
+| DMG randomly fluctuates between -20% to +60% | 0.51% |  |
+| Restore shield HP by 4 for each enemy killed | 0.31% |  |
+
+---
+
+## 🎯 LiDAR
+
+Provides skill-specific damage boosts and unique situational bonuses.
+
+| Stat | Drop Rate | Ultra Rare |
+|------|-----------|------------|
+| Phantom Dart DMG +36% | 0.51% |  |
+| Firewheel duration +5s | 0.25% |  |
+| Focus Laser DMG +48% | 0.51% |  |
+| Guardian bullet +1, DMG +20% | 0.51% |  |
+| Distortion Field DMG +48% | 0.51% |  |
+| Traction Field flight distance +20% | 0.51% |  |
+| DMG +72% for the first 2 minutes | 0.51% |  |
+| Debuff duration from Beam +0.75s | 0.51% |  |
+| Beam DMG +42% | 0.51% |  |
+| Distortion Field DMG interval -25% | 0.25% |  |
+| Thunder Core DMG +42% | 0.51% |  |
+| Focus Laser refracts 1 additional Laser when hitting slowed targets | 0.25% |  |
+| Mortar DMG +42% | 0.51% |  |
+| All damage dealt by Matrix Drone inflicts [Injured] for 4s | 0.25% |  |
+| Shield HP +1200, DMG received -12 | 0.51% |  |
+| DMG +60% to enemies with HP above 70% | 0.51% |  |
+| Physical DMG +18% | 0.51% |  |
+| Electric DMG +24% | 0.51% |  |
+| ATK +60 | 0.51% |  |
+| Crit Rate +6% | 0.51% |  |
+| Fire DMG +24% | 0.51% |  |
+| Flame Missile explosion DMG +24%, range +18% | 0.51% |  |
+| Flame Missile inflicts [Burn] effect for 3s | 0.51% |  |
+| For each enemy near the Shield, deal +1.5% DMG | 0.51% |  |
+| For each new skill gained in battle, DMG +14% | 0.25% |  |
+| Extend debuff duration on enemy by 40% | 0.51% |  |
+| Force-field DMG +24% | 0.51% |  |
+| Energy DMG +24% | 0.51% |  |
+| Explosion DMG +18% | 0.51% |  |
+| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |  |
+| Guardian DMG +30% | 0.51% |  |
+| Phantom Dart has 80% chance to fire twice consecutively | 0.51% |  |
+| Matrix Drone attack count +4 | 0.51% |  |
+| Thunder Core DMG width +24% | 0.51% |  |
+| Lightning Bomb has 10% chance to bounce once on hit | 0.51% |  |
+| Lightning Bomb explosion range +60% | 0.51% |  |
+| Firewheel DMG +48% | 0.51% |  |
+| Phantom Dart Reflection +2 | 0.25% |  |
+
+---
+
+## 🔋 Battery
+
+Balances offense and defense, with strong boss and penetration mechanics.
+
+| Stat | Drop Rate | Ultra Rare |
+|------|-----------|------------|
+| DMG +12% | 0.51% |  |
+| Crit Rate +6% | 0.51% |  |
+| ATK +60 | 0.51% |  |
+| Deal DMG +40% when elites and bosses are present | 0.51% |  |
+| Penetration +2 for all skills with penetration | 0.05% | ⭐ |
+| Core skills have 4% chance to fire once more | 0.05% | ⭐ |
+| Crit DMG deals 6% of target's MAX HP as additional DMG (MAX: 3x Crit DMG) | 0.05% | ⭐ |
+| DMG +36% to enemies with debuffs | 0.51% |  |
+| DMG +120% to Elites and Bosses | 0.25% |  |
+| DMG +36% to enemies within close range of shield | 0.51% |  |
+| Extend debuff duration on enemy by 40% | 0.51% |  |
+| Immune to the first 6 DMG, counterattack DMG of 50% ATK | 0.25% |  |
+| Explosion DMG +18% | 0.51% |  |
+| Energy DMG +24% | 0.51% |  |
+| Force-field DMG +24% | 0.51% |  |
+| Main beam reflection +1, DMG Unchanged | 0.51% |  |
+| Flame Missile DMG +36% | 0.51% |  |
+| Thunder Core DMG +42% | 0.51% |  |
+| Matrix Drone has 50% chance to evolve to level 2 with each attack | 0.51% |  |
+| Crit DMG +60% | 0.51% |  |
+| Firewheel speed +40% | 0.51% |  |
+| Mortar DMG +42% | 0.51% |  |
+| Shield HP +1200, DMG received -12 | 0.51% |  |
+| Fire DMG +24% | 0.51% |  |
+| Guardian bullet penetration +1, DMG +10% | 0.51% |  |
+| Traction Field DMG +48% | 0.51% |  |
+| Matrix Drone DMG +42% | 0.51% |  |
+| Distortion Field range +24% | 0.51% |  |
+| Focus Laser DMG +48% | 0.51% |  |
+| Lightning Bomb DMG +42% | 0.51% |  |
+| DMG +100% when shield HP is below 30% | 0.51% |  |
+| Phantom Dart DMG +36% | 0.51% |  |
+| Guardian DMG +30% | 0.51% |  |
+| DMG +60% to enemies with HP above 70% | 0.51% |  |
+| Physical DMG +18% | 0.51% |  |
+| Electric DMG +24% | 0.51% |  |
+
+---
+
