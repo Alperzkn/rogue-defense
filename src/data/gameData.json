@@ -640,7 +640,8 @@
           "tier": 1,
           "requiresCards": [
             "Lightning Paralysis"
-          ]
+          ],
+          "isSpecial": true
         },
         {
           "name": "Paralysis Extension",

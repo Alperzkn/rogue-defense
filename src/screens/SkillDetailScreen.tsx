@@ -23,19 +23,25 @@ const TIER_CONFIG: Record<CardTier, { label: string; color: string; desc: string
 // ── Chain card node inside modal ──
 function ChainNode({ card, highlighted, onClick }: { card: SkillCard; highlighted?: boolean; onClick?: () => void }) {
   const tier = TIER_CONFIG[card.tier];
+  const isSpecial = card.isSpecial;
   return (
     <div
       onClick={onClick}
       className={cn(
         'rounded-xl border px-4 py-3 text-left transition-all w-full',
         onClick && 'cursor-pointer hover:brightness-125',
-        highlighted
-          ? 'border-[#00C8FF]/50 bg-[#00C8FF]/12 ring-1 ring-[#00C8FF]/30'
-          : 'border-[#00C8FF]/20 bg-[#00C8FF]/5',
+        isSpecial
+          ? highlighted
+            ? 'border-[#B44FFF]/50 bg-[#B44FFF]/15 ring-1 ring-[#B44FFF]/30'
+            : 'border-[#B44FFF]/30 bg-[#B44FFF]/8'
+          : highlighted
+            ? 'border-[#00C8FF]/50 bg-[#00C8FF]/12 ring-1 ring-[#00C8FF]/30'
+            : 'border-[#00C8FF]/20 bg-[#00C8FF]/5',
       )}
     >
       <div className="flex items-center gap-2 mb-1">
-        <span className={cn('text-[12px] font-bold', highlighted ? 'text-foreground' : 'text-foreground/80')}>{card.name}</span>
+        <span className={cn('text-[12px] font-bold', isSpecial ? 'text-[#D4A0FF]' : highlighted ? 'text-foreground' : 'text-foreground/80')}>{card.name}</span>
+        {isSpecial && <Badge variant="epic" className="text-[7px]">Special</Badge>}
         <Badge variant="chain" className="text-[7px]">Chain</Badge>
       </div>
       <p className="text-[11px] text-muted-foreground leading-relaxed">{card.description}</p>
@@ -177,10 +183,16 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
                 <ArrowDown className="h-4 w-4 text-[#FF6B9D]/40" />
 
                 {/* The combo card */}
-                <div className="w-full rounded-xl border border-[#FF6B9D]/30 bg-[#FF6B9D]/8 px-4 py-3">
+                <div className={cn(
+                  'w-full rounded-xl border px-4 py-3',
+                  card.isSpecial
+                    ? 'border-[#B44FFF]/30 bg-[#B44FFF]/8'
+                    : 'border-[#FF6B9D]/30 bg-[#FF6B9D]/8'
+                )}>
                   <div className="flex items-center gap-2 mb-1.5">
                     <SkillIcon skill={skill} size={20} />
-                    <span className="text-[13px] font-bold text-foreground">{card.name}</span>
+                    <span className={cn('text-[13px] font-bold', card.isSpecial ? 'text-[#D4A0FF]' : 'text-foreground')}>{card.name}</span>
+                    {card.isSpecial && <Badge variant="epic" className="text-[7px]">Special</Badge>}
                     <Badge variant="combo" className="text-[7px]">Combo</Badge>
                   </div>
                   <span className="text-[9px] font-semibold" style={{ color: tier.color }}>★{card.tier}</span>
