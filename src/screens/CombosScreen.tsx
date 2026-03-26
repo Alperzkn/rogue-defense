@@ -156,14 +156,23 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Key Cards</span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
-                    {combo.cards.map(card => (
+                    {combo.cards.map(cardName => {
+                      const skillData = combo.skills.map(id => SKILLS.find(s => s.id === id)).filter(Boolean);
+                      const cardData = skillData.flatMap(s => s!.cards).find(c => c.name === cardName);
+                      const fromSkill = skillData.find(s => s!.cards.some(c => c.name === cardName));
+                      const tipContent = cardData
+                        ? <div><div className="font-semibold mb-1">{cardName}</div><p className="text-muted-foreground">{cardData.description}</p>{fromSkill && <p className="text-muted-foreground/50 mt-1 text-[9px]">From: {fromSkill.name} &middot; Tier {cardData.tier}</p>}</div>
+                        : cardName;
+                      return (
+                      <Tooltip key={cardName} content={tipContent}>
                       <span
-                        key={card}
-                        className="rounded-md border border-[#B44FFF]/15 bg-[#B44FFF]/6 px-2.5 py-1 text-[11px] font-medium text-[#D4A0FF]"
+                        className="rounded-md border border-[#B44FFF]/15 bg-[#B44FFF]/6 px-2.5 py-1 text-[11px] font-medium text-[#D4A0FF] cursor-default"
                       >
-                        {card}
+                        {cardName}
                       </span>
-                    ))}
+                      </Tooltip>
+                      );
+                    })}
                   </div>
                 </div>
 
