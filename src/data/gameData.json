@@ -70,19 +70,6 @@
           "isSpecial": true
         },
         {
-          "name": "[Burn] DMG +100%",
-          "description": "[Burn] DMG +100%",
-          "tag": "Standard",
-          "tier": 2
-        },
-        {
-          "name": "Flame Missile +2",
-          "description": "Flame Missile +2",
-          "tag": "Standard",
-          "tier": 2,
-          "isSpecial": true
-        },
-        {
           "name": "Close-range Explosion",
           "description": "Main missiles trigger a powerful explosion on hit",
           "tag": "Standard",
@@ -94,7 +81,7 @@
           "description": "Creates a Small Gravity Hole after the Flame Missile exploded",
           "tag": "Combo",
           "tier": 2,
-          "isSpecial": true,
+          "isSpecial": false,
           "requiredSkillId": "traction-field"
         },
         {
@@ -159,7 +146,7 @@
           "description": "Flame Missiles deal DMG to enemies along their path",
           "tag": "Combo",
           "tier": 3,
-          "requiredSkillId": "beam"
+          "requiredSkillId": "guardian-turret"
         }
       ]
     },
@@ -217,7 +204,8 @@
           "name": "Multi-Strike",
           "description": "Doubles duration, cooldown speed +20%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "isSpecial": true
         },
         {
           "name": "Vulnerable Beam",
@@ -248,14 +236,16 @@
           "name": "Tear Explosion",
           "description": "Has chance to trigger a Ripping Beam when main beam hits",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Energy Boost",
           "description": "Beam DMG +60% for each debuff on enemies (MAX: 300%)",
           "tag": "Standard",
           "tier": 2,
-          "lockedLevel": 18
+          "lockedLevel": 18,
+          "isSpecial": true
         },
         {
           "name": "Energy Paralysis",
@@ -384,13 +374,15 @@
           "name": "Quick Cooldown",
           "description": "Distortion Field DMG Interval -30%, cooldown speed +50%",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Field Suppression",
           "description": "Enemies in the Field take increased damage based on their reduced speed (MAX: 200% additional DMG)",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Beam Sweep",
@@ -429,14 +421,15 @@
           "description": "Distortion Field DMG +100%, each DMG pulls enemies toward the center",
           "tag": "Standard",
           "tier": 3,
-          "lockedLevel": 18
+          "lockedLevel": 18,
+          "isSpecial": true
         },
         {
           "name": "Field Support",
           "description": "Release an additional Distortion Field",
           "tag": "Combo",
           "tier": 3,
-          "requiredSkillId": "beam"
+          "requiredSkillId": "guardian-turret"
         },
         {
           "name": "Field Replication",
@@ -701,7 +694,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Lightning Paralysis"
+            "Paralysis Extension"
           ]
         },
         {
@@ -1241,7 +1234,8 @@
           "description": "Enemies hit by Mortar bullet will trigger an additional explosion after 1s",
           "tag": "Standard",
           "tier": 2,
-          "lockedLevel": 18
+          "lockedLevel": 18,
+          "isSpecial": true
         },
         {
           "name": "Piercing Blast",
