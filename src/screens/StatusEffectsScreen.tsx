@@ -5,6 +5,7 @@ import { Card, CardContent } from '../components/ui/card';
 import { Separator } from '../components/ui/separator';
 import { STATUS_EFFECTS } from '../data';
 import type { StatusEffect } from '../data/types';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 function StatusCard({ effect, index }: { effect: StatusEffect; index: number }) {
   return (
@@ -78,6 +79,7 @@ function StatusCard({ effect, index }: { effect: StatusEffect; index: number }) 
 }
 
 export function StatusEffectsScreen() {
+  useDocumentTitle('Status Effects');
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-8">
       {/* Header */}

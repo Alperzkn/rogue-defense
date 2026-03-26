@@ -10,6 +10,7 @@ import { SKILLS, CHIP_SOCKETS, COMBOS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
 import type { Skill, SkillCard, ChipSocketData, ChipStat, CardTier } from '../data/types';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const MAX_SKILLS = 4;
 
@@ -698,6 +699,7 @@ function ChipSelector({
 
 // ── Main Screen ──
 export function BuildPlannerScreen() {
+  useDocumentTitle('Build Planner');
   const fixedSkill = SKILLS.find(s => s.isFixed)!;
   const selectableSkills = SKILLS.filter(s => !s.isFixed);
 

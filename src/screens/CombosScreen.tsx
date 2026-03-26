@@ -12,6 +12,7 @@ import { COMBOS, SKILLS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import type { Combo } from '../data/types';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 function getComboColor(combo: Combo): string {
   const skills = combo.skills.map(id => SKILLS.find(s => s.id === id)).filter(Boolean);
@@ -205,6 +206,7 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
 }
 
 export function CombosScreen() {
+  useDocumentTitle('Synergy Builds');
   const sorted = [...COMBOS].sort((a, b) => b.rating - a.rating);
   const topCount = sorted.filter(c => c.rating === 5).length;
 

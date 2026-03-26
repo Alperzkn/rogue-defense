@@ -10,6 +10,7 @@ import { SKILLS } from '../data';
 import type { SkillType } from '../data/types';
 import { SkillTypeColors } from '../theme/colors';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const TYPE_FILTERS: { label: string; value: SkillType | 'all' }[] = [
   { label: 'All', value: 'all' },
@@ -21,6 +22,7 @@ const TYPE_FILTERS: { label: string; value: SkillType | 'all' }[] = [
 ];
 
 export function SkillsScreen() {
+  useDocumentTitle('Skills');
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState<SkillType | 'all'>('all');

@@ -8,6 +8,7 @@ import { Separator } from '../components/ui/separator';
 import { RarityBadge, rarityInfo } from '../components/RarityBadge';
 import { CHIP_SOCKETS } from '../data';
 import type { ChipSocketData, ChipStat } from '../data/types';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 function StatRow({ stat, index }: { stat: ChipStat; index: number }) {
   const { variant } = rarityInfo(stat.chance);
@@ -116,6 +117,7 @@ function SocketCard({ socket, defaultOpen = false }: { socket: ChipSocketData; d
 }
 
 export function ChipsScreen() {
+  useDocumentTitle('Chip Sockets');
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-8">
       {/* Header */}

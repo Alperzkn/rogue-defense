@@ -13,6 +13,7 @@ import { SKILLS, COMBOS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import type { Skill, SkillCard, CardTier } from '../data/types';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const TIER_CONFIG: Record<CardTier, { label: string; color: string; desc: string }> = {
   1: { label: 'Initial',     color: '#7AB8D4', desc: 'Available from the start' },
@@ -341,6 +342,7 @@ export function SkillDetailScreen() {
   const { skillId } = useParams<{ skillId: string }>();
   const navigate = useNavigate();
   const skill = SKILLS.find(s => s.id === skillId);
+  useDocumentTitle(skill?.name ?? 'Skill');
   const [selectedCard, setSelectedCard] = useState<SkillCard | null>(null);
 
   if (!skill) return (

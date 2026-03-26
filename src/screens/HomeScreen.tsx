@@ -9,6 +9,7 @@ import { Separator } from '../components/ui/separator';
 import { SkillTypeBadge, SkillIcon } from '../components';
 import { SKILLS, COMBOS, CHIP_SOCKETS } from '../data';
 import { fadeUp, staggerItem, TIMING, EASE } from '../lib/animations';
+import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const QUICK_NAV = [
   { path: '/skills', label: 'Skills', icon: Sword, desc: `${SKILLS.length} weapons with upgrade cards`, color: '#FF4500' },
@@ -26,6 +27,7 @@ const STATS = [
 ];
 
 export function HomeScreen() {
+  useDocumentTitle();
   const navigate = useNavigate();
   const topBuilds = COMBOS.filter(c => c.rating === 5);
 
