@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Link, Heart, Lightbulb, ChevronRight, Star, Info } from 'lucide-react';
+import { ArrowLeft, Link, Heart, Lightbulb, ChevronRight, Star, Info, X, ArrowDown } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Badge } from '../components/ui/badge';
 import { Card, CardContent } from '../components/ui/card';
@@ -11,7 +11,7 @@ import { SkillTypeBadge, SkillIcon } from '../components';
 import { Tooltip } from '../components/ui/tooltip';
 import { SKILLS, COMBOS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
-import type { SkillCard, CardTier } from '../data/types';
+import type { Skill, SkillCard, CardTier } from '../data/types';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
 
 const TIER_CONFIG: Record<CardTier, { label: string; color: string; desc: string }> = {
@@ -20,7 +20,191 @@ const TIER_CONFIG: Record<CardTier, { label: string; color: string; desc: string
   3: { label: 'Star Tier 3', color: '#B44FFF', desc: 'Pinnacle upgrades' },
 };
 
-function CardItem({ card, index }: { card: SkillCard; index: number }) {
+// ── Mini card used inside the modal flow ──
+function MiniCard({ card, highlighted, onClick }: { card: SkillCard; highlighted?: boolean; onClick?: () => void }) {
+  const tier = TIER_CONFIG[card.tier];
+  const isChain = card.tag === 'Chain';
+  const isCombo = card.tag === 'Combo';
+  return (
+    <div
+      onClick={onClick}
+      className={cn(
+        'rounded-lg border px-3 py-2 text-left transition-all',
+        onClick && 'cursor-pointer hover:brightness-125',
+        highlighted && 'ring-2 ring-primary/50',
+        card.isSpecial && 'border-[#B44FFF]/30 bg-[#B44FFF]/10',
+        isChain && !card.isSpecial && 'border-[#00C8FF]/25 bg-[#00C8FF]/8',
+        isCombo && !card.isSpecial && 'border-[#FF6B9D]/25 bg-[#FF6B9D]/8',
+        !isChain && !isCombo && !card.isSpecial && 'border-border/50 bg-secondary/30',
+      )}
+    >
+      <div className="flex items-center gap-1.5 mb-0.5">
+        <span className={cn('text-[11px] font-semibold truncate', card.isSpecial ? 'text-[#D4A0FF]' : 'text-foreground')}>{card.name}</span>
+        {card.isSpecial && <Badge variant="epic" className="text-[7px]">S</Badge>}
+        {isChain && <Badge variant="chain" className="text-[7px]">C</Badge>}
+        {isCombo && <Badge variant="combo" className="text-[7px]">Co</Badge>}
+      </div>
+      <p className="text-[10px] text-muted-foreground leading-relaxed line-clamp-2">{card.description}</p>
+      <span className="mt-1 inline-block text-[9px] font-semibold" style={{ color: tier.color }}>{tier.label}</span>
+    </div>
+  );
+}
+
+// ── Card Detail Modal ──
+function CardDetailModal({ card, skill, onClose, onSelectCard }: {
+  card: SkillCard;
+  skill: Skill;
+  onClose: () => void;
+  onSelectCard: (c: SkillCard) => void;
+}) {
+  const tier = TIER_CONFIG[card.tier];
+  const isChain = card.tag === 'Chain';
+  const isCombo = card.tag === 'Combo';
+
+  // Build chain flow: group chain cards by tier, showing dependency
+  const chainCards = skill.cards.filter(c => c.tag === 'Chain');
+  const chainTiers = [1, 2, 3] as CardTier[];
+
+  // Find cards that require this card
+  const dependents = skill.cards.filter(c => c.requiresCards?.includes(card.name));
+  // Find cards this card requires
+  const prerequisites = card.requiresCards
+    ? skill.cards.filter(c => card.requiresCards!.includes(c.name))
+    : [];
+
+  // Combo cards for this skill
+  const comboCards = skill.cards.filter(c => c.tag === 'Combo');
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 20 }}
+        className="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card p-5"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <h3 className={cn('text-lg font-bold', card.isSpecial ? 'text-[#D4A0FF]' : 'text-foreground')}>{card.name}</h3>
+              {card.isSpecial && <Badge variant="epic" className="text-[8px]">Special</Badge>}
+              {card.tag !== 'Standard' && (
+                <Badge variant={isChain ? 'chain' : 'combo'} className="text-[8px]">{card.tag}</Badge>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-semibold" style={{ color: tier.color }}>{tier.label}</span>
+              <span className="text-[10px] text-muted-foreground">&middot; {skill.name}</span>
+            </div>
+          </div>
+          <button type="button" aria-label="Close" onClick={onClose} className="rounded-md p-1 text-muted-foreground hover:text-foreground shrink-0">
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Description */}
+        <p className="text-[13px] text-muted-foreground leading-relaxed mb-5">{card.description}</p>
+
+        {/* Prerequisites */}
+        {prerequisites.length > 0 && (
+          <div className="mb-5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Requires</p>
+            <div className="flex flex-wrap gap-2">
+              {prerequisites.map(c => (
+                <MiniCard key={c.name} card={c} onClick={() => onSelectCard(c)} />
+              ))}
+            </div>
+            <div className="flex justify-center my-2">
+              <ArrowDown className="h-4 w-4 text-muted-foreground/30" />
+            </div>
+          </div>
+        )}
+
+        {/* Chain Flow Visualization */}
+        {isChain && chainCards.length > 1 && (
+          <div className="mb-5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+              <Link className="inline h-3 w-3 text-[#00C8FF] mr-1" />
+              Chain Flow
+            </p>
+            <div className="flex flex-col gap-1.5">
+              {chainTiers.map(t => {
+                const tierCards = chainCards.filter(c => c.tier === t);
+                if (tierCards.length === 0) return null;
+                return (
+                  <div key={t}>
+                    <div className="flex flex-wrap gap-1.5">
+                      {tierCards.map(c => (
+                        <div key={c.name} className="flex-1 min-w-[140px]">
+                          <MiniCard
+                            card={c}
+                            highlighted={c.name === card.name}
+                            onClick={c.name !== card.name ? () => onSelectCard(c) : undefined}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    {t < 3 && chainCards.some(c => c.tier > t) && (
+                      <div className="flex justify-center my-1.5">
+                        <ArrowDown className="h-3.5 w-3.5 text-[#00C8FF]/30" />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Combo Cards Visualization */}
+        {isCombo && comboCards.length > 1 && (
+          <div className="mb-5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+              <Heart className="inline h-3 w-3 text-[#FF6B9D] mr-1" />
+              Combo Cards
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {comboCards.map(c => (
+                <div key={c.name} className="flex-1 min-w-[140px]">
+                  <MiniCard
+                    card={c}
+                    highlighted={c.name === card.name}
+                    onClick={c.name !== card.name ? () => onSelectCard(c) : undefined}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Dependents */}
+        {dependents.length > 0 && (
+          <div className="mb-3">
+            <div className="flex justify-center mb-2">
+              <ArrowDown className="h-4 w-4 text-muted-foreground/30" />
+            </div>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Unlocks</p>
+            <div className="flex flex-wrap gap-2">
+              {dependents.map(c => (
+                <MiniCard key={c.name} card={c} onClick={() => onSelectCard(c)} />
+              ))}
+            </div>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function CardItem({ card, index, onClick }: { card: SkillCard; index: number; onClick?: () => void }) {
   const isChain = card.tag === 'Chain';
   const isCombo = card.tag === 'Combo';
   const isSpecial = card.isSpecial;
@@ -31,8 +215,10 @@ function CardItem({ card, index }: { card: SkillCard; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: TIMING.normal, delay: index * 0.03, ease: EASE.spring }}
     >
-      <div className={cn(
-        'flex items-start gap-3 rounded-xl border p-4 transition-all duration-200 hover:brightness-110',
+      <div
+        onClick={onClick}
+        className={cn(
+        'flex items-start gap-3 rounded-xl border p-4 transition-all duration-200 hover:brightness-110 cursor-pointer',
         isSpecial && 'border-[#B44FFF]/30 bg-gradient-to-br from-[#B44FFF]/12 to-[#FF6B9D]/6',
         isChain && !isSpecial && 'border-[#00C8FF]/25 bg-[#00C8FF]/8',
         isCombo && !isSpecial && 'border-[#FF6B9D]/25 bg-[#FF6B9D]/8',
@@ -80,6 +266,7 @@ export function SkillDetailScreen() {
   const { skillId } = useParams<{ skillId: string }>();
   const navigate = useNavigate();
   const skill = SKILLS.find(s => s.id === skillId);
+  const [selectedCard, setSelectedCard] = useState<SkillCard | null>(null);
 
   if (!skill) return (
     <div className="flex h-full items-center justify-center text-muted-foreground">Skill not found.</div>
@@ -195,7 +382,7 @@ export function SkillDetailScreen() {
                   <TabsContent key={t} value={String(t)}>
                     <p className="mb-4 text-[11px] text-muted-foreground">{desc}</p>
                     <div className="flex flex-col gap-2">
-                      {cards.map((card, i) => <CardItem key={`${card.name}-${card.tier}`} card={card} index={i} />)}
+                      {cards.map((card, i) => <CardItem key={`${card.name}-${card.tier}`} card={card} index={i} onClick={() => setSelectedCard(card)} />)}
                     </div>
                   </TabsContent>
                 );
@@ -256,6 +443,18 @@ export function SkillDetailScreen() {
           </motion.div>
         )}
       </div>
+
+      {/* Card Detail Modal */}
+      <AnimatePresence>
+        {selectedCard && (
+          <CardDetailModal
+            card={selectedCard}
+            skill={skill}
+            onClose={() => setSelectedCard(null)}
+            onSelectCard={c => setSelectedCard(c)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
