@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, ChevronDown, Sparkles, Star, Info, Search, Shield, Swords, Link2, Zap } from 'lucide-react';
+import { Plus, X, ChevronDown, Sparkles, Star, Info, Search, Shield, Swords, Link2, Zap, Save, FolderOpen, Trash2 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -757,6 +757,86 @@ export function BuildPlannerScreen() {
     setSelectedChips({});
   };
 
+  // ── Save / Load builds ──
+  interface SavedBuild {
+    name: string;
+    date: string;
+    skillIds: string[];
+    cards: Record<string, { name: string; tier: number }[]>;
+    chips: Record<string, { description: string; chance: number }[]>;
+  }
+
+  const STORAGE_KEY = 'rogue-defense-builds';
+
+  const getSavedBuilds = (): SavedBuild[] => {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch { return []; }
+  };
+
+  const [savedBuilds, setSavedBuilds] = useState<SavedBuild[]>(getSavedBuilds);
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [loadModalOpen, setLoadModalOpen] = useState(false);
+  const [saveName, setSaveName] = useState('');
+
+  const saveBuild = () => {
+    if (!saveName.trim() || selectedSkills.length === 0) return;
+    const build: SavedBuild = {
+      name: saveName.trim(),
+      date: new Date().toISOString(),
+      skillIds: selectedSkills.map(s => s.id),
+      cards: Object.fromEntries(
+        Object.entries(selectedCards).map(([id, cards]) => [
+          id, cards.map(c => ({ name: c.name, tier: c.tier }))
+        ])
+      ),
+      chips: Object.fromEntries(
+        Object.entries(selectedChips).map(([id, chips]) => [
+          id, chips.map(c => ({ description: c.description, chance: c.chance }))
+        ])
+      ),
+    };
+    const builds = [...getSavedBuilds(), build];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(builds));
+    setSavedBuilds(builds);
+    setSaveName('');
+    setSaveModalOpen(false);
+  };
+
+  const loadBuild = (build: SavedBuild) => {
+    const skills = build.skillIds
+      .map(id => SKILLS.find(s => s.id === id))
+      .filter((s): s is Skill => !!s);
+    setSelectedSkills(skills);
+
+    const cards: Record<string, SkillCard[]> = {};
+    for (const [skillId, refs] of Object.entries(build.cards)) {
+      const skill = SKILLS.find(s => s.id === skillId);
+      if (!skill) continue;
+      cards[skillId] = refs
+        .map(ref => skill.cards.find(c => c.name === ref.name && c.tier === ref.tier))
+        .filter((c): c is SkillCard => !!c);
+    }
+    setSelectedCards(cards);
+
+    const chips: Record<string, ChipStat[]> = {};
+    for (const [socketId, refs] of Object.entries(build.chips)) {
+      const socket = CHIP_SOCKETS.find(s => s.id === socketId);
+      if (!socket) continue;
+      chips[socketId] = refs
+        .map(ref => socket.stats.find(s => s.description === ref.description))
+        .filter((c): c is ChipStat => !!c);
+    }
+    setSelectedChips(chips);
+    setLoadModalOpen(false);
+  };
+
+  const deleteBuild = (index: number) => {
+    const builds = getSavedBuilds().filter((_, i) => i !== index);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(builds));
+    setSavedBuilds(builds);
+  };
+
   const totalSelectedCards = Object.values(selectedCards).flat().length;
   const totalEquippedChips = Object.values(selectedChips).flat().length;
 
@@ -776,15 +856,36 @@ export function BuildPlannerScreen() {
               </p>
             </div>
           </div>
-          {selectedSkills.length > 0 && (
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={clearAll}
-              className="rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-xs font-medium text-muted-foreground transition-all hover:bg-destructive/10 hover:border-destructive/30 hover:text-destructive"
+              onClick={() => setLoadModalOpen(true)}
+              className="flex items-center gap-1.5 rounded-lg border border-border/50 bg-card/50 px-3 py-2 text-xs font-medium text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
             >
-              Clear Build
+              <FolderOpen className="h-3.5 w-3.5" />
+              Load
+              {savedBuilds.length > 0 && <span className="text-[9px] text-primary">({savedBuilds.length})</span>}
             </button>
-          )}
+            {selectedSkills.length > 0 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => { setSaveName(''); setSaveModalOpen(true); }}
+                  className="flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition-all hover:bg-primary/20"
+                >
+                  <Save className="h-3.5 w-3.5" />
+                  Save
+                </button>
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="flex items-center gap-1.5 rounded-lg border border-border/50 bg-card/50 px-3 py-2 text-xs font-medium text-muted-foreground transition-all hover:bg-destructive/10 hover:border-destructive/30 hover:text-destructive"
+                >
+                  Clear
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </motion.div>
 
@@ -1280,6 +1381,108 @@ export function BuildPlannerScreen() {
           }}
           onClose={() => setPickerOpen(false)}
         />
+      </AnimatePresence>
+
+      {/* Save Build Modal */}
+      <AnimatePresence>
+        {saveModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setSaveModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }}
+              className="w-full max-w-sm rounded-xl border border-border bg-card p-5"
+              onClick={e => e.stopPropagation()}
+            >
+              <h3 className="text-lg font-bold text-foreground mb-1">Save Build</h3>
+              <p className="text-[11px] text-muted-foreground mb-4">
+                {selectedSkills.length} skills &middot; {totalSelectedCards} cards &middot; {totalEquippedChips} chips
+              </p>
+              <input
+                type="text"
+                value={saveName}
+                onChange={e => setSaveName(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && saveBuild()}
+                placeholder="Build name (e.g. Burn & Detonate)"
+                autoFocus
+                className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50 focus:outline-none mb-3"
+              />
+              <div className="flex gap-2">
+                <button type="button" onClick={() => setSaveModalOpen(false)}
+                  className="flex-1 rounded-lg border border-border px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-secondary">
+                  Cancel
+                </button>
+                <button type="button" onClick={saveBuild} disabled={!saveName.trim()}
+                  className="flex-1 flex items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+                  <Save className="h-3.5 w-3.5" /> Save
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Load Build Modal */}
+      <AnimatePresence>
+        {loadModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setLoadModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }}
+              className="w-full max-w-md max-h-[70vh] overflow-y-auto rounded-xl border border-border bg-card p-5"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-foreground">Saved Builds</h3>
+                <button type="button" aria-label="Close" onClick={() => setLoadModalOpen(false)}
+                  className="rounded-md p-1 text-muted-foreground hover:text-foreground">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              {savedBuilds.length === 0 ? (
+                <p className="py-8 text-center text-sm text-muted-foreground">No saved builds yet.</p>
+              ) : (
+                <div className="space-y-2">
+                  {savedBuilds.map((build, i) => {
+                    const skillNames = build.skillIds
+                      .map(id => SKILLS.find(s => s.id === id)?.name)
+                      .filter(Boolean);
+                    const cardCount = Object.values(build.cards).flat().length;
+                    const chipCount = Object.values(build.chips).flat().length;
+                    return (
+                      <div key={i} className="flex items-start gap-3 rounded-lg border border-border/50 bg-secondary/20 p-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-foreground truncate">{build.name}</p>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">
+                            {skillNames.join(', ')}
+                          </p>
+                          <p className="text-[10px] text-muted-foreground">
+                            {cardCount} cards &middot; {chipCount} chips &middot; {new Date(build.date).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="flex gap-1 shrink-0">
+                          <button type="button" onClick={() => loadBuild(build)}
+                            className="rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1.5 text-[10px] font-semibold text-primary hover:bg-primary/20">
+                            Load
+                          </button>
+                          <button type="button" aria-label="Delete build" onClick={() => deleteBuild(i)}
+                            className="rounded-md p-1.5 text-muted-foreground/50 hover:text-red-400 hover:bg-red-500/10">
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
