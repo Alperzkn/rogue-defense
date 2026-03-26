@@ -61,19 +61,39 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
   const isChain = card.tag === 'Chain';
   const isCombo = card.tag === 'Combo';
 
-  // Build chain flow: group chain cards by tier, showing dependency
-  const chainCards = skill.cards.filter(c => c.tag === 'Chain');
+  // Build the related chain: walk up prerequisites and down dependents
+  function collectChain(c: SkillCard, visited = new Set<string>()): SkillCard[] {
+    if (visited.has(c.name)) return [];
+    visited.add(c.name);
+    const result: SkillCard[] = [c];
+    // Walk up: find cards this one requires
+    if (c.requiresCards) {
+      for (const reqName of c.requiresCards) {
+        const req = skill.cards.find(x => x.name === reqName);
+        if (req) result.push(...collectChain(req, visited));
+      }
+    }
+    // Walk down: find cards that require this one
+    const deps = skill.cards.filter(x => x.requiresCards?.includes(c.name));
+    for (const dep of deps) {
+      result.push(...collectChain(dep, visited));
+    }
+    return result;
+  }
+
+  const relatedChain = isChain ? collectChain(card) : [];
   const chainTiers = [1, 2, 3] as CardTier[];
 
-  // Find cards that require this card
+  // Find direct dependents and prerequisites for the standalone sections
   const dependents = skill.cards.filter(c => c.requiresCards?.includes(card.name));
-  // Find cards this card requires
   const prerequisites = card.requiresCards
     ? skill.cards.filter(c => card.requiresCards!.includes(c.name))
     : [];
 
-  // Combo cards for this skill
-  const comboCards = skill.cards.filter(c => c.tag === 'Combo');
+  // For combo: find other combo cards from the same tier or related combos
+  const relatedCombos = isCombo
+    ? skill.cards.filter(c => c.tag === 'Combo' && c.tier === card.tier)
+    : [];
 
   return (
     <motion.div
@@ -128,8 +148,8 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
           </div>
         )}
 
-        {/* Chain Flow Visualization */}
-        {isChain && chainCards.length > 1 && (
+        {/* Chain Flow Visualization — only related cards */}
+        {isChain && relatedChain.length > 1 && (
           <div className="mb-5">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
               <Link className="inline h-3 w-3 text-[#00C8FF] mr-1" />
@@ -137,7 +157,7 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
             </p>
             <div className="flex flex-col gap-1.5">
               {chainTiers.map(t => {
-                const tierCards = chainCards.filter(c => c.tier === t);
+                const tierCards = relatedChain.filter(c => c.tier === t);
                 if (tierCards.length === 0) return null;
                 return (
                   <div key={t}>
@@ -152,7 +172,7 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
                         </div>
                       ))}
                     </div>
-                    {t < 3 && chainCards.some(c => c.tier > t) && (
+                    {t < 3 && relatedChain.some(c => c.tier > t) && (
                       <div className="flex justify-center my-1.5">
                         <ArrowDown className="h-3.5 w-3.5 text-[#00C8FF]/30" />
                       </div>
@@ -164,15 +184,15 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
           </div>
         )}
 
-        {/* Combo Cards Visualization */}
-        {isCombo && comboCards.length > 1 && (
+        {/* Combo Cards — same-tier combos */}
+        {isCombo && relatedCombos.length > 1 && (
           <div className="mb-5">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
               <Heart className="inline h-3 w-3 text-[#FF6B9D] mr-1" />
-              Combo Cards
+              Related Combo Cards
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {comboCards.map(c => (
+              {relatedCombos.map(c => (
                 <div key={c.name} className="flex-1 min-w-[140px]">
                   <MiniCard
                     card={c}
