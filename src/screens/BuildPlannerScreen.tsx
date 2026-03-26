@@ -459,9 +459,13 @@ function SkillCardSelector({
                               </div>
                               <p className="mt-0.5 text-[10px] text-muted-foreground">{card.description}</p>
                             </div>
-                            {isRepeatable ? (
+                            {isRepeatable ? (() => {
+                              const roundCardsHere = getRoundCards(round);
+                              const countInRound = roundCardsHere.filter(sc => sc.name === card.name && sc.tier === card.tier).length;
+                              const canRemoveHere = countInRound > 0 && !isRoundLocked(round);
+                              return (
                               <div className="flex items-center gap-1 shrink-0">
-                                {totalCount > 0 && (
+                                {canRemoveHere && (
                                   <button type="button" onClick={() => onToggleCard(card, 'remove')}
                                     className="flex h-6 w-6 items-center justify-center rounded bg-red-500/10 text-red-400 hover:bg-red-500/20 text-xs font-bold">
                                     -
@@ -474,7 +478,8 @@ function SkillCardSelector({
                                   </button>
                                 )}
                               </div>
-                            ) : (
+                              );
+                            })() : (
                               <button type="button"
                                 disabled={!canSelect && !isSelected}
                                 onClick={() => onToggleCard(card, isSelected ? 'remove' : 'add')}
