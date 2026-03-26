@@ -314,10 +314,23 @@ function SkillCardSelector({
 
     const roundCardsHere = getRoundCards(round);
     const isSelectedInRound = roundCardsHere.some(sc => sc.name === card.name && sc.tier === card.tier);
-    if (isSelectedInRound) return true; // can always deselect
 
-    // Check max selections across all rounds for repeatable cards
+    // For non-repeatable cards: if selected, can always deselect
     const maxSel = card.maxSelections || 1;
+    if (isSelectedInRound && maxSel <= 1) return true;
+
+    // For repeatable cards already selected: allow interaction (deselect at max, add if room)
+    if (isSelectedInRound && maxSel > 1) {
+      // At max globally → can only deselect
+      if (getCardCount(card) >= maxSel) return true;
+      // Not at max → check if tier has room for another
+      const state = getRoundState(round);
+      if (state.total >= CARDS_PER_TIER) return true; // can still deselect
+      if (card.isSpecial) return state.normalUnlocked && state.specialCount < SPECIAL_CARDS_PER_TIER;
+      return state.normalCount < NORMAL_CARDS_REQUIRED;
+    }
+
+    // Not selected in this round — check if can add
     if (getCardCount(card) >= maxSel) return false;
 
     const state = getRoundState(round);
@@ -947,21 +960,45 @@ export function BuildPlannerScreen() {
                         const count = current.filter(c => c.name === card.name && c.tier === card.tier).length;
 
                         if (maxSel > 1) {
-                          // Repeatable card: add if under max, remove last if at max
-                          if (count < maxSel) {
-                            return { ...prev, [skill.id]: [...current, card] };
+                          // Check if we should remove (at global max) or add
+                          if (count >= maxSel) {
+                            // At max — remove last occurrence
+                            let idx = -1;
+                            for (let j = current.length - 1; j >= 0; j--) {
+                              if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
+                            }
+                            if (idx >= 0) {
+                              const next = [...current];
+                              next.splice(idx, 1);
+                              return { ...prev, [skill.id]: next };
+                            }
+                            return prev;
                           }
-                          // At max — remove last occurrence
-                          let idx = -1;
-                          for (let j = current.length - 1; j >= 0; j--) {
-                            if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
+
+                          // Check per-tier limit before adding
+                          // Find which tier this card would be added to
+                          const tierSize = NORMAL_CARDS_REQUIRED + SPECIAL_CARDS_PER_TIER;
+                          const currentRound = Math.min(Math.floor(current.length / tierSize) + 1, 3);
+                          const roundStart = (currentRound - 1) * tierSize;
+                          const roundEnd = currentRound * tierSize;
+                          const roundCards = current.slice(roundStart, roundEnd);
+                          const normalInRound = roundCards.filter(c => !c.isSpecial).length;
+
+                          if (!card.isSpecial && normalInRound >= NORMAL_CARDS_REQUIRED) {
+                            // Tier full for normals — remove last occurrence instead
+                            let idx = -1;
+                            for (let j = current.length - 1; j >= 0; j--) {
+                              if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
+                            }
+                            if (idx >= 0) {
+                              const next = [...current];
+                              next.splice(idx, 1);
+                              return { ...prev, [skill.id]: next };
+                            }
+                            return prev;
                           }
-                          if (idx >= 0) {
-                            const next = [...current];
-                            next.splice(idx, 1);
-                            return { ...prev, [skill.id]: next };
-                          }
-                          return prev;
+
+                          return { ...prev, [skill.id]: [...current, card] };
                         }
 
                         // Non-repeatable: toggle
