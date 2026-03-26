@@ -254,7 +254,7 @@ function SkillCardSelector({
 }: {
   skill: Skill;
   selectedCards: SkillCard[];
-  onToggleCard: (card: SkillCard) => void;
+  onToggleCard: (card: SkillCard, action?: 'add' | 'remove') => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const color = SkillTypeColors[skill.type];
@@ -427,19 +427,17 @@ function SkillCardSelector({
                         const totalCount = getCardCount(card);
                         const maxSel = card.maxSelections || 1;
                         const isRepeatable = maxSel > 1;
+                        const canAdd = canSelect && (!isSelected || (isRepeatable && totalCount < maxSel));
                         return (
-                          <button
+                          <div
                             key={`${card.name}-${card.tier}-${i}`}
-                            type="button"
-                            disabled={!canSelect && !isSelected}
-                            onClick={() => onToggleCard(card)}
                             className={cn(
                               'flex items-start gap-2 rounded-md border p-2 text-left text-xs transition-colors',
                               isSelected
                                 ? 'border-primary/50 bg-primary/10'
                                 : canSelect
-                                  ? 'border-border hover:border-primary/30 hover:bg-secondary'
-                                  : 'border-border/50 opacity-50 cursor-not-allowed',
+                                  ? 'border-border'
+                                  : 'border-border/50 opacity-50',
                             )}
                           >
                             <div className="flex-1 min-w-0">
@@ -457,8 +455,33 @@ function SkillCardSelector({
                               </div>
                               <p className="mt-0.5 text-[10px] text-muted-foreground">{card.description}</p>
                             </div>
-                            {isSelected && <span className="text-[10px] font-bold text-primary shrink-0">{isRepeatable ? `+1` : 'Selected'}</span>}
-                          </button>
+                            {isRepeatable ? (
+                              <div className="flex items-center gap-1 shrink-0">
+                                {totalCount > 0 && (
+                                  <button type="button" onClick={() => onToggleCard(card, 'remove')}
+                                    className="flex h-6 w-6 items-center justify-center rounded bg-red-500/10 text-red-400 hover:bg-red-500/20 text-xs font-bold">
+                                    -
+                                  </button>
+                                )}
+                                {canAdd && (
+                                  <button type="button" onClick={() => onToggleCard(card, 'add')}
+                                    className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 text-primary hover:bg-primary/20 text-xs font-bold">
+                                    +
+                                  </button>
+                                )}
+                              </div>
+                            ) : (
+                              <button type="button"
+                                disabled={!canSelect && !isSelected}
+                                onClick={() => onToggleCard(card, isSelected ? 'remove' : 'add')}
+                                className={cn(
+                                  'shrink-0 rounded px-2 py-1 text-[10px] font-bold transition-colors',
+                                  isSelected ? 'text-primary hover:text-red-400' : canSelect ? 'text-muted-foreground hover:text-primary' : 'text-muted-foreground/30 cursor-not-allowed',
+                                )}>
+                                {isSelected ? 'Remove' : 'Select'}
+                              </button>
+                            )}
+                          </div>
                         );
                       })}
                     </div>
@@ -480,7 +503,7 @@ function SkillCardSelector({
                             key={`${card.name}-${card.tier}-${i}`}
                             type="button"
                             disabled={!canSelect && !isSelected}
-                            onClick={() => onToggleCard(card)}
+                            onClick={() => onToggleCard(card, isSelected ? 'remove' : 'add')}
                             className={cn(
                               'flex items-start gap-2 rounded-md border p-2 text-left text-xs transition-colors',
                               isSelected
@@ -953,51 +976,25 @@ export function BuildPlannerScreen() {
                     key={skill.id}
                     skill={skill}
                     selectedCards={selectedCards[skill.id] || []}
-                    onToggleCard={card => {
+                    onToggleCard={(card, action) => {
                       setSelectedCards(prev => {
                         const current = prev[skill.id] || [];
-                        const maxSel = card.maxSelections || 1;
-                        const count = current.filter(c => c.name === card.name && c.tier === card.tier).length;
 
-                        if (maxSel > 1) {
-                          // Check if we should remove (at global max) or add
-                          if (count >= maxSel) {
-                            // At max — remove last occurrence
-                            let idx = -1;
-                            for (let j = current.length - 1; j >= 0; j--) {
-                              if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
-                            }
-                            if (idx >= 0) {
-                              const next = [...current];
-                              next.splice(idx, 1);
-                              return { ...prev, [skill.id]: next };
-                            }
-                            return prev;
+                        if (action === 'remove') {
+                          // Remove last occurrence of this card
+                          let idx = -1;
+                          for (let j = current.length - 1; j >= 0; j--) {
+                            if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
                           }
-
-                          // Check per-tier limit before adding
-                          // Find which tier this card would be added to
-                          const tierSize = NORMAL_CARDS_REQUIRED + SPECIAL_CARDS_PER_TIER;
-                          const currentRound = Math.min(Math.floor(current.length / tierSize) + 1, 3);
-                          const roundStart = (currentRound - 1) * tierSize;
-                          const roundEnd = currentRound * tierSize;
-                          const roundCards = current.slice(roundStart, roundEnd);
-                          const normalInRound = roundCards.filter(c => !c.isSpecial).length;
-
-                          if (!card.isSpecial && normalInRound >= NORMAL_CARDS_REQUIRED) {
-                            // Tier full for normals — remove last occurrence instead
-                            let idx = -1;
-                            for (let j = current.length - 1; j >= 0; j--) {
-                              if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
-                            }
-                            if (idx >= 0) {
-                              const next = [...current];
-                              next.splice(idx, 1);
-                              return { ...prev, [skill.id]: next };
-                            }
-                            return prev;
+                          if (idx >= 0) {
+                            const next = [...current];
+                            next.splice(idx, 1);
+                            return { ...prev, [skill.id]: next };
                           }
+                          return prev;
+                        }
 
+                        if (action === 'add') {
                           return { ...prev, [skill.id]: [...current, card] };
                         }
 
