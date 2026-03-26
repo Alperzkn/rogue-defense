@@ -29,19 +29,22 @@
           "name": "Volley Missile",
           "description": "Flame Missile +1, DMG -15%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Flame Boost",
           "description": "Flame Missile DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Explosion Spread",
           "description": "Explosion range +30%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Impact Reinforcement",
@@ -167,19 +170,22 @@
           "name": "Beam Amplification",
           "description": "Main beam DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Stable Energy",
           "description": "Beam duration +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Beam Reflection",
           "description": "Main beam reflection +1, DMG -20% per reflection",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Additional Sweep",
@@ -312,19 +318,22 @@
           "name": "Field Amplification",
           "description": "Distortion Field DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Field Duration",
           "description": "Field duration +30%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Field Expansion",
           "description": "Distortion Field range +25%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Disruption Force",
@@ -457,19 +466,22 @@
           "name": "Electro Boost",
           "description": "Lightning Bomb DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Electro Strike",
           "description": "Lightning Bomb +1, DMG -15%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Electro Expansion",
           "description": "Lightning Bomb explosion range +20%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Bounce Boost",
@@ -594,19 +606,22 @@
           "name": "Continuous Strike",
           "description": "Thunder Core +1, DMG -15%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Swift Strike",
           "description": "Thunder Core attack range +30%, DMG +30%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Lightning Boost",
           "description": "Thunder Core DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Lightning Paralysis",
@@ -734,19 +749,22 @@
           "name": "Drone Assault",
           "description": "Matrix Drone DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Rapid Barrage",
           "description": "Matrix Drone attack count +2",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Dense Matrix",
           "description": "Matrix Drone +2, DMG -15%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Contact Pulse",
@@ -879,19 +897,22 @@
           "name": "Firewheel Boost",
           "description": "Firewheel DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Size Boost",
           "description": "Firewheel size +25%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Duration Extension",
           "description": "Firewheel duration +20% and DMG +20%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Mini Firewheel",
@@ -1018,19 +1039,22 @@
           "name": "Dart Boost",
           "description": "Phantom Dart DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Dart Salvo",
           "description": "Phantom Dart +1, DMG -15%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Penetrator Upgrade",
           "description": "Phantom Dart DMG +30%, Penetration +1",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Primary Splitting",
@@ -1156,19 +1180,22 @@
           "name": "Powerful Blast",
           "description": "Mortar DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Multiple Blast",
           "description": "Mortar bullet +1, DMG -15%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Impact Enhancement",
           "description": "Mortar knockback +50%, DMG +30%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Shotgun Barrage",
@@ -1301,13 +1328,15 @@
           "name": "Laser Boost",
           "description": "Focus Laser DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "High-Frequency Laser",
           "description": "Focus Laser DMG interval -20%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Damage Increase",
@@ -1319,7 +1348,8 @@
           "name": "Efficient Laser",
           "description": "Focus Laser duration +20%, DMG +20%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Laser Refraction",
@@ -1438,19 +1468,22 @@
           "name": "High Power Field",
           "description": "Traction Field DMG +50%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Wide Field",
           "description": "Traction Field range +25%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Extended Field",
           "description": "Traction Field flight distance +30%",
           "tag": "Standard",
-          "tier": 1
+          "tier": 1,
+          "maxSelections": 3
         },
         {
           "name": "Phase Siphon",

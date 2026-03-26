@@ -297,6 +297,11 @@ function SkillCardSelector({
     return thisComplete && nextHasCards;
   };
 
+  // Count how many times a card is selected across ALL rounds
+  const getCardCount = (card: SkillCard): number => {
+    return allSelected.filter(sc => sc.name === card.name && sc.tier === card.tier).length;
+  };
+
   const canSelectCard = (card: SkillCard, round: CardTier): boolean => {
     if (isRoundLocked(round)) return false;
     if (card.tier > round) return false;
@@ -308,8 +313,12 @@ function SkillCardSelector({
     }
 
     const roundCardsHere = getRoundCards(round);
-    const isSelected = roundCardsHere.some(sc => sc.name === card.name && sc.tier === card.tier);
-    if (isSelected) return true; // can always deselect
+    const isSelectedInRound = roundCardsHere.some(sc => sc.name === card.name && sc.tier === card.tier);
+    if (isSelectedInRound) return true; // can always deselect
+
+    // Check max selections across all rounds for repeatable cards
+    const maxSel = card.maxSelections || 1;
+    if (getCardCount(card) >= maxSel) return false;
 
     const state = getRoundState(round);
     if (state.total >= CARDS_PER_TIER) return false;
@@ -402,6 +411,9 @@ function SkillCardSelector({
                       {normalCards.map((card, i) => {
                         const isSelected = isCardSelected(card);
                         const canSelect = canSelectCard(card, round);
+                        const totalCount = getCardCount(card);
+                        const maxSel = card.maxSelections || 1;
+                        const isRepeatable = maxSel > 1;
                         return (
                           <button
                             key={`${card.name}-${card.tier}-${i}`}
@@ -426,10 +438,13 @@ function SkillCardSelector({
                                 {card.tag !== 'Standard' && (
                                   <Badge variant={card.tag === 'Chain' ? 'chain' : 'combo'} className="text-[8px] px-1 py-0">{card.tag}</Badge>
                                 )}
+                                {isRepeatable && totalCount > 0 && (
+                                  <span className="text-[9px] font-bold text-primary">{totalCount}/{maxSel}</span>
+                                )}
                               </div>
                               <p className="mt-0.5 text-[10px] text-muted-foreground">{card.description}</p>
                             </div>
-                            {isSelected && <span className="text-[10px] font-bold text-primary shrink-0">Selected</span>}
+                            {isSelected && <span className="text-[10px] font-bold text-primary shrink-0">{isRepeatable ? `+1` : 'Selected'}</span>}
                           </button>
                         );
                       })}
@@ -928,6 +943,28 @@ export function BuildPlannerScreen() {
                     onToggleCard={card => {
                       setSelectedCards(prev => {
                         const current = prev[skill.id] || [];
+                        const maxSel = card.maxSelections || 1;
+                        const count = current.filter(c => c.name === card.name && c.tier === card.tier).length;
+
+                        if (maxSel > 1) {
+                          // Repeatable card: add if under max, remove last if at max
+                          if (count < maxSel) {
+                            return { ...prev, [skill.id]: [...current, card] };
+                          }
+                          // At max — remove last occurrence
+                          let idx = -1;
+                          for (let j = current.length - 1; j >= 0; j--) {
+                            if (current[j].name === card.name && current[j].tier === card.tier) { idx = j; break; }
+                          }
+                          if (idx >= 0) {
+                            const next = [...current];
+                            next.splice(idx, 1);
+                            return { ...prev, [skill.id]: next };
+                          }
+                          return prev;
+                        }
+
+                        // Non-repeatable: toggle
                         const exists = current.some(c => c.name === card.name && c.tier === card.tier);
                         if (exists) {
                           return { ...prev, [skill.id]: current.filter(c => !(c.name === card.name && c.tier === card.tier)) };

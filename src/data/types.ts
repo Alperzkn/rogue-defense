@@ -10,6 +10,7 @@ export interface SkillCard {
   tier: CardTier;
   lockedLevel?: number;
   isSpecial?: boolean; // purple/pink card in game — powerful standalone effect
+  maxSelections?: number; // how many times this card can be selected (default 1)
   // Chain: other cards from the SAME skill that must be selected first
   requiresCards?: string[];
   // Combo: another SKILL that must be in the build for this card to be available
