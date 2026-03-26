@@ -28,7 +28,7 @@ function ChainNode({ card, highlighted, onClick }: { card: SkillCard; highlighte
     <div
       onClick={onClick}
       className={cn(
-        'rounded-xl border-2 px-4 py-3 text-left transition-all w-full',
+        'rounded-xl border-2 px-4 py-3 text-left transition-all w-full flex flex-col',
         onClick && 'cursor-pointer hover:brightness-125',
         isSpecial
           ? highlighted
@@ -44,7 +44,7 @@ function ChainNode({ card, highlighted, onClick }: { card: SkillCard; highlighte
         {isSpecial && <Badge variant="epic" className="text-[7px]">Special</Badge>}
         <Badge variant="chain" className="text-[7px]">Chain</Badge>
       </div>
-      <p className="text-[11px] text-muted-foreground leading-relaxed">{card.description}</p>
+      <p className="text-[11px] text-muted-foreground leading-relaxed flex-1">{card.description}</p>
       <span className="mt-1.5 inline-flex items-center gap-1 text-[9px] font-semibold" style={{ color: tier.color }}>
         <Star className="h-2.5 w-2.5" style={{ color: tier.color }} />
         {tier.label}
@@ -243,9 +243,9 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
                         onClick={levelCards[0].name !== card.name ? () => onSelectCard(levelCards[0]) : undefined}
                       />
                     ) : (
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 items-stretch">
                         {levelCards.map(c => (
-                          <div key={c.name} className="flex-1 min-w-0">
+                          <div key={c.name} className="flex-1 min-w-0 flex">
                             <ChainNode
                               card={c}
                               highlighted={c.name === card.name}
