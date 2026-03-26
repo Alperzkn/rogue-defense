@@ -117,7 +117,7 @@ function SocketCard({ socket, defaultOpen = false }: { socket: ChipSocketData; d
 
 export function ChipsScreen() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-8">
+    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-8">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-black tracking-tight text-foreground">Chip Sockets</h1>

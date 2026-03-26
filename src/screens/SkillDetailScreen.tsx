@@ -82,7 +82,7 @@ export function SkillDetailScreen() {
   const hasTips = skill.tips && skill.tips.length > 0;
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-10">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 py-6 sm:py-10">
 
       {/* Breadcrumb */}
       <motion.div {...fadeUp(0)} className="mb-8">

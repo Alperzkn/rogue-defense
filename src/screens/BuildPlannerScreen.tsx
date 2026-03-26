@@ -701,7 +701,7 @@ export function BuildPlannerScreen() {
   const totalEquippedChips = Object.values(selectedChips).flat().length;
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-10">
       {/* Header */}
       <motion.div {...fadeUp(0)} className="mb-8">
         <div className="flex items-center justify-between">
@@ -728,7 +728,7 @@ export function BuildPlannerScreen() {
         </div>
       </motion.div>
 
-      <div className="flex gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         {/* Left: Skills + Chips */}
         <div className="flex-1 min-w-0 space-y-6">
           {/* Skill Slots */}
@@ -971,8 +971,8 @@ export function BuildPlannerScreen() {
           )}
         </div>
 
-        {/* Right: Build Summary — pulled to the right edge */}
-        <div className="w-[300px] shrink-0 ml-auto">
+        {/* Right: Build Summary */}
+        <div className="w-full lg:w-[300px] lg:shrink-0 lg:ml-auto">
           <div className="sticky top-8">
             <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Build Summary
