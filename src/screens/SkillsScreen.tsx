@@ -27,6 +27,7 @@ export function SkillsScreen() {
 
   const filtered = useMemo(() =>
     SKILLS.filter(s => {
+      if (s.isFixed) return false;
       const matchType = activeFilter === 'all' || s.type === activeFilter;
       const matchSearch = s.name.toLowerCase().includes(search.toLowerCase()) ||
         s.description.toLowerCase().includes(search.toLowerCase());
@@ -114,8 +115,8 @@ export function SkillsScreen() {
                     onClick={() => navigate(`/skills/${skill.id}`)}
                     className="group cursor-pointer overflow-hidden transition-all duration-200 hover:brightness-110"
                     style={{
-                      border: `1px solid ${typeColor}25`,
-                      background: `linear-gradient(135deg, ${typeColor}18, ${typeColor}08 50%, hsl(var(--card)) 100%)`,
+                      border: `1px solid ${typeColor}35`,
+                      background: `linear-gradient(135deg, ${typeColor}20, ${typeColor}10 50%, hsl(var(--card)) 100%)`,
                     }}
                   >
                     <CardContent className="p-4">

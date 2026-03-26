@@ -15,7 +15,7 @@ const TooltipContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        'z-50 max-w-[300px] overflow-hidden rounded-xl border border-border/60 bg-card px-4 py-3 text-[11px] text-foreground shadow-2xl leading-relaxed',
+        'z-50 max-w-[280px] sm:max-w-[300px] overflow-hidden rounded-xl border border-border/60 bg-card px-4 py-3 text-[11px] text-foreground shadow-2xl leading-relaxed',
         'animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
         'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         className,
@@ -26,7 +26,7 @@ const TooltipContent = React.forwardRef<
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-// Simple wrapper for easy usage
+// Simple wrapper — supports both hover (desktop) and tap (mobile)
 function Tooltip({
   children,
   content,
@@ -38,9 +38,20 @@ function Tooltip({
   side?: 'top' | 'bottom' | 'left' | 'right';
   className?: string;
 }) {
+  const [open, setOpen] = React.useState(false);
+
   return (
-    <TooltipRoot delayDuration={150}>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
+    <TooltipRoot delayDuration={150} open={open} onOpenChange={setOpen}>
+      <TooltipTrigger
+        asChild
+        onClick={(e) => {
+          // On touch devices, toggle tooltip on tap
+          e.preventDefault();
+          setOpen(prev => !prev);
+        }}
+      >
+        {children}
+      </TooltipTrigger>
       <TooltipContent side={side} className={className}>{content}</TooltipContent>
     </TooltipRoot>
   );

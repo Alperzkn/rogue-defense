@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge';
 import { Card, CardContent } from '../components/ui/card';
 import { Separator } from '../components/ui/separator';
 import { SkillTypeBadge, SkillIcon } from '../components';
+import { Tooltip } from '../components/ui/tooltip';
 import { COMBOS, SKILLS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import type { Combo } from '../data/types';
@@ -33,7 +34,9 @@ function SkillPill({ skillId, onClick }: { skillId: string; onClick?: () => void
     >
       <SkillIcon skill={skill} size={16} />
       <span className="text-foreground">{skill.name}</span>
-      <SkillTypeBadge type={skill.type} />
+      <Tooltip content={`${skill.type.charAt(0).toUpperCase() + skill.type.slice(1)} damage type`}>
+        <span><SkillTypeBadge type={skill.type} /></span>
+      </Tooltip>
     </button>
   );
 }
@@ -66,8 +69,8 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
       <Card
         className="group relative overflow-hidden transition-all duration-200 hover:brightness-110"
         style={{
-          border: `1px solid ${accentColor}25`,
-          background: `linear-gradient(135deg, ${accentColor}18, ${accentColor}08 50%, hsl(var(--card)) 100%)`,
+          border: `1px solid ${accentColor}35`,
+          background: `linear-gradient(135deg, ${accentColor}20, ${accentColor}10 50%, hsl(var(--card)) 100%)`,
         }}
       >
 
@@ -81,8 +84,14 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
             <div className="flex items-start gap-3">
               <div className="flex-1 min-w-0">
                 <div className="mb-2 flex items-center gap-2.5 flex-wrap">
-                  <StarRow rating={combo.rating} />
-                  {isTop && <Badge variant="mythic" className="text-[9px]">TOP BUILD</Badge>}
+                  <Tooltip content={`${combo.rating}/5 — ${combo.rating === 5 ? 'Meta defining' : combo.rating === 4 ? 'Strong' : 'Viable'}`}>
+                    <div className="cursor-default"><StarRow rating={combo.rating} /></div>
+                  </Tooltip>
+                  {isTop && (
+                    <Tooltip content="Meta-defining build — highest effectiveness rating">
+                      <span><Badge variant="mythic" className="text-[9px] cursor-default">TOP BUILD</Badge></span>
+                    </Tooltip>
+                  )}
                 </div>
                 <h3 className="text-[15px] font-bold text-foreground leading-tight mb-2">
                   {combo.name}
@@ -113,7 +122,7 @@ function ComboCard({ combo, index }: { combo: Combo; index: number }) {
             >
               <div className="mx-5 ml-5 h-px bg-border/30" />
               <CardContent className="p-5 pl-5 pt-4">
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
                   {/* Synergy */}
                   <div>

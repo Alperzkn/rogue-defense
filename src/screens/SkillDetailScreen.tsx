@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Link, Heart, Lightbulb, ChevronRight, Star } from 'lucide-react';
+import { ArrowLeft, Link, Heart, Lightbulb, ChevronRight, Star, Info } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Badge } from '../components/ui/badge';
 import { Card, CardContent } from '../components/ui/card';
 import { Separator } from '../components/ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
 import { SkillTypeBadge, SkillIcon } from '../components';
+import { Tooltip } from '../components/ui/tooltip';
 import { SKILLS, COMBOS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import type { SkillCard, CardTier } from '../data/types';
@@ -32,10 +33,10 @@ function CardItem({ card, index }: { card: SkillCard; index: number }) {
     >
       <div className={cn(
         'flex items-start gap-3 rounded-xl border p-4 transition-all duration-200 hover:brightness-110',
-        isSpecial && 'border-[#B44FFF]/20 bg-gradient-to-br from-[#B44FFF]/8 to-[#FF6B9D]/4',
-        isChain && !isSpecial && 'border-[#00C8FF]/15 bg-[#00C8FF]/4',
-        isCombo && !isSpecial && 'border-[#FF6B9D]/15 bg-[#FF6B9D]/4',
-        !isChain && !isCombo && !isSpecial && 'border-border/40 bg-secondary/20',
+        isSpecial && 'border-[#B44FFF]/30 bg-gradient-to-br from-[#B44FFF]/12 to-[#FF6B9D]/6',
+        isChain && !isSpecial && 'border-[#00C8FF]/25 bg-[#00C8FF]/8',
+        isCombo && !isSpecial && 'border-[#FF6B9D]/25 bg-[#FF6B9D]/8',
+        !isChain && !isCombo && !isSpecial && 'border-border/50 bg-secondary/40',
       )}>
         {(isChain || isCombo) && (
           <div className="mt-0.5 shrink-0">
@@ -46,9 +47,20 @@ function CardItem({ card, index }: { card: SkillCard; index: number }) {
           <div className="flex items-start justify-between gap-2">
             <span className={cn('text-[13px] font-semibold leading-tight', isSpecial ? 'text-[#D4A0FF]' : 'text-foreground')}>{card.name}</span>
             <div className="flex items-center gap-1 shrink-0">
-              {isSpecial && <Badge variant="epic" className="text-[8px]">Special</Badge>}
-              {card.tag !== 'Standard' && (
-                <Badge variant={card.tag === 'Chain' ? 'chain' : 'combo'} className="text-[8px]">{card.tag}</Badge>
+              {isSpecial && (
+                <Tooltip content="Enhanced/rare variant — purple background in-game">
+                  <span><Badge variant="epic" className="text-[8px] cursor-default">Special</Badge></span>
+                </Tooltip>
+              )}
+              {card.tag === 'Chain' && (
+                <Tooltip content="Requires other cards from the same skill">
+                  <span><Badge variant="chain" className="text-[8px] cursor-default">Chain</Badge></span>
+                </Tooltip>
+              )}
+              {card.tag === 'Combo' && (
+                <Tooltip content="Requires another skill in your build">
+                  <span><Badge variant="combo" className="text-[8px] cursor-default">Combo</Badge></span>
+                </Tooltip>
               )}
             </div>
           </div>
@@ -97,52 +109,62 @@ export function SkillDetailScreen() {
       </motion.div>
 
       {/* Two-column layout */}
-      <div className={cn('flex gap-8 items-start', hasTips ? 'grid grid-cols-[1fr_260px]' : '')}>
+      <div className={cn('flex flex-col gap-8 items-start', hasTips ? 'lg:grid lg:grid-cols-[1fr_260px]' : '')}>
 
         {/* Left: main content */}
         <div className="min-w-0">
 
           {/* Hero */}
           <motion.div {...fadeUp(0.03)} className="mb-8">
-            <div className="flex items-start gap-5">
+            <div className="flex items-start gap-4 sm:gap-5">
               <div
-                className={`flex h-16 w-16 shrink-0 items-center justify-center text-3xl overflow-hidden ${skill.iconImage ? 'rounded-full' : 'rounded-xl'}`}
+                className={`flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center text-3xl overflow-hidden ${skill.iconImage ? 'rounded-full' : 'rounded-xl'}`}
                 style={{ backgroundColor: `${typeColor}10`, border: `1px solid ${typeColor}20` }}
               >
-                <SkillIcon skill={skill} size={skill.iconImage ? 64 : 30} />
+                <SkillIcon skill={skill} size={skill.iconImage ? 56 : 30} />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-2">
-                  <h1 className="text-2xl font-black text-foreground">{skill.name}</h1>
-                  <SkillTypeBadge type={skill.type} />
+                <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+                  <h1 className="text-xl sm:text-2xl font-black text-foreground">{skill.name}</h1>
+                  <Tooltip content={`${skill.type.charAt(0).toUpperCase() + skill.type.slice(1)} damage type`}>
+                    <span><SkillTypeBadge type={skill.type} /></span>
+                  </Tooltip>
                 </div>
                 <p className="text-[13px] text-muted-foreground leading-relaxed mb-4">{skill.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {tiers.map(t => {
                     const count = skill.cards.filter(c => c.tier === t).length;
-                    const { label, color } = TIER_CONFIG[t];
+                    const { label, color, desc } = TIER_CONFIG[t];
                     return (
-                      <div key={t} className="flex items-center gap-1.5 rounded-md border border-border/40 bg-secondary/30 px-2.5 py-1">
-                        <div className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
-                        <span className="text-[11px] text-muted-foreground">{label}</span>
-                        <span className="text-[11px] font-bold" style={{ color }}>{count}</span>
-                      </div>
+                      <Tooltip key={t} content={desc}>
+                        <div className="flex items-center gap-1.5 rounded-md border border-border/40 bg-secondary/30 px-2.5 py-1 cursor-default">
+                          <div className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
+                          <span className="text-[11px] text-muted-foreground">{label}</span>
+                          <span className="text-[11px] font-bold" style={{ color }}>{count}</span>
+                        </div>
+                      </Tooltip>
                     );
                   })}
-                  <Separator orientation="vertical" className="h-5 self-center opacity-30" />
-                  <div className="flex items-center gap-1 rounded-md border border-[#00C8FF]/15 bg-[#00C8FF]/5 px-2.5 py-1">
-                    <Link className="h-3 w-3 text-[#00C8FF]" />
-                    <span className="text-[11px] font-bold text-[#00C8FF]">{chainCards.length}</span>
-                  </div>
-                  <div className="flex items-center gap-1 rounded-md border border-[#FF6B9D]/15 bg-[#FF6B9D]/5 px-2.5 py-1">
-                    <Heart className="h-3 w-3 text-[#FF6B9D]" />
-                    <span className="text-[11px] font-bold text-[#FF6B9D]">{comboCards.length}</span>
-                  </div>
-                  {specialCards.length > 0 && (
-                    <div className="flex items-center gap-1 rounded-md border border-[#B44FFF]/15 bg-[#B44FFF]/5 px-2.5 py-1">
-                      <Star className="h-3 w-3 text-[#B44FFF]" />
-                      <span className="text-[11px] font-bold text-[#B44FFF]">{specialCards.length}</span>
+                  <Separator orientation="vertical" className="h-5 self-center opacity-30 hidden sm:block" />
+                  <Tooltip content="Chain cards — require other cards from the same skill">
+                    <div className="flex items-center gap-1 rounded-md border border-[#00C8FF]/15 bg-[#00C8FF]/5 px-2.5 py-1 cursor-default">
+                      <Link className="h-3 w-3 text-[#00C8FF]" />
+                      <span className="text-[11px] font-bold text-[#00C8FF]">{chainCards.length}</span>
                     </div>
+                  </Tooltip>
+                  <Tooltip content="Combo cards — require another skill in your build">
+                    <div className="flex items-center gap-1 rounded-md border border-[#FF6B9D]/15 bg-[#FF6B9D]/5 px-2.5 py-1 cursor-default">
+                      <Heart className="h-3 w-3 text-[#FF6B9D]" />
+                      <span className="text-[11px] font-bold text-[#FF6B9D]">{comboCards.length}</span>
+                    </div>
+                  </Tooltip>
+                  {specialCards.length > 0 && (
+                    <Tooltip content="Special cards — enhanced/rare variants (purple in-game)">
+                      <div className="flex items-center gap-1 rounded-md border border-[#B44FFF]/15 bg-[#B44FFF]/5 px-2.5 py-1 cursor-default">
+                        <Star className="h-3 w-3 text-[#B44FFF]" />
+                        <span className="text-[11px] font-bold text-[#B44FFF]">{specialCards.length}</span>
+                      </div>
+                    </Tooltip>
                   )}
                 </div>
               </div>
