@@ -28,19 +28,19 @@ function ChainNode({ card, highlighted, onClick }: { card: SkillCard; highlighte
     <div
       onClick={onClick}
       className={cn(
-        'rounded-xl border px-4 py-3 text-left transition-all w-full',
+        'rounded-xl border-2 px-4 py-3 text-left transition-all w-full',
         onClick && 'cursor-pointer hover:brightness-125',
         isSpecial
           ? highlighted
-            ? 'border-[#B44FFF]/50 bg-[#B44FFF]/15 ring-1 ring-[#B44FFF]/30'
-            : 'border-[#B44FFF]/30 bg-[#B44FFF]/8'
+            ? 'border-[#B44FFF]/60 bg-[#B44FFF]/15 ring-2 ring-[#B44FFF]/40 shadow-[0_0_12px_rgba(180,79,255,0.2)]'
+            : 'border-[#B44FFF]/25 bg-[#B44FFF]/6'
           : highlighted
-            ? 'border-[#00C8FF]/50 bg-[#00C8FF]/12 ring-1 ring-[#00C8FF]/30'
-            : 'border-[#00C8FF]/20 bg-[#00C8FF]/5',
+            ? 'border-[#00C8FF]/60 bg-[#00C8FF]/15 ring-2 ring-[#00C8FF]/40 shadow-[0_0_12px_rgba(0,200,255,0.2)]'
+            : 'border-[#00C8FF]/15 bg-[#00C8FF]/4',
       )}
     >
       <div className="flex items-center gap-2 mb-1">
-        <span className={cn('text-[12px] font-bold', isSpecial ? 'text-[#D4A0FF]' : highlighted ? 'text-foreground' : 'text-foreground/80')}>{card.name}</span>
+        <span className={cn('text-[12px] font-bold', isSpecial ? 'text-[#D4A0FF]' : highlighted ? 'text-[#00C8FF]' : 'text-foreground/70')}>{card.name}</span>
         {isSpecial && <Badge variant="epic" className="text-[7px]">Special</Badge>}
         <Badge variant="chain" className="text-[7px]">Chain</Badge>
       </div>
@@ -204,12 +204,37 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
             {/* ── CHAIN visualization ── */}
             {isChain && chainByLevel.length > 0 && (
               <div className="flex flex-col items-center gap-0">
-                {chainByLevel.map((levelCards, lvl) => (
+                {chainByLevel.map((levelCards, lvl) => {
+                  // Determine which parent cards from previous level feed into this level
+                  const prevLevel = lvl > 0 ? chainByLevel[lvl - 1] : [];
+                  // For each card in this level, find which parent(s) it requires
+                  const parentNames = new Set(
+                    levelCards.flatMap(c => (c.requiresCards || []).filter(r => prevLevel.some(p => p.name === r)))
+                  );
+                  // If all cards in this level share the same parent(s), show one centered arrow
+                  // If only some parents lead to this level, show arrows only from those parents
+                  const allParentsLead = prevLevel.length > 0 && prevLevel.every(p => parentNames.has(p.name));
+                  const showArrowPerParent = prevLevel.length > 1 && !allParentsLead && parentNames.size > 0;
+
+                  return (
                   <div key={lvl} className="w-full">
                     {lvl > 0 && (
-                      <div className="flex justify-center py-2">
-                        <ArrowDown className="h-4 w-4 text-[#00C8FF]/30" />
-                      </div>
+                      showArrowPerParent ? (
+                        // Show arrows only below the specific parent cards
+                        <div className="flex gap-2 py-2">
+                          {prevLevel.map(p => (
+                            <div key={p.name} className="flex-1 flex justify-center">
+                              {parentNames.has(p.name)
+                                ? <ArrowDown className="h-4 w-4 text-[#00C8FF]/40" />
+                                : <div className="h-4 w-4" />}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex justify-center py-2">
+                          <ArrowDown className="h-4 w-4 text-[#00C8FF]/40" />
+                        </div>
+                      )
                     )}
                     {levelCards.length === 1 ? (
                       <ChainNode
@@ -231,7 +256,8 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
                       </div>
                     )}
                   </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
