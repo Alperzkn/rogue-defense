@@ -381,12 +381,8 @@ function SkillCardSelector({
                 const thisRoundNewCards = skill.cards.filter(c => c.tier === round);
                 const previousTierUnselected = skill.cards.filter(c => {
                   if (c.tier >= round) return false;
-                  // Repeatable cards: show if they haven't hit max selections globally
-                  const maxSel = c.maxSelections || 1;
-                  if (maxSel > 1) {
-                    const globalCount = allSelected.filter(sc => sc.name === c.name && sc.tier === c.tier).length;
-                    return globalCount < maxSel;
-                  }
+                  // Repeatable cards: always show so user can deselect
+                  if ((c.maxSelections || 1) > 1) return true;
                   // Non-repeatable: only show if not selected in any previous round
                   return !prevRoundsSelected.some(sc => sc.name === c.name && sc.tier === c.tier);
                 });
