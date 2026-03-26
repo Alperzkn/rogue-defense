@@ -78,7 +78,34 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
   }
 
   const relatedChain = isChain ? collectChain(card) : [];
-  const chainTiers = [1, 2, 3] as CardTier[];
+
+  // Group chain cards by dependency depth (not tier number)
+  // Root = cards in the chain that have no requiresCards pointing to another chain member
+  const chainByLevel: SkillCard[][] = [];
+  if (isChain && relatedChain.length > 0) {
+    const chainSet = new Set(relatedChain.map(c => c.name));
+    const placed = new Set<string>();
+    // Level 0: root cards (no prerequisites within the chain)
+    const roots = relatedChain.filter(c =>
+      !c.requiresCards || !c.requiresCards.some(r => chainSet.has(r))
+    );
+    if (roots.length > 0) {
+      chainByLevel.push(roots);
+      roots.forEach(c => placed.add(c.name));
+    }
+    // Subsequent levels: cards whose all prerequisites are already placed
+    let safety = 10;
+    while (placed.size < relatedChain.length && safety-- > 0) {
+      const next = relatedChain.filter(c =>
+        !placed.has(c.name) &&
+        c.requiresCards &&
+        c.requiresCards.filter(r => chainSet.has(r)).every(r => placed.has(r))
+      );
+      if (next.length === 0) break;
+      chainByLevel.push(next);
+      next.forEach(c => placed.add(c.name));
+    }
+  }
 
   // For combo: find the required skill
   const comboSkill = isCombo && card.requiredSkillId
@@ -163,40 +190,36 @@ function CardDetailModal({ card, skill, onClose, onSelectCard }: {
             )}
 
             {/* ── CHAIN visualization ── */}
-            {isChain && relatedChain.length > 0 && (
+            {isChain && chainByLevel.length > 0 && (
               <div className="flex flex-col items-center gap-0">
-                {chainTiers.map(t => {
-                  const tierCards = relatedChain.filter(c => c.tier === t);
-                  if (tierCards.length === 0) return null;
-                  return (
-                    <div key={t} className="w-full">
-                      {t > 1 && relatedChain.some(c => c.tier < t) && (
-                        <div className="flex justify-center py-2">
-                          <ArrowDown className="h-4 w-4 text-[#00C8FF]/30" />
-                        </div>
-                      )}
-                      {tierCards.length === 1 ? (
-                        <ChainNode
-                          card={tierCards[0]}
-                          highlighted={tierCards[0].name === card.name}
-                          onClick={tierCards[0].name !== card.name ? () => onSelectCard(tierCards[0]) : undefined}
-                        />
-                      ) : (
-                        <div className="flex gap-2">
-                          {tierCards.map(c => (
-                            <div key={c.name} className="flex-1 min-w-0">
-                              <ChainNode
-                                card={c}
-                                highlighted={c.name === card.name}
-                                onClick={c.name !== card.name ? () => onSelectCard(c) : undefined}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                {chainByLevel.map((levelCards, lvl) => (
+                  <div key={lvl} className="w-full">
+                    {lvl > 0 && (
+                      <div className="flex justify-center py-2">
+                        <ArrowDown className="h-4 w-4 text-[#00C8FF]/30" />
+                      </div>
+                    )}
+                    {levelCards.length === 1 ? (
+                      <ChainNode
+                        card={levelCards[0]}
+                        highlighted={levelCards[0].name === card.name}
+                        onClick={levelCards[0].name !== card.name ? () => onSelectCard(levelCards[0]) : undefined}
+                      />
+                    ) : (
+                      <div className="flex gap-2">
+                        {levelCards.map(c => (
+                          <div key={c.name} className="flex-1 min-w-0">
+                            <ChainNode
+                              card={c}
+                              highlighted={c.name === card.name}
+                              onClick={c.name !== card.name ? () => onSelectCard(c) : undefined}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             )}
 
