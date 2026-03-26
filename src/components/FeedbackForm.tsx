@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, CheckCircle } from 'lucide-react';
+import { MessageSquare, X, Send, CheckCircle, ImagePlus } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 const TYPES = ['Feedback', 'Bug Report', 'Feature Request'] as const;
+const MAX_IMAGE_SIZE = 4 * 1024 * 1024; // 4MB
 
 export function FeedbackButton() {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState<string>(TYPES[0]);
   const [message, setMessage] = useState('');
   const [contact, setContact] = useState('');
+  const [image, setImage] = useState<string | null>(null);
+  const [imageName, setImageName] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const reset = () => {
     setMessage('');
     setContact('');
     setType(TYPES[0]);
+    setImage(null);
+    setImageName(null);
     setStatus('idle');
+  };
+
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > MAX_IMAGE_SIZE) {
+      alert('Image must be under 4MB');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result as string);
+      setImageName(file.name);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,7 +48,7 @@ export function FeedbackButton() {
       const resp = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, message, contact }),
+        body: JSON.stringify({ type, message, contact, image }),
       });
       if (resp.ok) {
         setStatus('sent');
@@ -119,6 +140,41 @@ export function FeedbackButton() {
                       required
                       className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50 focus:outline-none resize-none"
                     />
+
+                    {/* Image upload */}
+                    <div>
+                      <input
+                        ref={fileRef}
+                        type="file"
+                        accept="image/*"
+                        aria-label="Attach screenshot"
+                        onChange={handleImage}
+                        className="hidden"
+                      />
+                      {image ? (
+                        <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
+                          <img src={image} alt="Preview" className="h-10 w-10 rounded object-cover" />
+                          <span className="flex-1 truncate text-xs text-muted-foreground">{imageName}</span>
+                          <button
+                            type="button"
+                            aria-label="Remove image"
+                            onClick={() => { setImage(null); setImageName(null); if (fileRef.current) fileRef.current.value = ''; }}
+                            className="rounded p-1 text-muted-foreground hover:text-red-400"
+                          >
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => fileRef.current?.click()}
+                          className="flex w-full items-center gap-2 rounded-lg border border-dashed border-border/60 bg-background px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+                        >
+                          <ImagePlus className="h-4 w-4" />
+                          Attach screenshot (optional)
+                        </button>
+                      )}
+                    </div>
 
                     {/* Contact (optional) */}
                     <input
