@@ -13,6 +13,7 @@ import { ChipsScreen } from './src/screens/ChipsScreen';
 import { CombosScreen } from './src/screens/CombosScreen';
 import { StatusEffectsScreen } from './src/screens/StatusEffectsScreen';
 import { BuildPlannerScreen } from './src/screens/BuildPlannerScreen';
+import { FeedbackButton } from './src/components/FeedbackForm';
 
 const NAV_ITEMS = [
   { path: '/', label: 'Home', icon: Home, exact: true },
@@ -190,6 +191,7 @@ export default function App() {
               <AnimatedRoutes />
             </div>
           </main>
+          <FeedbackButton />
         </div>
       </BrowserRouter>
     </TooltipProvider>
