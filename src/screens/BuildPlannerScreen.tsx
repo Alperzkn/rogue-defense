@@ -379,9 +379,17 @@ function SkillCardSelector({
                 // Cards from previous rounds that were selected there (locked away)
                 const prevRoundsSelected = allSelected.slice(0, (round - 1) * CARDS_PER_TIER);
                 const thisRoundNewCards = skill.cards.filter(c => c.tier === round);
-                const previousTierUnselected = skill.cards.filter(c =>
-                  c.tier < round && !prevRoundsSelected.some(sc => sc.name === c.name && sc.tier === c.tier)
-                );
+                const previousTierUnselected = skill.cards.filter(c => {
+                  if (c.tier >= round) return false;
+                  // Repeatable cards: show if they haven't hit max selections globally
+                  const maxSel = c.maxSelections || 1;
+                  if (maxSel > 1) {
+                    const globalCount = allSelected.filter(sc => sc.name === c.name && sc.tier === c.tier).length;
+                    return globalCount < maxSel;
+                  }
+                  // Non-repeatable: only show if not selected in any previous round
+                  return !prevRoundsSelected.some(sc => sc.name === c.name && sc.tier === c.tier);
+                });
 
                 // Accessibility: need previous round complete to access this one
                 const accessible = round === 1 || getRoundCards((round - 1) as CardTier).length >= CARDS_PER_TIER;
