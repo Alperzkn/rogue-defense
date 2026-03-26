@@ -60,20 +60,18 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| [Burn] DMG +100% | — | Normal | [Burn] DMG +100% |
-| Flame Missile +2 | — | ★ Special | Flame Missile +2 |
 | Close-range Explosion | — | ★ Special | Main missiles trigger a powerful explosion on hit |
-| Collapse Explosion | Combo | ★ Special | Creates a Small Gravity Hole after the Flame Missile exploded |
+| Collapse Explosion | Combo | Normal | Creates a Small Gravity Hole after the Flame Missile exploded |
 | Missile Amplification | Chain | Normal | Small Flame Missile +3 *(Requires: Impact Reinforcement)* |
-| Chain Reaction | Chain | Normal | Small Flame Missiles have a 60% chance to launch an additional Small Flame Missile upon hitting an enemy |
-| Ignition Amplification | Chain | Normal | [Burn] DMG +100% |
+| Chain Reaction | Chain | Normal | Small Flame Missiles have a 60% chance to launch an additional Small Flame Missile upon hitting an enemy *(Requires: Impact Reinforcement)* |
+| Ignition Amplification | Chain | Normal | [Burn] DMG +100% *(Requires: Ignition)* |
 | Strong Impact | — | ★ Special | Flame Missile +2 |
 
 ### Star Tier 3 Unlock
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Death Ignition | Chain | Normal | Enemies with [Burn] explode upon death |
+| Death Ignition | Chain | Normal | Enemies with [Burn] explode upon death *(Requires: Ignition Amplification)* |
 | Fire Transmission | — | ★ Special | Inflicts [Burn] when main missiles passing through enemies |
 | Lightning Link | Combo | Normal | All Flame Missiles have a 30% chance to trigger 1 Chain Lightning when hitting enemies |
 | Path Strike | Combo | Normal | Flame Missiles deal DMG to enemies along their path |
@@ -101,17 +99,17 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 | Additional Sweep | Chain | Normal | Fires 1 additional Sweeping Beam |
 | Energy Surge | Chain | Normal | Fires 2 additional Deflected Beams |
 | High-Energy Pulse | — | ★ Special | Main beam range +100%, DMG +60% |
-| Multi-Strike | — | Normal | Doubles duration, cooldown speed +20% |
+| Multi-Strike | — | ★ Special | Doubles duration, cooldown speed +20% |
 
 ### Star Tier 2 Unlock
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Vulnerable Beam | Chain | Normal | Sweeping Beams inflict [Vulnerable] on hit |
-| Slow Beam | Chain | Normal | Deflected Beams inflict [Slow] on hit |
+| Vulnerable Beam | Chain | Normal | Sweeping Beams inflict [Vulnerable] on hit *(Requires: Additional Sweep)* |
+| Slow Beam | Chain | Normal | Deflected Beams inflict [Slow] on hit *(Requires: Energy Surge)* |
 | Energy Overload | — | ★ Special | Doubles debuff duration |
-| Tear Explosion | — | Normal | Has chance to trigger a Ripping Beam when main beam hits |
-| Energy Boost | — | Normal | Beam DMG +60% for each debuff on enemies (MAX: 300%) |
+| Tear Explosion | — | ★ Special | Has chance to trigger a Ripping Beam when main beam hits |
+| Energy Boost | — | ★ Special | Beam DMG +60% for each debuff on enemies (MAX: 300%) |
 | Energy Paralysis | Combo | Normal | Main beam inflicts [Paralyze] on hit |
 | Graviton Laser | Combo | Normal | Beam creates a pull effect in nearby enemies |
 
@@ -119,8 +117,8 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Sweep Boost | Chain | Normal | Sweeping Beams sweep an extra time |
-| Deflected Reflection | Chain | Normal | Deflected Beam reflections +1 |
+| Sweep Boost | Chain | Normal | Sweeping Beams sweep an extra time *(Requires: Additional Sweep)* |
+| Deflected Reflection | Chain | Normal | Deflected Beam reflections +1 *(Requires: Energy Surge)* |
 | Energy Detonation | Combo | Normal | Hitting enemies with [Burn] will trigger Super Ignition Explosion |
 | Convergence Trigger | Combo | Normal | 30% chance to generate a Refracted Laser upon beam hitting enemies |
 
@@ -153,10 +151,10 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Disruption Burst | Chain | Normal | When Disruption effect reaches MAX stacks, deals 1 high burst DMG |
-| Rewind Teleport | Chain | Normal | Has chance to teleport targets back to start point on hit |
-| Quick Cooldown | — | Normal | Distortion Field DMG Interval -30%, cooldown speed +50% |
-| Field Suppression | — | Normal | Enemies in the Field take increased damage based on their reduced speed (MAX: 200% additional DMG) |
+| Disruption Burst | Chain | Normal | When Disruption effect reaches MAX stacks, deals 1 high burst DMG *(Requires: Disruption Force)* |
+| Rewind Teleport | Chain | Normal | Has chance to teleport targets back to start point on hit *(Requires: Random Disturbance)* |
+| Quick Cooldown | — | ★ Special | Distortion Field DMG Interval -30%, cooldown speed +50% |
+| Field Suppression | — | ★ Special | Enemies in the Field take increased damage based on their reduced speed (MAX: 200% additional DMG) |
 | Beam Sweep | Combo | Normal | A Sweeping Beam is generated in the center of Distortion Field |
 | Electric Field | Combo | Normal | Has chance to inflict Paralyze on hit |
 
@@ -164,9 +162,9 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Area Disruption | Chain | Normal | When Disruption effect reaches MAX stacks, deals 1 extra DMG |
-| Teleport Damage | Chain | Normal | Teleportation from the Distortion Field deals 3% of the target's MAX HP as DMG |
-| Converging Field | — | Normal | Distortion Field DMG +100%, each DMG pulls enemies toward the center |
+| Area Disruption | Chain | Normal | When Disruption effect reaches MAX stacks, deals 1 extra DMG *(Requires: Disruption Force)* |
+| Teleport Damage | Chain | Normal | Teleportation from the Distortion Field deals 3% of the target's MAX HP as DMG *(Requires: Random Disturbance)* |
+| Converging Field | — | ★ Special | Distortion Field DMG +100%, each DMG pulls enemies toward the center |
 | Field Support | Combo | Normal | Release an additional Distortion Field |
 | Field Replication | Combo | Normal | When Phantom Dart enters Distortion Field first time, it 100% splits into 1 additional Phantom Dart |
 
@@ -199,8 +197,8 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Continuous Bomb | Chain | Normal | Lightning Bombs has a chance to bounce multiple times. Chance -20% after each successful bounce |
-| Enhanced Matrix | Chain | Normal | Electric Matrix DMG +100% |
+| Continuous Bomb | Chain | Normal | Lightning Bombs has a chance to bounce multiple times. Chance -20% after each successful bounce *(Requires: Bounce Boost)* |
+| Enhanced Matrix | Chain | Normal | Electric Matrix DMG +100% *(Requires: Trap Matrix)* |
 | Expanded Shockwave | — | ★ Special | Lightning Bomb explosion range and Electro Matrix range increased, outer DMG halved |
 | Thunder Shock | — | ★ Special | Lightning Bomb triggers a strong thunder explosion nearby after killing the enemy |
 | Electric Enhancement | Combo | Normal | All Electric DMG +80% |
@@ -210,8 +208,8 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Bomb Extension | Chain | Normal | Each time Lightning Bomb bounces, DMG +30%, explosion range +10% |
-| Persistent Matrix | Chain | Normal | Electro Matrix duration +2s |
+| Bomb Extension | Chain | Normal | Each time Lightning Bomb bounces, DMG +30%, explosion range +10% *(Requires: Continuous Bomb)* |
+| Persistent Matrix | Chain | Normal | Electro Matrix duration +2s *(Requires: Enhanced Matrix)* |
 | Cooperative Beam | Combo | Normal | Lightning Bomb releases 1 Focus Laser on hit |
 | Cyclotron Beam | Combo | Normal | Lightning Bomb releases 1 Cyclotron Beam on first hit |
 
@@ -239,16 +237,16 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 | Chain Lightning | Chain | Normal | Thunder Core triggers 1 Chain Lightning on hit (MAX: 5) |
 | Lightning Expansion | — | ★ Special | Thunder Core cooldown speed +30% |
 | Thunder Explosion | — | Normal | Thunder Core has a 60% chance to trigger a thunder explosion when killing enemies |
-| Paralysis Chain | Chain | Normal | Enemies paralyzed by Thunder Core trigger a Small Chain Lightning each time they take damage (0.5s interval) |
+| Paralysis Chain | Chain | ★ Special | Enemies paralyzed by Thunder Core trigger a Small Chain Lightning each time they take damage (0.5s interval) *(Requires: Lightning Paralysis)* |
 
 ### Star Tier 2 Unlock
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Paralysis Extension | Chain | Normal | Duration of [Paralyze] effect caused by the Thunder Core +100% |
-| Chain Expansion | Chain | Normal | Chain Lightning's target +4 |
+| Paralysis Extension | Chain | Normal | Duration of [Paralyze] effect caused by the Thunder Core +100% *(Requires: Lightning Paralysis)* |
+| Chain Expansion | Chain | Normal | Chain Lightning's target +4 *(Requires: Chain Lightning)* |
 | Bounce Strike | — | ★ Special | Thunder Core has a 50% chance to bounce back |
-| Chain Strike | — | Normal | Enemies hit by Chain Lightning have a 25% chance to trigger a small thunder explosion |
+| Chain Strike | — | ★ Special | Enemies hit by Chain Lightning have a 25% chance to trigger a small thunder explosion |
 | Lightning Aftershock | Combo | Normal | There is a 50% chance to generate 1 Landmine by Thunder Core hits enemies |
 | Lightning Trail | Combo | Normal | Thunder Core leaves a flame trail during flight |
 
@@ -256,8 +254,8 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Life Erosion | Chain | Normal | Thunder Core deals an additional 3% of the target's MAX HP as DMG when inflicting [Paralyze] effect |
-| Chain Interference | Chain | Normal | Enemies hit by Chain Lightning receive [Paralyze] effect, Chain Lightning DMG +100% |
+| Life Erosion | Chain | Normal | Thunder Core deals an additional 3% of the target's MAX HP as DMG when inflicting [Paralyze] effect *(Requires: Paralysis Extension)* |
+| Chain Interference | Chain | Normal | Enemies hit by Chain Lightning receive [Paralyze] effect, Chain Lightning DMG +100% *(Requires: Chain Expansion)* |
 | Lightning Teleportation | Combo | Normal | Enemies hit by Thunder Core or Chain Lightning have a 50% chance to be teleported back a certain distance |
 
 **Tips:**
@@ -289,12 +287,12 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Amplified Pulse | Chain | Normal | Pulse Wave DMG range +30% and inflicts [Slow] effect on hit |
-| Final Resonance | Chain | Normal | Matrix Drone releases 1 Pulse Wave when it ends |
-| Echo Upgrade II | Chain | Normal | Evolves Echo Drones to level 2 |
-| Drone Evolution III | — | Normal | The level 2 Matrix Drone evolves to level 3 after 3 attacks |
-| Drone Mutation III | — | Normal | After 2 launches per round, 50% chance to deploy level 3 Matrix Drone for subsequent launches |
-| Drone Retrieval | — | Normal | Matrix Drone has a 50% chance to return when destroyed (MAX: 5 stored) |
+| Amplified Pulse | Chain | Normal | Pulse Wave DMG range +30% and inflicts [Slow] effect on hit *(Requires: Contact Pulse)* |
+| Final Resonance | Chain | Normal | Matrix Drone releases 1 Pulse Wave when it ends *(Requires: Contact Pulse)* |
+| Echo Upgrade II | Chain | Normal | Evolves Echo Drones to level 2 *(Requires: Echo Drone)* |
+| Drone Evolution III | — | ★ Special | The level 2 Matrix Drone evolves to level 3 after 3 attacks |
+| Drone Mutation III | — | ★ Special | After 2 launches per round, 50% chance to deploy level 3 Matrix Drone for subsequent launches |
+| Drone Retrieval | — | ★ Special | Matrix Drone has a 50% chance to return when destroyed (MAX: 5 stored) |
 | Electroshock | Combo | Normal | Each Matrix Drone attack has a 50% chance to release an electroshock at enemies in close range |
 | Aero Split | — | Normal | 60% chance for Matrix Drone to split into 3 small darts upon hitting an enemy |
 
@@ -302,7 +300,7 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Echo Upgrade III | Chain | Normal | Evolves Echo Drones to level 3 |
+| Echo Upgrade III | Chain | Normal | Evolves Echo Drones to level 3 *(Requires: Echo Upgrade II)* |
 | Drone Salvo | Combo | Normal | Matrix Drone bullets +1 |
 | Raging Drone | Combo | Normal | Matrix Drone DMG +30% after each attack |
 
@@ -335,10 +333,10 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Killing Array | Chain | Normal | For every 2 enemies directly killed by Firewheel, summon 2 Mini Fireballs |
-| Blazing Trail | Chain | Normal | Flame Trail DMG +60% |
-| Charge Multiplier | — | Normal | Firewheel cooldown speed +50% |
-| Combo Boost | — | Normal | For every 20 hits dealt by Firewheel, Firewheel DMG +20% (MAX: +200%) |
+| Killing Array | Chain | Normal | For every 2 enemies directly killed by Firewheel, summon 2 Mini Fireballs *(Requires: Mini Firewheel)* |
+| Blazing Trail | Chain | Normal | Flame Trail DMG +60% *(Requires: Flame Trail)* |
+| Charge Multiplier | — | ★ Special | Firewheel cooldown speed +50% |
+| Combo Boost | — | ★ Special | For every 20 hits dealt by Firewheel, Firewheel DMG +20% (MAX: +200%) |
 | Firewheel Ignition | Combo | Normal | Firewheel has a 20% chance to inflict [Burning] effect |
 | Vortex Firewheel | Combo | Normal | Firewheel creates a pull effect around it |
 
@@ -346,10 +344,10 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Mini Size Boost | Chain | Normal | Mini Firewheel DMG +50%, duration +50% |
-| Extended Trail | Chain | Normal | Flame Trail duration +2s |
+| Mini Size Boost | Chain | Normal | Mini Firewheel DMG +50%, duration +50% *(Requires: Killing Array)* |
+| Extended Trail | Chain | Normal | Flame Trail duration +2s *(Requires: Blazing Trail)* |
 | Blazing Pulse | Combo | Normal | Firewheel releases a pulse wave every 1.5s |
-| Extra Barrage | — | ★ Special | For every 15 hits dealt by Firewheel, launch 1 ring of penetrating bullets |
+| Extra Barrage | — | Normal | For every 15 hits dealt by Firewheel, launch 1 ring of penetrating bullets |
 
 **Tips:**
 - Hold the Ground extends the Firewheel by 10s — massive value.
@@ -380,11 +378,11 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Advanced Splitting | Chain | Normal | Upon hitting the first enemy, Small darts split into 2 Mini darts, with a 20% chance to split into 2 more |
-| Impact Spread | Chain | Normal | Phantom Dart explosion range +20% for each penetration |
-| Impact Boost | Chain | Normal | Phantom Dart explosion DMG +30% for each penetration |
+| Advanced Splitting | Chain | Normal | Upon hitting the first enemy, Small darts split into 2 Mini darts, with a 20% chance to split into 2 more *(Requires: Primary Splitting)* |
+| Impact Spread | Chain | Normal | Phantom Dart explosion range +20% for each penetration *(Requires: Explosive Dart)* |
+| Impact Boost | Chain | Normal | Phantom Dart explosion DMG +30% for each penetration *(Requires: Explosive Dart)* |
 | Shell Crit Boost | — | ★ Special | All Phantom Darts DMG +40%, Crit Rate +30% |
-| Execution Penetration | — | Normal | All Phantom Dart penetration +1 on kill (MAX: +5) |
+| Execution Penetration | — | ★ Special | All Phantom Dart penetration +1 on kill (MAX: +5) |
 | Piercing Mark | Combo | Normal | Enemies hit by all Phantom Dart receive [Physical Vulnerable] effect |
 | Surge Pierce | Combo | Normal | Phantom Darts have a 50% chance to trigger a High-voltage shock upon enemy kill |
 
@@ -392,7 +390,7 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Split Mastery | Chain | Normal | All Phantom Darts split chance +40% |
+| Split Mastery | Chain | Normal | All Phantom Darts split chance +40% *(Requires: Advanced Splitting)* |
 | Secondary Minefield | Combo | Normal | Phantom Dart releases 1 Landmine on hit |
 | Piercing Ricochet | — | Normal | All Phantom Darts penetration +1, reflection +1 |
 
@@ -425,12 +423,12 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Extra Loading | Chain | Normal | For each enemy killed, Mortar fires 1 additional penetrating Shotgun Shell (MAX: 10) |
-| Wide Minefield | Chain | Normal | Landmine +2, explosion DMG +25% |
-| Landmine Shockwave | Chain | Normal | Landmine +2, knockback +100% |
+| Extra Loading | Chain | Normal | For each enemy killed, Mortar fires 1 additional penetrating Shotgun Shell (MAX: 10) *(Requires: Shotgun Barrage)* |
+| Wide Minefield | Chain | Normal | Landmine +2, explosion DMG +25% *(Requires: Landmine)* |
+| Landmine Shockwave | Chain | Normal | Landmine +2, knockback +100% *(Requires: Landmine)* |
 | Chain Explosion | — | ★ Special | For each enemy hit by Mortar explosion, explosion DMG +20% (MAX: 200%) |
 | Range Extension | — | ★ Special | Mortar range +70% |
-| Secondary Explosion | — | Normal | Enemies hit by Mortar bullet will trigger an additional explosion after 1s |
+| Secondary Explosion | — | ★ Special | Enemies hit by Mortar bullet will trigger an additional explosion after 1s |
 | Piercing Blast | Combo | Normal | Mortar bullet penetration +1 |
 | Firewheel Summon | Combo | Normal | For each enemy hit by Mortar explosion, it generates a Small Firewheel |
 
@@ -438,7 +436,7 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Shotgun Penetration | Chain | Normal | Penetrating Shotgun Shells penetration DMG +50%, range +70% |
+| Shotgun Penetration | Chain | Normal | Penetrating Shotgun Shells penetration DMG +50%, range +70% *(Requires: Shotgun Barrage)* |
 | Gravity Bomb | Combo | Normal | Mortar DMG +100%, pulls enemies to the center before the explosion |
 | Shatter Impact | Combo | Normal | Mortar creates two additional Ripping Beams upon impact |
 
@@ -471,8 +469,8 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Stacking Damage | Chain | Normal | When the Focus Laser switches targets, damage continues to increase |
-| Refraction Pull | Chain | Normal | Refraction +2, Refracted Lasers will pull the hit target towards the center |
+| Stacking Damage | Chain | Normal | When the Focus Laser switches targets, damage continues to increase *(Requires: Damage Increase)* |
+| Refraction Pull | Chain | Normal | Refraction +2, Refracted Lasers will pull the hit target towards the center *(Requires: Laser Refraction)* |
 | Slaughtering Laser | — | Normal | Every enemy killed by Focus Laser, duration +20% (up to 4 stacks) |
 | Extra Laser | — | ★ Special | Release an additional secondary Laser |
 | Target Explosion | Combo | Normal | Each hit from Focus Laser triggers an explosion |
@@ -482,10 +480,10 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Extreme Focus | Chain | Normal | Damage stacking cap increased to 400% |
-| Refraction Explosion | Chain | Normal | Each hit by Refracted Laser will cause an explosion |
+| Extreme Focus | Chain | Normal | Damage stacking cap increased to 400% *(Requires: Stacking Damage)* |
+| Refraction Explosion | Chain | Normal | Each hit by Refracted Laser will cause an explosion *(Requires: Refraction Pull)* |
 | Laser Lightning | Combo | Normal | Each hit from Focus Laser has a 30% chance to trigger 1 Chain Lightning |
-| Matrix Resonance | — | ★ Special | Focus Laser releases an expanding Electric Matrix on hit |
+| Matrix Resonance | — | Normal | Focus Laser releases an expanding Electric Matrix on hit |
 
 **Tips:**
 - Damage Increase + Extreme Focus (400% cap) is the ultimate single-target DPS path.
@@ -516,9 +514,9 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Siphon Enhancement | Chain | Normal | Portal duration (entrance and exit) +100% |
-| Siphon Expansion | Chain | Normal | Portal entry range +100% |
-| Hole Expansion | Chain | Normal | Gravity Hole range +50%, pulling force +50% |
+| Siphon Enhancement | Chain | Normal | Portal duration (entrance and exit) +100% *(Requires: Phase Siphon)* |
+| Siphon Expansion | Chain | Normal | Portal entry range +100% *(Requires: Phase Siphon)* |
+| Hole Expansion | Chain | Normal | Gravity Hole range +50%, pulling force +50% *(Requires: Gravity Hole)* |
 | Extra Field | — | ★ Special | Traction Field +1 |
 | Extended Range | — | ★ Special | Traction Field flight distance doubled |
 | Field Reflection | Combo | Normal | All Traction Fields can reflect |
@@ -528,7 +526,7 @@ Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2
 
 | Card Name | Type | Rarity | Effect |
 |-----------|------|--------|--------|
-| Destructive Hole | Chain | Normal | Gravity Hole DMG +250% |
+| Destructive Hole | Chain | Normal | Gravity Hole DMG +250% *(Requires: Hole Expansion)* |
 | Binary Split | Combo | Normal | Traction Field splits into a pair of spinning fields |
 | Double Fission | — | Normal | Traction Field splits into two small Traction Fields at the end |
 
@@ -581,44 +579,6 @@ Curated skill combinations ranked by effectiveness.
 
 ---
 
-## Laser Web (★★★★★)
-
-**Skills:** Focus Laser, Distortion Field
-
-> Focus Laser's Disruptive Field creates a Distortion Field on every hit, while Refraction Pull chains lasers through the field endlessly.
-
-**Synergy:** Every laser hit spawns a Distortion Field — more fields = more slowed enemies = more targets for refracted lasers.
-
-**Playstyle:** Fire Focus Laser into groups to rapidly spawn Distortion Fields and chain lasers.
-
-**Key Cards:** Laser Refraction, Disruptive Field, Refraction Pull, Extreme Focus
-
-**Tips:**
-- Extreme Focus increases damage cap to 400% — stay on one target for maximum DPS.
-- Matrix Resonance releases Electric Matrix on every hit for extra AOE.
-- Field Suppression gives +200% bonus DMG on slowed enemies — stack with Stasis Field.
-
----
-
-## Debuff Sniper (★★★★★)
-
-**Skills:** Beam, Thunder Core
-
-> Stack Slow (Beam), Paralyze (Thunder Core), and Vulnerable on enemies to maximize Beam's Energy Boost (+60% per debuff, up to 300%).
-
-**Synergy:** Energy Boost at Lv.18 gives +60% DMG for EACH debuff on an enemy. With Slow + Paralyze + Vulnerable = +180% (or 300% cap).
-
-**Playstyle:** Apply as many different debuffs as possible, then fire Beam for massive scaling damage.
-
-**Key Cards:** Slow Beam, Energy Paralysis, Energy Boost, Laser Penetration
-
-**Tips:**
-- Energy Overload doubles debuff duration — keep all debuffs active simultaneously.
-- Extend debuff duration chips amplify this synergy enormously.
-- Graviton Laser pulls debuffed enemies into the beam path.
-
----
-
 ## Lightning Storm (★★★★☆)
 
 **Skills:** Thunder Core, Lightning Bomb
@@ -635,6 +595,25 @@ Curated skill combinations ranked by effectiveness.
 - Electro Interference paralysis + Chain Interference from Thunder Core locks enemies in place.
 - Equip Electric DMG chips on all sockets for massive multiplier.
 - Continuous Bomb chains Lightning Bomb indefinitely — great for long waves.
+
+---
+
+## Laser Web (★★★★★)
+
+**Skills:** Focus Laser, Distortion Field
+
+> Focus Laser's Disruptive Field creates a Distortion Field on every hit, while Refraction Pull chains lasers through the field endlessly.
+
+**Synergy:** Every laser hit spawns a Distortion Field — more fields = more slowed enemies = more targets for refracted lasers.
+
+**Playstyle:** Fire Focus Laser into groups to rapidly spawn Distortion Fields and chain lasers.
+
+**Key Cards:** Laser Refraction, Disruptive Field, Refraction Pull, Extreme Focus
+
+**Tips:**
+- Extreme Focus increases damage cap to 400% — stay on one target for maximum DPS.
+- Matrix Resonance releases Electric Matrix on every hit for extra AOE.
+- Field Suppression gives +200% bonus DMG on slowed enemies — stack with Stasis Field.
 
 ---
 
@@ -692,6 +671,25 @@ Curated skill combinations ranked by effectiveness.
 - Smart Acceleration gives Firewheel +60% DMG and +30% speed — great base card.
 - Mini Firewheel generates 2 mini wheels every 3s for persistent coverage.
 - Firewheel Ignition adds Burn stacks for extra DoT damage.
+
+---
+
+## Debuff Sniper (★★★★★)
+
+**Skills:** Beam, Thunder Core
+
+> Stack Slow (Beam), Paralyze (Thunder Core), and Vulnerable on enemies to maximize Beam's Energy Boost (+60% per debuff, up to 300%).
+
+**Synergy:** Energy Boost at Lv.18 gives +60% DMG for EACH debuff on an enemy. With Slow + Paralyze + Vulnerable = +180% (or 300% cap).
+
+**Playstyle:** Apply as many different debuffs as possible, then fire Beam for massive scaling damage.
+
+**Key Cards:** Slow Beam, Energy Paralysis, Energy Boost, Laser Penetration
+
+**Tips:**
+- Energy Overload doubles debuff duration — keep all debuffs active simultaneously.
+- Extend debuff duration chips amplify this synergy enormously.
+- Graviton Laser pulls debuffed enemies into the beam path.
 
 ---
 
@@ -1049,4 +1047,3 @@ Balances offense and defense, with strong boss and penetration mechanics.
 | Electric DMG +24% | 0.51% |  |
 
 ---
-

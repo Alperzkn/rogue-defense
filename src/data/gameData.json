@@ -124,7 +124,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Ignition"
+            "Ignition Amplification"
           ]
         },
         {
@@ -549,7 +549,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Bounce Boost"
+            "Continuous Bomb"
           ]
         },
         {
@@ -558,7 +558,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Trap Matrix"
+            "Enhanced Matrix"
           ]
         },
         {
@@ -673,7 +673,8 @@
           "description": "Enemies hit by Chain Lightning have a 25% chance to trigger a small thunder explosion",
           "tag": "Standard",
           "tier": 2,
-          "lockedLevel": 18
+          "lockedLevel": 18,
+          "isSpecial": true
         },
         {
           "name": "Lightning Aftershock",
@@ -704,7 +705,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Chain Lightning"
+            "Chain Expansion"
           ]
         },
         {
@@ -804,19 +805,22 @@
           "name": "Drone Evolution III",
           "description": "The level 2 Matrix Drone evolves to level 3 after 3 attacks",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Drone Mutation III",
           "description": "After 2 launches per round, 50% chance to deploy level 3 Matrix Drone for subsequent launches",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Drone Retrieval",
           "description": "Matrix Drone has a 50% chance to return when destroyed (MAX: 5 stored)",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Electroshock",
@@ -839,7 +843,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Echo Drone"
+            "Echo Upgrade II"
           ]
         },
         {
@@ -847,7 +851,7 @@
           "description": "Matrix Drone bullets +1",
           "tag": "Combo",
           "tier": 3,
-          "requiredSkillId": "beam"
+          "requiredSkillId": "guardian-turret"
         },
         {
           "name": "Raging Drone",
@@ -937,13 +941,15 @@
           "name": "Charge Multiplier",
           "description": "Firewheel cooldown speed +50%",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Combo Boost",
           "description": "For every 20 hits dealt by Firewheel, Firewheel DMG +20% (MAX: +200%)",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Firewheel Ignition",
@@ -965,7 +971,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Mini Firewheel"
+            "Killing Array"
           ]
         },
         {
@@ -974,7 +980,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Flame Trail"
+            "Blazing Trail"
           ]
         },
         {
@@ -990,7 +996,7 @@
           "tag": "Standard",
           "tier": 3,
           "lockedLevel": 18,
-          "isSpecial": true,
+          "isSpecial": false,
           "requiredSkillId": "mortar"
         }
       ]
@@ -1090,14 +1096,15 @@
           "name": "Execution Penetration",
           "description": "All Phantom Dart penetration +1 on kill (MAX: +5)",
           "tag": "Standard",
-          "tier": 2
+          "tier": 2,
+          "isSpecial": true
         },
         {
           "name": "Piercing Mark",
           "description": "Enemies hit by all Phantom Dart receive [Physical Vulnerable] effect",
           "tag": "Combo",
           "tier": 2,
-          "requiredSkillId": "beam"
+          "requiredSkillId": "guardian-turret"
         },
         {
           "name": "Surge Pierce",
@@ -1112,7 +1119,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Primary Splitting"
+            "Advanced Splitting"
           ]
         },
         {
@@ -1384,7 +1391,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Damage Increase"
+            "Stacking Damage"
           ]
         },
         {
@@ -1393,7 +1400,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Laser Refraction"
+            "Refraction Pull"
           ]
         },
         {
@@ -1409,7 +1416,7 @@
           "tag": "Standard",
           "tier": 3,
           "lockedLevel": 14,
-          "isSpecial": true,
+          "isSpecial": false,
           "requiredSkillId": "lightning-bomb"
         }
       ]
@@ -1532,7 +1539,7 @@
           "tag": "Chain",
           "tier": 3,
           "requiresCards": [
-            "Gravity Hole"
+            "Hole Expansion"
           ]
         },
         {
@@ -1540,7 +1547,7 @@
           "description": "Traction Field splits into a pair of spinning fields",
           "tag": "Combo",
           "tier": 3,
-          "requiredSkillId": "distortion-field"
+          "requiredSkillId": "matrix-drone"
         },
         {
           "name": "Double Fission",
