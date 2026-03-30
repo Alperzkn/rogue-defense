@@ -8,8 +8,142 @@
       "icon": "🔫",
       "iconImage": "/icons/turret.png",
       "isFixed": true,
-      "tips": [],
-      "cards": []
+      "tips": [
+        "Volley Shot stacks well — pick 3 copies early for sustained DPS.",
+        "Bullet Explosion + Explosion Expansion + Explosion Boost is the core AoE chain.",
+        "Charge Activation enables powerful Impact Bullet scaling in Charged State."
+      ],
+      "cards": [
+        {
+          "name": "Volley Shot",
+          "description": "Bullets +1, DMG -15%",
+          "tag": "Standard",
+          "tier": 1,
+          "maxSelections": 3
+        },
+        {
+          "name": "Piercing Bullet",
+          "description": "All Bullets Penetration +1",
+          "tag": "Standard",
+          "tier": 1,
+          "maxSelections": 3
+        },
+        {
+          "name": "Bullets Boost",
+          "description": "All Bullets DMG +50%",
+          "tag": "Standard",
+          "tier": 1,
+          "maxSelections": 3
+        },
+        {
+          "name": "Bullet Explosion",
+          "description": "Has chance to explode on hit",
+          "tag": "Chain",
+          "tier": 1
+        },
+        {
+          "name": "Charge Activation",
+          "description": "Activates charged state",
+          "tag": "Chain",
+          "tier": 1
+        },
+        {
+          "name": "Cruise Shooting",
+          "description": "Spawn a turret to cruise and fire",
+          "tag": "Chain",
+          "tier": 1
+        },
+        {
+          "name": "Penetration Boost",
+          "description": "All bullets penetration +2",
+          "tag": "Standard",
+          "tier": 1,
+          "isSpecial": true
+        },
+        {
+          "name": "Impact Bullet",
+          "description": "Bullets DMG +100%, with weak knockback; knockback +200% in Charged State",
+          "tag": "Standard",
+          "tier": 1,
+          "isSpecial": true
+        },
+        {
+          "name": "Explosion Expansion",
+          "description": "Explosion range +50%",
+          "tag": "Chain",
+          "tier": 2,
+          "requiresCards": ["Bullet Explosion"]
+        },
+        {
+          "name": "Heavy Cruise",
+          "description": "Cruise bullet DMG +200%",
+          "tag": "Chain",
+          "tier": 2,
+          "requiresCards": ["Cruise Shooting"]
+        },
+        {
+          "name": "Quick Charge",
+          "description": "Doubles charging speed",
+          "tag": "Chain",
+          "tier": 2,
+          "requiresCards": ["Charge Activation"]
+        },
+        {
+          "name": "Sustained Charge",
+          "description": "Doubles charged state duration",
+          "tag": "Chain",
+          "tier": 2,
+          "requiresCards": ["Charge Activation"]
+        },
+        {
+          "name": "Counterburst Scatter",
+          "description": "After every 40 shots, the guardian fires a wave of Penetrating Shotgun Shells at enemies near the Shield",
+          "tag": "Standard",
+          "tier": 2
+        },
+        {
+          "name": "Reflection Boost",
+          "description": "Main bullets reflection +2",
+          "tag": "Standard",
+          "tier": 2,
+          "isSpecial": true
+        },
+        {
+          "name": "Electric Bullet",
+          "description": "50% chance to trigger a small thunder explosion on kill",
+          "tag": "Combo",
+          "tier": 2,
+          "requiredSkillId": "thunder-core"
+        },
+        {
+          "name": "Crippling Strike",
+          "description": "Inflicts [Vulnerable] on hit",
+          "tag": "Combo",
+          "tier": 2,
+          "requiredSkillId": "beam"
+        },
+        {
+          "name": "Explosion Boost",
+          "description": "Explosion DMG +60%, explosion chance +10%",
+          "tag": "Chain",
+          "tier": 3,
+          "requiresCards": ["Explosion Expansion"]
+        },
+        {
+          "name": "Cruise Master",
+          "description": "Doubles cruise bullets speed",
+          "tag": "Chain",
+          "tier": 3,
+          "requiresCards": ["Heavy Cruise"]
+        },
+        {
+          "name": "Disruption Fire",
+          "description": "Has chance to inflict [Disruption] on hit",
+          "tag": "Combo",
+          "tier": 3,
+          "requiredSkillId": "distortion-field"
+        }
+      ]
     },
     {
       "id": "flame-missile",

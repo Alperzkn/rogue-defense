@@ -9,6 +9,7 @@ Cards marked with ★ Special have a purple background in-game, indicating they 
 ## Table of Contents
 
 - [Skill Cards](#skill-cards)
+  - [Guardian Turret](#guardian-turret)
   - [Flame Missile](#flame-missile)
   - [Beam](#beam)
   - [Distortion Field](#distortion-field)
@@ -35,6 +36,53 @@ Cards marked with ★ Special have a purple background in-game, indicating they 
 # Skill Cards
 
 Each skill has cards organized into tiers: Tier 1 (Initial), Tier 2 (Star Tier 2), and Tier 3 (Star Tier 3). Cards are typed as Standard, **Chain** (prerequisite cards within the same skill), or **Combo** (requires another skill in your build). Cards marked **★ Special** have a purple background in-game.
+
+---
+
+## Guardian Turret
+
+**Type:** Physical
+
+> The Guardian's built-in turret that fires physical projectiles at enemies.
+
+### Initial Unlocked
+
+| Card Name | Type | Rarity | Effect |
+|-----------|------|--------|--------|
+| Volley Shot | — | Normal | Bullets +1, DMG -15% |
+| Piercing Bullet | — | Normal | All Bullets Penetration +1 |
+| Bullets Boost | — | Normal | All Bullets DMG +50% |
+| Bullet Explosion | Chain | Normal | Has chance to explode on hit |
+| Charge Activation | Chain | Normal | Activates charged state |
+| Cruise Shooting | Chain | Normal | Spawn a turret to cruise and fire |
+| Penetration Boost | — | ★ Special | All bullets penetration +2 |
+| Impact Bullet | — | ★ Special | Bullets DMG +100%, with weak knockback; knockback +200% in Charged State |
+
+### Star Tier 2 Unlock
+
+| Card Name | Type | Rarity | Effect |
+|-----------|------|--------|--------|
+| Explosion Expansion | Chain | Normal | Explosion range +50% *(Requires: Bullet Explosion)* |
+| Heavy Cruise | Chain | Normal | Cruise bullet DMG +200% *(Requires: Cruise Shooting)* |
+| Quick Charge | Chain | Normal | Doubles charging speed *(Requires: Charge Activation)* |
+| Sustained Charge | Chain | Normal | Doubles charged state duration *(Requires: Charge Activation)* |
+| Counterburst Scatter | — | Normal | After every 40 shots, the guardian fires a wave of Penetrating Shotgun Shells at enemies near the Shield |
+| Reflection Boost | — | ★ Special | Main bullets reflection +2 |
+| Electric Bullet | Combo | Normal | 50% chance to trigger a small thunder explosion on kill |
+| Crippling Strike | Combo | Normal | Inflicts [Vulnerable] on hit |
+
+### Star Tier 3 Unlock
+
+| Card Name | Type | Rarity | Effect |
+|-----------|------|--------|--------|
+| Explosion Boost | Chain | Normal | Explosion DMG +60%, explosion chance +10% *(Requires: Explosion Expansion)* |
+| Cruise Master | Chain | Normal | Doubles cruise bullets speed *(Requires: Heavy Cruise)* |
+| Disruption Fire | Combo | Normal | Has chance to inflict [Disruption] on hit |
+
+**Tips:**
+- Volley Shot stacks well — pick 3 copies early for sustained DPS.
+- Bullet Explosion + Explosion Expansion + Explosion Boost is the core AoE chain.
+- Charge Activation enables powerful Impact Bullet scaling in Charged State.
 
 ---
 
