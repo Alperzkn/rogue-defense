@@ -29,7 +29,7 @@ export function SkillsScreen() {
 
   const filtered = useMemo(() =>
     SKILLS.filter(s => {
-      if (s.isFixed) return false;
+      if (s.isFixed && s.cards.length === 0) return false;
       const matchType = activeFilter === 'all' || s.type === activeFilter;
       const matchSearch = s.name.toLowerCase().includes(search.toLowerCase()) ||
         s.description.toLowerCase().includes(search.toLowerCase());
