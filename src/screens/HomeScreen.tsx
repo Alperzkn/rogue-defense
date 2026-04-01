@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench } from 'lucide-react';
+import { ArrowRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench, Skull } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Separator } from '../components/ui/separator';
 import { SkillTypeBadge, SkillIcon } from '../components';
-import { SKILLS, COMBOS, CHIP_SOCKETS } from '../data';
+import { SKILLS, COMBOS, CHIP_SOCKETS, ENEMIES } from '../data';
 import { fadeUp, staggerItem, TIMING, EASE } from '../lib/animations';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
@@ -16,6 +16,7 @@ const QUICK_NAV = [
   { path: '/chips', label: 'Chip Sockets', icon: Cpu, desc: `${CHIP_SOCKETS.length} socket types & drop rates`, color: '#00C8FF' },
   { path: '/combos', label: 'Combos', icon: Link2, desc: `${COMBOS.length} curated synergy builds`, color: '#B44FFF' },
   { path: '/status', label: 'Status Effects', icon: Sparkles, desc: '7 debuffs & their interactions', color: '#00FF88' },
+  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies across 15 stages`, color: '#EF4444' },
   { path: '/build', label: 'Build Planner', icon: Wrench, desc: 'Plan your build with chip recommendations', color: '#FFD700' },
 ];
 
@@ -24,6 +25,7 @@ const STATS = [
   { value: SKILLS.reduce((a, s) => a + s.cards.length, 0), label: 'Upgrade Cards', color: '#00C8FF' },
   { value: CHIP_SOCKETS.length, label: 'Chip Sockets', color: '#FFD700' },
   { value: COMBOS.length, label: 'Synergy Builds', color: '#B44FFF' },
+  { value: ENEMIES.length, label: 'Enemies', color: '#EF4444' },
 ];
 
 export function HomeScreen() {
