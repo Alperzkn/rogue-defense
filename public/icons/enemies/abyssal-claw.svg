@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <!-- 6-pointed star / asterisk -->
+    <line x1="32" y1="8" x2="32" y2="56" stroke="#B44FFF" stroke-width="3" stroke-linecap="round"/>
+    <line x1="11" y1="20" x2="53" y2="44" stroke="#B44FFF" stroke-width="3" stroke-linecap="round"/>
+    <line x1="11" y1="44" x2="53" y2="20" stroke="#B44FFF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <!-- Biohazard: three crescents around a center ring -->
+    <circle cx="32" cy="32" r="4" fill="none" stroke="#FF8C00" stroke-width="2"/>
+    <!-- Top crescent -->
+    <path d="M32,10 A14,14 0 0,1 44,28" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"/>
+    <path d="M32,10 A14,14 0 0,0 20,28" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"/>
+    <!-- Bottom-left crescent -->
+    <path d="M13,42 A14,14 0 0,1 20,28" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"/>
+    <path d="M13,42 A14,14 0 0,0 32,48" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"/>
+    <!-- Bottom-right crescent -->
+    <path d="M51,42 A14,14 0 0,1 32,48" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"/>
+    <path d="M51,42 A14,14 0 0,0 44,28" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round"/>
+    <!-- Outer ring -->
+    <circle cx="32" cy="32" r="24" fill="none" stroke="#FF8C00" stroke-width="1.5" opacity="0.5"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <!-- Center hexagon -->
+    <polygon points="32,22 39,26 39,34 32,38 25,34 25,26" fill="none" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Top-right hexagon -->
+    <polygon points="43,15 50,19 50,27 43,31 36,27 36,19" fill="none" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Top-left hexagon -->
+    <polygon points="21,15 28,19 28,27 21,31 14,27 14,19" fill="none" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+    <!-- Bottom hexagon -->
+    <polygon points="32,37 39,41 39,49 32,53 25,49 25,41" fill="none" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+</svg>

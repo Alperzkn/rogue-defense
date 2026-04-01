@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <!-- Inverted triangle / sword pointing down -->
+    <polygon points="14,12 50,12 32,56" fill="none" stroke="#00C8FF" stroke-width="3" stroke-linejoin="round"/>
+    <!-- Small triangle cutout -->
+    <polygon points="26,20 38,20 32,32" fill="none" stroke="#00C8FF" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+</svg>

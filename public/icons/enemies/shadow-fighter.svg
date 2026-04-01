@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <polygon points="32,10 48,40 42,40 38,52 32,44 26,52 22,40 16,40" fill="none" stroke="#00FF88" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+</svg>

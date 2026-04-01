@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#glow)">
+    <!-- Eye outer shape with pointed ends -->
+    <path d="M4,32 Q32,8 60,32 Q32,56 4,32 Z" fill="none" stroke="#B44FFF" stroke-width="2.5"/>
+    <!-- Pupil circle -->
+    <circle cx="32" cy="32" r="8" fill="none" stroke="#B44FFF" stroke-width="2"/>
+    <circle cx="32" cy="32" r="3" fill="#B44FFF"/>
+    <!-- Decorative pointed ends -->
+    <line x1="0" y1="32" x2="8" y2="32" stroke="#B44FFF" stroke-width="2" stroke-linecap="round"/>
+    <line x1="56" y1="32" x2="64" y2="32" stroke="#B44FFF" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

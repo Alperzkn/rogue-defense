@@ -139,6 +139,13 @@ function EnemyCard({ enemy, index }: { enemy: Enemy; index: number }) {
         >
           <CardContent className="p-4">
             <div className="flex items-start gap-3">
+              {/* Enemy icon */}
+              {enemy.icon && (
+                <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-lg"
+                  style={{ backgroundColor: `${typeColor}10`, border: `1px solid ${typeColor}20` }}>
+                  <img src={enemy.icon} alt={enemy.name} className="h-8 w-8 sm:h-9 sm:w-9" />
+                </div>
+              )}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                   <h3 className="text-[15px] font-bold text-foreground">{enemy.name}</h3>

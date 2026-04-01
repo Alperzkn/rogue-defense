@@ -65,6 +65,7 @@ export interface Enemy {
   description: string;
   ability: string;
   type: EnemyType;
+  icon?: string;
   firstStage: number;
   resistances: Record<DamageType, number>;
   stages: number[];
