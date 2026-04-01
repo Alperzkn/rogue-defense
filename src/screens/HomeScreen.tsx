@@ -16,7 +16,7 @@ const QUICK_NAV = [
   { path: '/chips', label: 'Chip Sockets', icon: Cpu, desc: `${CHIP_SOCKETS.length} socket types & drop rates`, color: '#00C8FF' },
   { path: '/combos', label: 'Combos', icon: Link2, desc: `${COMBOS.length} curated synergy builds`, color: '#B44FFF' },
   { path: '/status', label: 'Status Effects', icon: Sparkles, desc: '7 debuffs & their interactions', color: '#00FF88' },
-  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies across 15 stages`, color: '#EF4444' },
+  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies with resistances & tips`, color: '#EF4444' },
   { path: '/build', label: 'Build Planner', icon: Wrench, desc: 'Plan your build with chip recommendations', color: '#FFD700' },
 ];
 
@@ -47,7 +47,7 @@ export function HomeScreen() {
       </motion.div>
 
       {/* Stats */}
-      <motion.div {...fadeUp(0.05)} className="mb-10 grid grid-cols-4 gap-4">
+      <motion.div {...fadeUp(0.05)} className="mb-10 grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
         {STATS.map(({ value, label, color }) => (
           <div key={label} className="rounded-xl border border-border/40 bg-card/60 p-4 text-center">
             <div className="text-2xl font-black tabular-nums" style={{ color }}>{value}</div>

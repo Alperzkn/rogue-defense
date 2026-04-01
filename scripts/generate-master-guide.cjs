@@ -206,7 +206,7 @@ for (const effect of data.statusEffects) {
 if (data.enemies && data.enemies.length > 0) {
   sections.push(`# Enemies
 
-All enemies encountered across the 15 stages of Rogue Defense. Resistance values show damage modifiers: positive means the enemy takes MORE damage of that type, negative means LESS.`);
+All known enemies in Rogue Defense. Resistance values show damage modifiers: positive means the enemy takes MORE damage of that type, negative means LESS.`);
 
   for (const type of ["boss", "elite", "minion"]) {
     const group = data.enemies.filter((e) => e.type === type);

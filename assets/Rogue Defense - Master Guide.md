@@ -823,7 +823,7 @@ Damage-over-time debuff applied to enemies. All Matrix Drone damage can inflict 
 
 # Enemies
 
-All enemies encountered across the 15 stages of Rogue Defense. Resistance values show damage modifiers: positive means the enemy takes MORE damage of that type, negative means LESS.
+All known enemies in Rogue Defense. Resistance values show damage modifiers: positive means the enemy takes MORE damage of that type, negative means LESS.
 
 ## Bosses
 

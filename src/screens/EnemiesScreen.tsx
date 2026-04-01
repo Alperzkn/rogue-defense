@@ -261,7 +261,7 @@ function EnemyCard({ enemy, index }: { enemy: Enemy; index: number }) {
                     Appears in Stages
                   </p>
                   <div className="flex flex-wrap gap-1">
-                    {Array.from({ length: 15 }, (_, i) => i + 1).map(stage => {
+                    {Array.from({ length: Math.max(...ENEMIES.flatMap(e => e.stages)) }, (_, i) => i + 1).map(stage => {
                       const active = enemy.stages.includes(stage);
                       return (
                         <div
@@ -324,7 +324,7 @@ export function EnemiesScreen() {
       <motion.div {...fadeUp(0)} className="mb-6">
         <h1 className="text-2xl font-black tracking-tight text-foreground">Enemies</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {ENEMIES.length} enemies &middot; {bossCount} bosses &middot; {eliteCount} elites &middot; 15 stages
+          {ENEMIES.length} enemies &middot; {bossCount} bosses &middot; {eliteCount} elites
         </p>
       </motion.div>
 
