@@ -23,6 +23,7 @@ Cards marked with ★ Special have a purple background in-game, indicating they 
   - [Traction Field](#traction-field)
 - [Synergy Builds](#synergy-builds)
 - [Status Effects](#status-effects)
+- [Enemies](#enemies)
 - [Chip Sockets](#chip-sockets)
   - [Database](#database)
   - [Emitter](#emitter)
@@ -817,6 +818,55 @@ Damage-over-time debuff applied to enemies. All Matrix Drone damage can inflict 
 
 **Sources:**
 - LiDAR chip: Matrix Drone damage inflicts Injured for 4s
+
+---
+
+# Enemies
+
+All enemies encountered across the 15 stages of Rogue Defense. Resistance values show damage modifiers: positive means the enemy takes MORE damage of that type, negative means LESS.
+
+## Bosses
+
+| Name | Ability | Type | First Stage | Stages | Fire | Electric | Energy | Physical | Field |
+|------|---------|------|-------------|--------|------|----------|--------|----------|-------|
+| Plague Variant | Leads a swarm of rings and cubes into battle. Takes 50% LESS Electric and Force-field DMG. | Boss | 1 | 1 | — | -50% | — | — | -50% |
+| Cube Master | Long-range attacks; splits into more cubes upon defeat. Takes 50% LESS Energy damage. | Boss | 3 | 3, 12 | — | — | -50% | — | — |
+| Central Hive | Continuously spawns Hexagonal Bees. Takes 50% LESS Physical and Electric DMG. | Boss | 5 | 5 | — | -50% | — | -50% | — |
+| Mirage | Continuously deploys rebel fighters and fires powerful pulse cannons when approaching the shield. Takes 50% LESS Fire and Force-field DMG. | Boss | 10 | 10 | -50% | — | — | — | -50% |
+| Mutated Sword | Reduces our attack power upon reaching the shield. Takes 50% LESS Fire DMG. | Boss | 11 | 11 | -50% | — | — | — | — |
+| Dark Leech Eye | Restores its HP when it attacks. Takes 50% LESS Force-field DMG. | Boss | 13 | 13 | — | — | — | — | -50% |
+| Star Defiler | Consumes nearby enemies and releases them upon defeat. Takes 50% LESS Fire and Force-field DMG. | Boss | 15 | 15 | -50% | — | — | — | -50% |
+
+---
+
+## Elites
+
+| Name | Ability | Type | First Stage | Stages | Fire | Electric | Energy | Physical | Field |
+|------|---------|------|-------------|--------|------|----------|--------|----------|-------|
+| Phase Beetle | Block all ballistics. Takes 50% LESS Electric DMG. | Elite | 7 | 7, 14 | — | -50% | — | — | — |
+| Phase Moth | Moves diagonally and attacks from range. Takes 100% MORE Fire DMG. | Elite | 3 | 3, 4, 7 | +100% | — | — | — | — |
+| Crystal Wurm | Immune to Paralysis, dodges upward after taking DMG. Takes 50% LESS Electric DMG. Takes 50% MORE Fire DMG. | Elite | 5 | 5 | +50% | -50% | — | — | — |
+| Annihilator | Long-range attack. Takes 50% MORE Electric and Force-field DMG. | Elite | 7 | 7, 10, 13 | — | +50% | — | — | +50% |
+| Flash Wings | Engages in close-range combat. Takes 50% MORE Fire and Force-field DMG. | Elite | 6 | 6, 9, 10 | +50% | — | — | — | +50% |
+| Agile Specter | Dashes side to side when damaged and gains a shield. Takes 50% LESS Physical DMG. | Elite | 9 | 9 | — | — | — | -50% | — |
+| Shadow Fighter | Invisible and immune to all projectile DMG. Takes 100% MORE Force-field DMG. | Elite | 10 | 10 | — | — | — | — | +100% |
+| Fission Triangle | Splits into smaller fragments upon destruction. Takes 50% MORE Physical and Force-field DMG. | Elite | 12 | 12 | — | — | — | +50% | +50% |
+| Quantum Arrow | Occasionally speeds up. Takes 50% MORE Physical and Electric DMG. | Elite | 8 | 8, 11, 14 | — | +50% | — | +50% | — |
+| Hexagonal Bee | Splits into two smaller bees upon death. Takes 50% MORE Fire and Energy DMG. | Elite | 5 | 5, 8 | +50% | — | +50% | — | — |
+| Eye of Illusion | Grants shields to surrounding enemies upon being eliminated. Takes 50% LESS Force-field DMG. Takes 50% MORE Energy DMG. | Elite | 15 | 15 | — | — | +50% | — | -50% |
+| Abyssal Claw | Increases the movement speed of nearby enemies. Takes 50% MORE Physical and Energy DMG. | Elite | 14 | 14, 15 | — | — | +50% | +50% | — |
+| Void Fish | Engages in close-range combat. Takes 50% MORE Fire and Energy DMG. | Elite | 13 | 13, 15 | +50% | — | +50% | — | — |
+
+---
+
+## Minions
+
+| Name | Ability | Type | First Stage | Stages | Fire | Electric | Energy | Physical | Field |
+|------|---------|------|-------------|--------|------|----------|--------|----------|-------|
+| Overload Ring | The lower its remaining HP, the less DMG it deals. | Minion | 1 | 1, 2, 3, 4, 6, 8, 12, 13 | — | — | — | — | — |
+| Overload Triangle | High speed; the lower its HP, the less DMG it deals. Takes 50% MORE Physical and Fire DMG. | Minion | 1 | 1 | +50% | — | — | +50% | — |
+| Overload Cube | High-speed enemy where lower HP results in less damage dealt. Takes 50% MORE Physical and Fire damage. | Minion | 2 | 2, 6, 9, 11, 12, 14 | +50% | — | — | +50% | — |
+| Vector Beetle | Close-range melee combatant. Takes 50% MORE Physical and Fire damage. | Minion | 2 | 2, 4, 5, 7, 9, 11 | +50% | — | — | +50% | — |
 
 ---
 

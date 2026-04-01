@@ -115,6 +115,24 @@ function renderStatusEffect(effect) {
   return lines.join("\n");
 }
 
+// --- Enemies ---
+function renderEnemyGroup(type, enemies) {
+  const lines = [];
+  const label = type === "boss" ? "Bosses" : capitalize(type) + "s";
+  lines.push(`## ${label}`);
+  lines.push("");
+  lines.push("| Name | Ability | Type | First Stage | Stages | Fire | Electric | Energy | Physical | Field |");
+  lines.push("|------|---------|------|-------------|--------|------|----------|--------|----------|-------|");
+  for (const enemy of enemies) {
+    const r = enemy.resistances;
+    const fmt = (v) => v === 0 ? "—" : (v > 0 ? `+${v}%` : `${v}%`);
+    const stages = enemy.stages.join(", ");
+    lines.push(`| ${enemy.name} | ${enemy.ability} | ${capitalize(enemy.type)} | ${enemy.firstStage} | ${stages} | ${fmt(r.fire)} | ${fmt(r.electric)} | ${fmt(r.energy)} | ${fmt(r.physical)} | ${fmt(r.field)} |`);
+  }
+  lines.push("");
+  return lines.join("\n");
+}
+
 // --- Chip Sockets ---
 function renderChipSocket(socket) {
   const lines = [];
@@ -151,6 +169,7 @@ Cards marked with ★ Special have a purple background in-game, indicating they 
 ${data.skills.filter((s) => s.cards.length > 0).map((s) => `  - [${s.name}](#${skillAnchor(s.id)})`).join("\n")}
 - [Synergy Builds](#synergy-builds)
 - [Status Effects](#status-effects)
+- [Enemies](#enemies)
 - [Chip Sockets](#chip-sockets)
 ${data.chipSockets.map((cs) => `  - [${cs.name}](#${cs.id})`).join("\n")}
 
@@ -181,6 +200,20 @@ sections.push("# Status Effects");
 
 for (const effect of data.statusEffects) {
   sections.push(renderStatusEffect(effect) + "\n---");
+}
+
+// Enemies
+if (data.enemies && data.enemies.length > 0) {
+  sections.push(`# Enemies
+
+All enemies encountered across the 15 stages of Rogue Defense. Resistance values show damage modifiers: positive means the enemy takes MORE damage of that type, negative means LESS.`);
+
+  for (const type of ["boss", "elite", "minion"]) {
+    const group = data.enemies.filter((e) => e.type === type);
+    if (group.length > 0) {
+      sections.push(renderEnemyGroup(type, group) + "\n---");
+    }
+  }
 }
 
 // Chip Sockets

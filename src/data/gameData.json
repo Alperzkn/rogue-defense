@@ -2934,5 +2934,247 @@
         "LiDAR chip: Matrix Drone damage inflicts Injured for 4s"
       ]
     }
+  ],
+  "enemies": [
+    {
+      "id": "plague-variant",
+      "name": "Plague Variant",
+      "description": "Leads a swarm of rings and cubes into battle.",
+      "ability": "Leads a swarm of rings and cubes into battle. Takes 50% LESS Electric and Force-field DMG.",
+      "type": "boss",
+      "firstStage": 1,
+      "resistances": { "fire": 0, "electric": -50, "energy": 0, "physical": 0, "field": -50 },
+      "stages": [1]
+    },
+    {
+      "id": "cube-master",
+      "name": "Cube Master",
+      "description": "Long-range attacker that splits into more cubes upon defeat.",
+      "ability": "Long-range attacks; splits into more cubes upon defeat. Takes 50% LESS Energy damage.",
+      "type": "boss",
+      "firstStage": 3,
+      "resistances": { "fire": 0, "electric": 0, "energy": -50, "physical": 0, "field": 0 },
+      "stages": [3, 12]
+    },
+    {
+      "id": "central-hive",
+      "name": "Central Hive",
+      "description": "Continuously spawns Hexagonal Bees.",
+      "ability": "Continuously spawns Hexagonal Bees. Takes 50% LESS Physical and Electric DMG.",
+      "type": "boss",
+      "firstStage": 5,
+      "resistances": { "fire": 0, "electric": -50, "energy": 0, "physical": -50, "field": 0 },
+      "stages": [5]
+    },
+    {
+      "id": "mirage",
+      "name": "Mirage",
+      "description": "Deploys rebel fighters and fires powerful pulse cannons when approaching the shield.",
+      "ability": "Continuously deploys rebel fighters and fires powerful pulse cannons when approaching the shield. Takes 50% LESS Fire and Force-field DMG.",
+      "type": "boss",
+      "firstStage": 10,
+      "resistances": { "fire": -50, "electric": 0, "energy": 0, "physical": 0, "field": -50 },
+      "stages": [10]
+    },
+    {
+      "id": "mutated-sword",
+      "name": "Mutated Sword",
+      "description": "Reduces our attack power upon reaching the shield.",
+      "ability": "Reduces our attack power upon reaching the shield. Takes 50% LESS Fire DMG.",
+      "type": "boss",
+      "firstStage": 11,
+      "resistances": { "fire": -50, "electric": 0, "energy": 0, "physical": 0, "field": 0 },
+      "stages": [11]
+    },
+    {
+      "id": "dark-leech-eye",
+      "name": "Dark Leech Eye",
+      "description": "Restores its HP when it attacks.",
+      "ability": "Restores its HP when it attacks. Takes 50% LESS Force-field DMG.",
+      "type": "boss",
+      "firstStage": 13,
+      "resistances": { "fire": 0, "electric": 0, "energy": 0, "physical": 0, "field": -50 },
+      "stages": [13]
+    },
+    {
+      "id": "star-defiler",
+      "name": "Star Defiler",
+      "description": "Consumes nearby enemies and releases them upon defeat.",
+      "ability": "Consumes nearby enemies and releases them upon defeat. Takes 50% LESS Fire and Force-field DMG.",
+      "type": "boss",
+      "firstStage": 15,
+      "resistances": { "fire": -50, "electric": 0, "energy": 0, "physical": 0, "field": -50 },
+      "stages": [15]
+    },
+    {
+      "id": "phase-beetle",
+      "name": "Phase Beetle",
+      "description": "Blocks all ballistics.",
+      "ability": "Block all ballistics. Takes 50% LESS Electric DMG.",
+      "type": "elite",
+      "firstStage": 7,
+      "resistances": { "fire": 0, "electric": -50, "energy": 0, "physical": 0, "field": 0 },
+      "stages": [7, 14]
+    },
+    {
+      "id": "phase-moth",
+      "name": "Phase Moth",
+      "description": "Moves diagonally and attacks from range.",
+      "ability": "Moves diagonally and attacks from range. Takes 100% MORE Fire DMG.",
+      "type": "elite",
+      "firstStage": 3,
+      "resistances": { "fire": 100, "electric": 0, "energy": 0, "physical": 0, "field": 0 },
+      "stages": [3, 4, 7]
+    },
+    {
+      "id": "crystal-wurm",
+      "name": "Crystal Wurm",
+      "description": "Immune to Paralysis, dodges upward after taking DMG.",
+      "ability": "Immune to Paralysis, dodges upward after taking DMG. Takes 50% LESS Electric DMG. Takes 50% MORE Fire DMG.",
+      "type": "elite",
+      "firstStage": 5,
+      "resistances": { "fire": 50, "electric": -50, "energy": 0, "physical": 0, "field": 0 },
+      "stages": [5]
+    },
+    {
+      "id": "annihilator",
+      "name": "Annihilator",
+      "description": "Long-range attacker.",
+      "ability": "Long-range attack. Takes 50% MORE Electric and Force-field DMG.",
+      "type": "elite",
+      "firstStage": 7,
+      "resistances": { "fire": 0, "electric": 50, "energy": 0, "physical": 0, "field": 50 },
+      "stages": [7, 10, 13]
+    },
+    {
+      "id": "flash-wings",
+      "name": "Flash Wings",
+      "description": "Engages in close-range combat.",
+      "ability": "Engages in close-range combat. Takes 50% MORE Fire and Force-field DMG.",
+      "type": "elite",
+      "firstStage": 6,
+      "resistances": { "fire": 50, "electric": 0, "energy": 0, "physical": 0, "field": 50 },
+      "stages": [6, 9, 10]
+    },
+    {
+      "id": "agile-specter",
+      "name": "Agile Specter",
+      "description": "Dashes side to side when damaged and gains a shield.",
+      "ability": "Dashes side to side when damaged and gains a shield. Takes 50% LESS Physical DMG.",
+      "type": "elite",
+      "firstStage": 9,
+      "resistances": { "fire": 0, "electric": 0, "energy": 0, "physical": -50, "field": 0 },
+      "stages": [9]
+    },
+    {
+      "id": "shadow-fighter",
+      "name": "Shadow Fighter",
+      "description": "Invisible and immune to all projectile DMG.",
+      "ability": "Invisible and immune to all projectile DMG. Takes 100% MORE Force-field DMG.",
+      "type": "elite",
+      "firstStage": 10,
+      "resistances": { "fire": 0, "electric": 0, "energy": 0, "physical": 0, "field": 100 },
+      "stages": [10]
+    },
+    {
+      "id": "fission-triangle",
+      "name": "Fission Triangle",
+      "description": "Splits into smaller fragments upon destruction.",
+      "ability": "Splits into smaller fragments upon destruction. Takes 50% MORE Physical and Force-field DMG.",
+      "type": "elite",
+      "firstStage": 12,
+      "resistances": { "fire": 0, "electric": 0, "energy": 0, "physical": 50, "field": 50 },
+      "stages": [12]
+    },
+    {
+      "id": "quantum-arrow",
+      "name": "Quantum Arrow",
+      "description": "Occasionally speeds up.",
+      "ability": "Occasionally speeds up. Takes 50% MORE Physical and Electric DMG.",
+      "type": "elite",
+      "firstStage": 8,
+      "resistances": { "fire": 0, "electric": 50, "energy": 0, "physical": 50, "field": 0 },
+      "stages": [8, 11, 14]
+    },
+    {
+      "id": "hexagonal-bee",
+      "name": "Hexagonal Bee",
+      "description": "Splits into two smaller bees upon death.",
+      "ability": "Splits into two smaller bees upon death. Takes 50% MORE Fire and Energy DMG.",
+      "type": "elite",
+      "firstStage": 5,
+      "resistances": { "fire": 50, "electric": 0, "energy": 50, "physical": 0, "field": 0 },
+      "stages": [5, 8]
+    },
+    {
+      "id": "eye-of-illusion",
+      "name": "Eye of Illusion",
+      "description": "Grants shields to surrounding enemies upon being eliminated.",
+      "ability": "Grants shields to surrounding enemies upon being eliminated. Takes 50% LESS Force-field DMG. Takes 50% MORE Energy DMG.",
+      "type": "elite",
+      "firstStage": 15,
+      "resistances": { "fire": 0, "electric": 0, "energy": 50, "physical": 0, "field": -50 },
+      "stages": [15]
+    },
+    {
+      "id": "abyssal-claw",
+      "name": "Abyssal Claw",
+      "description": "Increases the movement speed of nearby enemies.",
+      "ability": "Increases the movement speed of nearby enemies. Takes 50% MORE Physical and Energy DMG.",
+      "type": "elite",
+      "firstStage": 14,
+      "resistances": { "fire": 0, "electric": 0, "energy": 50, "physical": 50, "field": 0 },
+      "stages": [14, 15]
+    },
+    {
+      "id": "void-fish",
+      "name": "Void Fish",
+      "description": "Engages in close-range combat.",
+      "ability": "Engages in close-range combat. Takes 50% MORE Fire and Energy DMG.",
+      "type": "elite",
+      "firstStage": 13,
+      "resistances": { "fire": 50, "electric": 0, "energy": 50, "physical": 0, "field": 0 },
+      "stages": [13, 15]
+    },
+    {
+      "id": "overload-ring",
+      "name": "Overload Ring",
+      "description": "The lower its remaining HP, the less DMG it deals.",
+      "ability": "The lower its remaining HP, the less DMG it deals.",
+      "type": "minion",
+      "firstStage": 1,
+      "resistances": { "fire": 0, "electric": 0, "energy": 0, "physical": 0, "field": 0 },
+      "stages": [1, 2, 3, 4, 6, 8, 12, 13]
+    },
+    {
+      "id": "overload-triangle",
+      "name": "Overload Triangle",
+      "description": "High speed; the lower its HP, the less DMG it deals.",
+      "ability": "High speed; the lower its HP, the less DMG it deals. Takes 50% MORE Physical and Fire DMG.",
+      "type": "minion",
+      "firstStage": 1,
+      "resistances": { "fire": 50, "electric": 0, "energy": 0, "physical": 50, "field": 0 },
+      "stages": [1]
+    },
+    {
+      "id": "overload-cube",
+      "name": "Overload Cube",
+      "description": "High-speed enemy where lower HP results in less damage dealt.",
+      "ability": "High-speed enemy where lower HP results in less damage dealt. Takes 50% MORE Physical and Fire damage.",
+      "type": "minion",
+      "firstStage": 2,
+      "resistances": { "fire": 50, "electric": 0, "energy": 0, "physical": 50, "field": 0 },
+      "stages": [2, 6, 9, 11, 12, 14]
+    },
+    {
+      "id": "vector-beetle",
+      "name": "Vector Beetle",
+      "description": "Close-range melee combatant.",
+      "ability": "Close-range melee combatant. Takes 50% MORE Physical and Fire damage.",
+      "type": "minion",
+      "firstStage": 2,
+      "resistances": { "fire": 50, "electric": 0, "energy": 0, "physical": 50, "field": 0 },
+      "stages": [2, 4, 5, 7, 9, 11]
+    }
   ]
 }

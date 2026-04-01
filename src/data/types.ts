@@ -1,4 +1,6 @@
 export type SkillType = 'fire' | 'electric' | 'energy' | 'physical' | 'field';
+export type EnemyType = 'boss' | 'elite' | 'minion';
+export type DamageType = 'fire' | 'electric' | 'energy' | 'physical' | 'field';
 export type CardTag = 'Chain' | 'Combo' | 'Standard';
 export type CardTier = 1 | 2 | 3;
 export type ChipSocket = 'emitter' | 'lidar' | 'processor' | 'controller' | 'database' | 'battery';
@@ -55,6 +57,17 @@ export interface Combo {
   rating: 1 | 2 | 3 | 4 | 5;
   playstyle: string;
   tips: string[];
+}
+
+export interface Enemy {
+  id: string;
+  name: string;
+  description: string;
+  ability: string;
+  type: EnemyType;
+  firstStage: number;
+  resistances: Record<DamageType, number>;
+  stages: number[];
 }
 
 export interface StatusEffect {
