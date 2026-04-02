@@ -1,0 +1,182 @@
+[
+  {
+    "file_name": "stage_15_enemies_overview.jpeg",
+    "description": "Stage 15 enemy roster overview showing four enemies: Star Defiler (large purple star with spiral core), Void Fish (small purple star), Abyssal Claw (six-pointed star), and Eye of Illusion (crescent shape)"
+  },
+  {
+    "file_name": "star_defiler_ability.jpeg",
+    "description": "Star Defiler enemy with ability tooltip: 'Consumes nearby enemies and releases them upon defeat. Takes 50% LESS Fire and Force-field DMG.'"
+  },
+  {
+    "file_name": "void_fish_ability.jpeg",
+    "description": "Void Fish enemy with ability tooltip: 'Engages in close-range combat. Takes 50% MORE Fire and Energy DMG.'"
+  },
+  {
+    "file_name": "abyssal_claw_ability.jpeg",
+    "description": "Abyssal Claw enemy with ability tooltip: 'Increases the movement speed of nearby enemies. Takes 50% MORE Physical and Energy DMG.'"
+  },
+  {
+    "file_name": "eye_of_illusion_ability.jpeg",
+    "description": "Eye of Illusion enemy with ability tooltip: 'Grants shields to surrounding enemies upon being eliminated. Takes 50% LESS Force-field DMG. Takes 50% MORE Energy DMG.'"
+  },
+  {
+    "description": "Plague Variant enemy with biohazard symbol (orange/yellow concentric circles). Shows stage progression UI with related enemies: Overload Ring and Overload Triangle below.",
+    "file_name": "plague_variant_stage1.jpeg"
+  },
+  {
+    "description": "Plague Variant with tooltip: 'Leads a swarm of rings and cubes into battle. Takes 50% LESS Electric and Force-field DMG.'",
+    "file_name": "plague_variant_ability.jpeg"
+  },
+  {
+    "description": "Overload Ring enemy (green circle icon) with tooltip: 'The lower its remaining HP, the less DMG it deals.'",
+    "file_name": "overload_ring_ability.jpeg"
+  },
+  {
+    "description": "Overload Triangle enemy (orange triangle icon) with tooltip: 'High speed; the lower its HP, the less DMG it deals. Takes 50% MORE Physical and Fire DMG.'",
+    "file_name": "overload_triangle_ability.jpeg"
+  },
+  {
+    "description": "Normal Stage 2 enemies display showing three variants: Overload Ring, Vector Beetle, and Overload Cube.",
+    "file_name": "stage2_enemy_variants.jpeg"
+  },
+  {
+    "description": "Vector Beetle enemy - Close-range melee combatant. Takes 50% MORE Physical and Fire damage. Yellow diamond-shaped icon.",
+    "file_name": "vector_beetle_ability.jpeg"
+  },
+  {
+    "description": "Overload Cube enemy - High-speed enemy where lower HP results in less damage dealt. Takes 50% MORE Physical and Fire damage. Yellow square icon.",
+    "file_name": "overload_cube_ability.jpeg"
+  },
+  {
+    "description": "Stage 3 overview showing Cube Master enemy (orange glowing cube) alongside Overload Ring and Phase Moth.",
+    "file_name": "cube_master_stage3.jpeg"
+  },
+  {
+    "description": "Cube Master ability: 'Long-range attacks; splits into more cubes upon defeat. Takes 50% LESS Energy damage.'",
+    "file_name": "cube_master_ability.jpeg"
+  },
+  {
+    "description": "Phase Moth enemy - Moves diagonally and attacks from range. Takes 100% MORE Fire damage. Yellow V-shaped/wing-like icon.",
+    "file_name": "phase_moth_ability.jpeg"
+  },
+  {
+    "description": "Stage 4 enemy roster: Overload Ring (lime green circle outline), Phase Moth (yellow star shape), and Vector Beetle (yellow diamond shape).",
+    "file_name": "stage4_enemies_overview.jpeg"
+  },
+  {
+    "description": "Stage 5 enemy roster: Central Hive (large yellow hexagon cluster), Vector Beetle, Hexagonal Bee (hexagon cluster), and Crystal Wurm (stacked diamonds).",
+    "file_name": "stage5_enemies_overview.jpeg"
+  },
+  {
+    "description": "Central Hive ability: 'Continuously spawns Hexagonal Bees. Takes 50% LESS Physical and Electric DMG.'",
+    "file_name": "central_hive_ability.jpeg"
+  },
+  {
+    "description": "Hexagonal Bee ability: 'Splits into two smaller bees upon death. Takes 50% MORE Fire and Energy DMG.'",
+    "file_name": "hexagonal_bee_ability.jpeg"
+  },
+  {
+    "description": "Crystal Wurm ability: 'Immune to Paralysis, dodges upward after taking DMG. Takes 50% LESS Electric DMG. Takes 50% MORE Fire DMG.'",
+    "file_name": "crystal_wurm_ability.jpeg"
+  },
+  {
+    "description": "Stage 6 enemy roster: Overload Ring, Flash Wings (lime green downward-pointing wings), and Overload Cube.",
+    "file_name": "stage6_enemies_overview.jpeg"
+  },
+  {
+    "description": "Flash Wings ability: 'Engages in close-range combat. Takes 50% MORE Fire and Force-field DMG.'",
+    "file_name": "flash_wings_ability.jpeg"
+  },
+  {
+    "description": "Stage 7 enemy roster: Phase Beetle (yellow peace symbol), Vector Beetle, Phase Moth, and Annihilator (green nested diamonds).",
+    "file_name": "stage7_enemies_overview.jpeg"
+  },
+  {
+    "description": "Phase Beetle ability: 'Block all ballistics. Takes 50% LESS Electric DMG.'",
+    "file_name": "phase_beetle_ability.jpeg"
+  },
+  {
+    "description": "Annihilator ability: 'Long-range attack. Takes 50% MORE Electric and Force-field DMG.'",
+    "file_name": "annihilator_ability.jpeg"
+  },
+  {
+    "description": "Phase Moth in Stage 7 context. Ability: Moves diagonally and attacks from range. Takes 100% MORE Fire DMG.",
+    "file_name": "phase_moth_stage7.jpeg"
+  },
+  {
+    "description": "Stage 8 enemy roster: Overload Ring, Quantum Arrow (blue downward chevron), and Hexagonal Bee.",
+    "file_name": "stage8_enemies_overview.jpeg"
+  },
+  {
+    "description": "Quantum Arrow ability: 'Occasionally speeds up. Takes 50% MORE Physical and Electric DMG.'",
+    "file_name": "quantum_arrow_ability.jpeg"
+  },
+  {
+    "description": "Stage 9 enemy roster featuring Agile Specter (yellow multi-pointed diamond), alongside Vector Beetle, Overload Cube, and Flash Wings.",
+    "file_name": "agile_specter_stage9.jpeg"
+  },
+  {
+    "description": "Agile Specter ability: 'Dashes side to side when damaged and gains a shield. Takes 50% LESS Physical DMG.'",
+    "file_name": "agile_specter_ability.jpeg"
+  },
+  {
+    "description": "Stage 10 enemy roster: Mirage (main), Flash Wings, Annihilator, and Shadow Fighter. Lime green neon styling.",
+    "file_name": "stage10_enemies_overview.jpeg"
+  },
+  {
+    "description": "Mirage ability: 'Continuously deploys rebel fighters and fires powerful pulse cannons when approaching the shield. Takes 50% LESS Fire and Force-field DMG.'",
+    "file_name": "mirage_ability.jpeg"
+  },
+  {
+    "description": "Shadow Fighter ability: 'Invisible and immune to all projectile DMG. Takes 100% MORE Force-field DMG.'",
+    "file_name": "shadow_fighter_ability.jpeg"
+  },
+  {
+    "description": "Stage 11 enemy roster: Mutated Sword (main), Overload Cube, Quantum Arrow, and Vector Beetle. Cyan neon styling.",
+    "file_name": "stage11_enemies_overview.jpeg"
+  },
+  {
+    "description": "Mutated Sword ability: 'Reduces our attack power upon reaching the shield. Takes 50% LESS Fire DMG.'",
+    "file_name": "mutated_sword_ability.jpeg"
+  },
+  {
+    "description": "Stage 12 overview: Cube Master (orange glowing cube) with Overload Ring, Fission Triangle (cyan inverted triangle), and Overload Cube.",
+    "file_name": "stage12_enemies_overview.jpeg"
+  },
+  {
+    "description": "Fission Triangle ability: 'Splits into smaller fragments upon destruction. Takes 50% MORE Physical and Force-field DMG.'",
+    "file_name": "fission_triangle_ability.jpeg"
+  },
+  {
+    "description": "Stage 13 overview: Dark Leech Eye (purple circular eye with pink center) with Overload Ring, Void Fish, and Annihilator.",
+    "file_name": "stage13_dark_leech_eye_overview.jpeg"
+  },
+  {
+    "description": "Dark Leech Eye ability: 'Restores its HP when it attacks. Takes 50% LESS Force-field DMG.'",
+    "file_name": "dark_leech_eye_ability.jpeg"
+  },
+  {
+    "description": "Void Fish (purple star shape) in Stage 13 context. Ability: 'Engages in close-range combat. Takes 50% MORE Fire and Energy DMG.'",
+    "file_name": "void_fish_ability_stage13.jpeg"
+  },
+  {
+    "description": "Stage 14 enemy roster: Phase Beetle (yellow peace sign icon), Overload Cube, Abyssal Claw, and Quantum Arrow.",
+    "file_name": "stage14_enemies_overview.jpeg"
+  },
+  {
+    "description": "Abyssal Claw in Stage 14 context. Ability: Increases movement speed of nearby enemies. Takes 50% MORE Physical and Energy DMG.",
+    "file_name": "abyssal_claw_ability_stage14.jpeg"
+  },
+  {
+    "description": "Stage 15 enemy roster: Star Defiler (purple spiral triangle icon) with Void Fish, Abyssal Claw, and Eye of Illusion.",
+    "file_name": "stage15_star_defiler_overview.jpeg"
+  },
+  {
+    "description": "Eye of Illusion in Stage 15 context. Ability: Grants shields to surrounding enemies upon being eliminated. Takes 50% LESS Force-field DMG. Takes 50% MORE Energy DMG.",
+    "file_name": "eye_of_illusion_ability_stage15.jpeg"
+  },
+  {
+    "description": "Star Defiler in Stage 15 context. Ability: Consumes nearby enemies and releases them upon defeat. Takes 50% LESS Fire and Force-field DMG.",
+    "file_name": "star_defiler_ability_stage15.jpeg"
+  }
+]
