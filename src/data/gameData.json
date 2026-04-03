@@ -51,7 +51,8 @@
           "name": "Cruise Shooting",
           "description": "Spawn a turret to cruise and fire",
           "tag": "Chain",
-          "tier": 1
+          "tier": 1,
+          "isSpecial": true
         },
         {
           "name": "Penetration Boost",
@@ -126,9 +127,9 @@
         {
           "name": "Crippling Strike",
           "description": "Inflicts [Vulnerable] on hit",
-          "tag": "Combo",
+          "tag": "Standard",
           "tier": 2,
-          "requiredSkillId": "beam"
+          "isSpecial": true
         },
         {
           "name": "Explosion Boost",
@@ -154,6 +155,14 @@
           "tag": "Combo",
           "tier": 3,
           "requiredSkillId": "distortion-field"
+        },
+        {
+          "name": "Beam Shot",
+          "description": " 20% chance to trigger a Ripping Beam when hitting enemies with bullets, doubled chance in Charged State",
+          "tag": "Combo",
+          "tier": 3,
+          "isSpecial": false,
+          "requiredSkillId": "beam"
         }
       ]
     },
