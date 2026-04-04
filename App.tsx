@@ -117,7 +117,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
             href="https://buymeacoffee.com/alperzkn"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-2.5 text-[11px] font-semibold text-yellow-400 transition-all hover:bg-yellow-500/20 hover:border-yellow-500/50"
+            className="flex items-center justify-center gap-2 rounded-lg border border-yellow-500/40 bg-gradient-to-r from-yellow-500/20 to-amber-500/15 px-4 py-3 text-[12px] font-bold text-yellow-300 transition-all hover:bg-yellow-500/30 hover:border-yellow-500/60 hover:shadow-[0_0_15px_rgba(234,179,8,0.15)]"
           >
             <Coffee className="h-4 w-4" />
             Buy me a coffee
