@@ -112,16 +112,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 space-y-3">
-          <a
-            href="https://buymeacoffee.com/alperzkn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-lg border border-yellow-500/40 bg-gradient-to-r from-yellow-500/20 to-amber-500/15 px-4 py-3 text-[12px] font-bold text-yellow-300 transition-all hover:bg-yellow-500/30 hover:border-yellow-500/60 hover:shadow-[0_0_15px_rgba(234,179,8,0.15)]"
-          >
-            <Coffee className="h-4 w-4" />
-            Buy me a coffee
-          </a>
+        <div className="p-4">
           <div className="rounded-lg border border-border/40 bg-muted/30 px-4 py-3">
             <p className="text-[11px] font-semibold text-foreground/80">Rogue Defense</p>
             <p className="text-[10px] text-muted-foreground">v2.0 &middot; Updated Mar 2026</p>
@@ -194,7 +185,19 @@ export default function App() {
               <AnimatedRoutes />
             </div>
           </main>
-          <FeedbackButton />
+          {/* Floating action buttons */}
+          <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3 items-end">
+            <a
+              href="https://buymeacoffee.com/alperzkn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-yellow-500/50 bg-yellow-500/15 backdrop-blur-md pl-4 pr-5 py-2.5 text-[12px] font-bold text-yellow-300 shadow-lg transition-all hover:bg-yellow-500/25 hover:border-yellow-500/70 hover:shadow-[0_0_20px_rgba(234,179,8,0.2)]"
+            >
+              <Coffee className="h-4 w-4" />
+              Buy me a coffee
+            </a>
+            <FeedbackButton />
+          </div>
         </div>
       </BrowserRouter>
     </TooltipProvider>

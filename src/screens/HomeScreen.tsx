@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench, Skull, Coffee } from 'lucide-react';
+import { ArrowRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench, Skull } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
@@ -175,18 +175,6 @@ export function HomeScreen() {
         </Card>
       </motion.div>
 
-      {/* Buy Me a Coffee — visible on all devices */}
-      <motion.div {...fadeUp(0.3)} className="mt-10 mb-4">
-        <a
-          href="https://buymeacoffee.com/alperzkn"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2.5 rounded-xl border border-yellow-500/40 bg-gradient-to-r from-yellow-500/15 to-amber-500/10 px-5 py-3.5 text-[13px] font-bold text-yellow-300 transition-all hover:bg-yellow-500/25 hover:border-yellow-500/60 hover:shadow-[0_0_20px_rgba(234,179,8,0.12)]"
-        >
-          <Coffee className="h-5 w-5" />
-          Enjoying this guide? Buy me a coffee
-        </a>
-      </motion.div>
     </div>
   );
 }
