@@ -36,8 +36,17 @@ export function HomeScreen() {
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-10">
 
+      {/* Disclaimer */}
+      <motion.div {...fadeUp(0)} className="mb-6 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
+        <p className="text-[11px] text-muted-foreground leading-relaxed">
+          This is <span className="font-semibold text-foreground/80">not</span> an official encyclopedia from the developers of Rogue Defense.
+          Built by a fellow player to help the community. Information may not be 100% accurate — use the
+          <span className="font-semibold text-primary"> feedback button</span> to report errors or share requests.
+        </p>
+      </motion.div>
+
       {/* Hero */}
-      <motion.div {...fadeUp(0)} className="mb-10">
+      <motion.div {...fadeUp(0.02)} className="mb-10">
         <h1 className="text-3xl font-black tracking-tight text-foreground">
           Rogue <span className="text-primary">Defense</span>
         </h1>
