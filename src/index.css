@@ -22,7 +22,7 @@
     --border: 225 12% 14%;
     --input: 225 12% 11%;
     --ring: 195 90% 50%;
-    --radius: 0.625rem;
+    --radius: 0.375rem;
 
     /* Game element colors */
     --fire: #FF4500;
@@ -50,6 +50,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.01em;
+    font-feature-settings: 'ss01', 'ss02', 'cv11';
+  }
+
+  .font-display {
+    font-family: 'Unbounded', 'Manrope', sans-serif;
+    letter-spacing: -0.035em;
+    font-feature-settings: 'ss01';
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-feature-settings: 'zero', 'ss02';
   }
 
   html, body, #root {
@@ -107,6 +118,52 @@
     background-image: linear-gradient(hsl(var(--primary) / 0.02) 1px, transparent 1px),
                       linear-gradient(90deg, hsl(var(--primary) / 0.02) 1px, transparent 1px);
     background-size: 40px 40px;
+  }
+
+  /* Grain / noise overlay for atmosphere */
+  .bg-noise {
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/></svg>");
+    background-size: 180px 180px;
+  }
+
+  /* Editorial rule line with a short tick */
+  .rule-line {
+    position: relative;
+    height: 1px;
+    background: hsl(var(--border));
+  }
+  .rule-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -3px;
+    width: 32px;
+    height: 3px;
+    background: hsl(var(--primary));
+  }
+
+  /* Diagonal slash — used for eyebrow labels */
+  .slash::before {
+    content: '//';
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: hsl(var(--primary));
+    font-weight: 700;
+  }
+
+  /* Scanline overlay for display numbers */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 3px,
+      rgba(0, 0, 0, 0.25) 3px,
+      rgba(0, 0, 0, 0.25) 4px
+    );
+  }
+
+  .text-glow-primary {
+    text-shadow: 0 0 24px hsl(var(--primary) / 0.4);
   }
 
   /* Animations */

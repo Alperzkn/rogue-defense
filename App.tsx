@@ -58,11 +58,12 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
         )}
       >
         {/* Header with close button on mobile */}
-        <div className="flex items-center justify-between px-6 pt-6 pb-5">
+        <div className="flex items-start justify-between px-6 pt-7 pb-5">
           <div>
-            <div className="text-xs font-black tracking-[0.25em] uppercase text-foreground/90">Rogue</div>
-            <div className="text-xs font-black tracking-[0.25em] uppercase text-primary">Defense</div>
-            <div className="mt-1.5 text-[10px] text-muted-foreground">Game Encyclopedia</div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-primary mb-2">Issue 01</div>
+            <div className="font-display text-[22px] leading-[0.9] font-black tracking-[-0.04em] text-foreground">Rogue</div>
+            <div className="font-display text-[22px] leading-[0.9] font-black tracking-[-0.04em] text-primary">Defense<span className="text-foreground/30">.</span></div>
+            <div className="mt-3 font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground">Encyclopedia</div>
           </div>
           <button
             type="button"
@@ -75,10 +76,14 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
         </div>
 
         <div className="mx-5 h-px bg-border/50" />
+        <div className="mx-5 mt-2 flex items-center gap-2">
+          <div className="h-[3px] w-6 bg-primary" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-muted-foreground">Navigation</span>
+        </div>
 
         {/* Nav */}
-        <nav className="flex flex-1 flex-col gap-0.5 px-3 pt-5 overflow-y-auto">
-          {NAV_ITEMS.map(({ path, label, icon: Icon, exact }) => {
+        <nav className="flex flex-1 flex-col gap-0.5 px-3 pt-3 overflow-y-auto">
+          {NAV_ITEMS.map(({ path, label, icon: Icon, exact }, i) => {
             const isActive = exact
               ? location.pathname === path
               : location.pathname.startsWith(path);
@@ -90,21 +95,27 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
                   whileTap={{ scale: 0.98 }}
                   transition={EASE.bounce}
                   className={cn(
-                    'relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] transition-all duration-200',
+                    'relative flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] transition-all duration-200',
                     isActive
-                      ? 'bg-primary/8 text-primary font-semibold'
+                      ? 'bg-primary/10 text-primary font-semibold'
                       : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground font-medium'
                   )}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-primary"
+                      className="absolute left-0 top-1.5 bottom-1.5 w-[3px] bg-primary"
                       transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                     />
                   )}
-                  <Icon className={cn('h-4 w-4 shrink-0', isActive && 'text-primary')} />
-                  <span>{label}</span>
+                  <span className={cn(
+                    'font-mono text-[9px] tabular-nums w-5 text-right',
+                    isActive ? 'text-primary' : 'text-muted-foreground/60'
+                  )}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <Icon className={cn('h-4 w-4 shrink-0', isActive && 'text-primary')} strokeWidth={1.75} />
+                  <span className="font-display tracking-tight">{label}</span>
                 </motion.div>
               </NavLink>
             );
@@ -113,9 +124,10 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
 
         {/* Footer */}
         <div className="p-4">
-          <div className="rounded-lg border border-border/40 bg-muted/30 px-4 py-3">
-            <p className="text-[11px] font-semibold text-foreground/80">Rogue Defense</p>
-            <p className="text-[10px] text-muted-foreground">v2.0 &middot; Updated Mar 2026</p>
+          <div className="border-l-2 border-primary/60 pl-3 py-1">
+            <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-primary/80">Colophon</p>
+            <p className="mt-1 font-display text-[11px] font-bold text-foreground/90">v2.0</p>
+            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">Apr 2026</p>
           </div>
         </div>
       </aside>
@@ -134,9 +146,9 @@ function MobileHeader({ onMenuToggle }: { onMenuToggle: () => void }) {
       >
         <Menu className="h-5 w-5" />
       </button>
-      <div>
-        <span className="text-xs font-black tracking-[0.2em] uppercase text-foreground/90">Rogue </span>
-        <span className="text-xs font-black tracking-[0.2em] uppercase text-primary">Defense</span>
+      <div className="flex items-baseline gap-2">
+        <span className="font-display text-sm font-black tracking-[-0.03em] text-foreground">Rogue</span>
+        <span className="font-display text-sm font-black tracking-[-0.03em] text-primary">Defense<span className="text-foreground/30">.</span></span>
       </div>
     </header>
   );
@@ -191,7 +203,7 @@ export default function App() {
               href="https://buymeacoffee.com/alperzkn"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-yellow-500/50 bg-yellow-500/15 backdrop-blur-md pl-4 pr-5 py-2.5 text-[12px] font-bold text-yellow-300 shadow-lg transition-all hover:bg-yellow-500/25 hover:border-yellow-500/70 hover:shadow-[0_0_20px_rgba(234,179,8,0.2)]"
+              className="flex items-center gap-2 border border-yellow-500/50 bg-yellow-500/15 backdrop-blur-md pl-3 pr-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-yellow-300 shadow-lg transition-all hover:bg-yellow-500/25 hover:border-yellow-500/70 hover:shadow-[0_0_20px_rgba(234,179,8,0.25)]"
             >
               <Coffee className="h-4 w-4" />
               Buy me a coffee

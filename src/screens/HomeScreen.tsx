@@ -1,31 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench, Skull } from 'lucide-react';
-import { Card, CardContent } from '../components/ui/card';
+import { ArrowUpRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench, Skull } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Separator } from '../components/ui/separator';
 import { SkillTypeBadge, SkillIcon } from '../components';
 import { SKILLS, COMBOS, CHIP_SOCKETS, ENEMIES } from '../data';
-import { fadeUp, staggerItem, TIMING, EASE } from '../lib/animations';
+import { fadeUp, TIMING, EASE } from '../lib/animations';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const QUICK_NAV = [
-  { path: '/skills', label: 'Skills', icon: Sword, desc: `${SKILLS.length} weapons with upgrade cards`, color: '#FF4500' },
-  { path: '/chips', label: 'Chip Sockets', icon: Cpu, desc: `${CHIP_SOCKETS.length} socket types & drop rates`, color: '#00C8FF' },
-  { path: '/combos', label: 'Combos', icon: Link2, desc: `${COMBOS.length} curated synergy builds`, color: '#B44FFF' },
-  { path: '/status', label: 'Status Effects', icon: Sparkles, desc: '7 debuffs & their interactions', color: '#00FF88' },
-  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies with resistances & tips`, color: '#EF4444' },
-  { path: '/build', label: 'Build Planner', icon: Wrench, desc: 'Plan your build with chip recommendations', color: '#FFD700' },
+  { path: '/skills', label: 'Skills', icon: Sword, desc: `${SKILLS.length} weapons · upgrade cards`, color: '#FF4500', index: '01' },
+  { path: '/chips', label: 'Chip Sockets', icon: Cpu, desc: `${CHIP_SOCKETS.length} socket types · drop rates`, color: '#00C8FF', index: '02' },
+  { path: '/combos', label: 'Combos', icon: Link2, desc: `${COMBOS.length} curated synergy builds`, color: '#B44FFF', index: '03' },
+  { path: '/status', label: 'Status Effects', icon: Sparkles, desc: '7 debuffs · interactions', color: '#00FF88', index: '04' },
+  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies · resistances`, color: '#EF4444', index: '05' },
+  { path: '/build', label: 'Build Planner', icon: Wrench, desc: 'Interactive chip planner', color: '#FFD700', index: '06' },
 ];
 
 const STATS = [
   { value: SKILLS.length, label: 'Skills', color: '#FF4500' },
-  { value: SKILLS.reduce((a, s) => a + s.cards.length, 0), label: 'Upgrade Cards', color: '#00C8FF' },
-  { value: CHIP_SOCKETS.length, label: 'Chip Sockets', color: '#FFD700' },
-  { value: COMBOS.length, label: 'Synergy Builds', color: '#B44FFF' },
+  { value: SKILLS.reduce((a, s) => a + s.cards.length, 0), label: 'Cards', color: '#00C8FF' },
+  { value: CHIP_SOCKETS.length, label: 'Chips', color: '#FFD700' },
+  { value: COMBOS.length, label: 'Builds', color: '#B44FFF' },
   { value: ENEMIES.length, label: 'Enemies', color: '#EF4444' },
+];
+
+const MECHANICS = [
+  { Icon: Link, color: '#00C8FF', title: 'Chain Cards', desc: "Self-contained upgrades that enhance the skill's own mechanics and create internal synergies." },
+  { Icon: Heart, color: '#FF6B9D', title: 'Combo Cards', desc: 'Cross-skill synergies that only activate when you have a specific second skill equipped.' },
+  { Icon: Layers, color: '#B44FFF', title: 'Debuff Stacking', desc: "Stack Slow + Paralyze + Vulnerable for Beam's Energy Boost (+60% DMG each, max 300%)." },
+  { Icon: Gem, color: '#FFD700', title: 'Ultra Rare Chips', desc: '0.05% drop rate chips that can completely transform your build. Farm them aggressively.' },
 ];
 
 export function HomeScreen() {
@@ -34,102 +38,181 @@ export function HomeScreen() {
   const topBuilds = COMBOS.filter(c => c.rating === 5);
 
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-10">
+    <div className="relative mx-auto max-w-[1180px] px-5 sm:px-10 py-8 sm:py-14">
 
-      {/* Disclaimer */}
-      <motion.div {...fadeUp(0)} className="mb-6 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3">
-        <p className="text-[11px] text-muted-foreground leading-relaxed">
-          This is <span className="font-semibold text-foreground/80">not</span> an official encyclopedia from the developers of Rogue Defense.
+      {/* Editorial gutter ticker (desktop only) */}
+      <div className="pointer-events-none hidden lg:flex absolute right-4 top-0 bottom-0 w-6 flex-col items-center justify-start pt-16 gap-8 text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/40 [writing-mode:vertical-rl]">
+        <span>RD // Encyclopedia // 2026</span>
+        <span>Build · Chip · Combo</span>
+      </div>
+
+      {/* Disclaimer — turned into a print-style masthead strip */}
+      <motion.div {...fadeUp(0)} className="mb-10 border-l-2 border-primary pl-4 py-1">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/80">Community Project · Unofficial</p>
+        <p className="mt-1 text-[12px] text-muted-foreground leading-relaxed max-w-xl">
           Built by a fellow player to help the community. Information may not be 100% accurate — use the
-          <span className="font-semibold text-primary"> feedback button</span> to report errors or share requests.
+          <span className="font-semibold text-foreground/90"> feedback button</span> to report errors.
         </p>
       </motion.div>
 
-      {/* Hero */}
-      <motion.div {...fadeUp(0.02)} className="mb-10">
-        <h1 className="text-3xl font-black tracking-tight text-foreground">
-          Rogue <span className="text-primary">Defense</span>
-        </h1>
-        <p className="mt-2 max-w-lg text-sm text-muted-foreground leading-relaxed">
-          Complete reference for skills, upgrade cards, chip sockets, and combo synergies.
-        </p>
-      </motion.div>
-
-      {/* Stats */}
-      <motion.div {...fadeUp(0.05)} className="mb-10 grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
-        {STATS.map(({ value, label, color }) => (
-          <div key={label} className="rounded-xl border border-border/40 bg-card/60 p-4 text-center">
-            <div className="text-2xl font-black tabular-nums" style={{ color }}>{value}</div>
-            <div className="mt-1 text-[11px] font-medium text-muted-foreground">{label}</div>
+      {/* Hero — asymmetric, oversized */}
+      <motion.div {...fadeUp(0.04)} className="relative mb-12">
+        <div className="flex items-start justify-between gap-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+            <span className="text-primary">Issue 01</span> / Hybrid Tower TD
           </div>
-        ))}
+          <div className="hidden sm:block font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground text-right">
+            Updated · Apr 2026
+          </div>
+        </div>
+
+        <h1 className="font-display mt-4 text-[clamp(2.75rem,11vw,7.5rem)] leading-[0.82] font-black tracking-[-0.055em] text-foreground">
+          ROGUE
+        </h1>
+        <div className="relative mt-1 sm:-mt-3">
+          <h1 className="font-display text-[clamp(2.75rem,11vw,7.5rem)] leading-[0.82] font-black tracking-[-0.055em] text-primary text-glow-primary pl-[18%]">
+            DEFENSE<span className="text-foreground/30">.</span>
+          </h1>
+          {/* Accent block */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden sm:block h-[70%] w-[14%]">
+            <div className="h-full w-full border-l-2 border-primary/60" />
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full">
+              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary/80">
+                The<br />Encyclopedia
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p className="mt-8 max-w-xl text-[15px] text-muted-foreground leading-relaxed">
+          Complete reference for skills, upgrade cards, chip sockets, and combo synergies —
+          written for players, by a player.
+        </p>
       </motion.div>
 
-      {/* Quick Navigation */}
-      <motion.div {...fadeUp(0.1)} className="mb-10">
-        <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Browse</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {QUICK_NAV.map(({ path, label, icon: Icon, desc, color }) => (
-            <motion.div
-              key={path}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={EASE.bounce}
+      {/* Stats — one horizontal strip, no cards, editorial rule */}
+      <motion.div {...fadeUp(0.08)} className="mb-16">
+        <div className="rule-line mb-6" />
+        <div className="flex items-end gap-2 overflow-x-auto -mx-1 px-1 pb-1">
+          {STATS.map(({ value, label, color }, i) => (
+            <div
+              key={label}
+              className="relative flex-1 min-w-[100px] border-r border-border/50 last:border-r-0 pr-3 sm:pr-5"
             >
-              <Card
-                onClick={() => navigate(path)}
-                className="group cursor-pointer border-border/40 bg-card/60 transition-all duration-200 hover:border-border/80"
+              <div
+                className="font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-none font-black tabular-nums tracking-[-0.06em]"
+                style={{ color }}
               >
-                <CardContent className="flex items-center gap-4 p-4">
-                  <div
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                    style={{ backgroundColor: `${color}12`, border: `1px solid ${color}25` }}
-                  >
-                    <Icon className="h-4.5 w-4.5" style={{ color }} />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold text-foreground">{label}</div>
-                    <div className="text-[11px] text-muted-foreground">{desc}</div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-foreground" />
-                </CardContent>
-              </Card>
-            </motion.div>
+                {String(value).padStart(2, '0')}
+              </div>
+              <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                {label}
+              </div>
+            </div>
           ))}
         </div>
       </motion.div>
 
-      {/* Top Builds */}
-      <motion.div {...fadeUp(0.15)} className="mb-10">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Top Builds</h2>
-          <Button variant="ghost" size="sm" onClick={() => navigate('/combos')} className="h-7 gap-1 text-[11px] text-muted-foreground hover:text-foreground">
-            View all <ArrowRight className="h-3 w-3" />
-          </Button>
+      {/* Browse — slab-left index cards, sharper edges */}
+      <motion.div {...fadeUp(0.12)} className="mb-16">
+        <div className="mb-5 flex items-end justify-between">
+          <div>
+            <p className="slash font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Section</p>
+            <h2 className="font-display mt-1 text-2xl font-bold tracking-tight text-foreground">Browse</h2>
+          </div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+            {String(QUICK_NAV.length).padStart(2, '0')} destinations
+          </div>
         </div>
-        <div className="space-y-3">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-border/60 border border-border/60">
+          {QUICK_NAV.map(({ path, label, icon: Icon, desc, color, index }, i) => (
+            <motion.button
+              key={path}
+              onClick={() => navigate(path)}
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.015)' }}
+              transition={EASE.bounce}
+              className="group relative text-left bg-card/80 hover:bg-card transition-colors"
+            >
+              {/* Left accent slab — full height, type color */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-[5px] transition-all duration-200 group-hover:w-2"
+                style={{ backgroundColor: color }}
+              />
+              <div className="pl-6 pr-5 py-6">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <span
+                    className="font-mono text-[10px] uppercase tracking-[0.25em]"
+                    style={{ color }}
+                  >
+                    {index}
+                  </span>
+                  <ArrowUpRight
+                    className="h-4 w-4 text-muted-foreground/40 transition-all duration-200 group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </div>
+                <div className="flex items-center gap-3 mb-1.5">
+                  <Icon className="h-5 w-5 shrink-0" style={{ color }} strokeWidth={1.75} />
+                  <span className="font-display text-lg font-bold tracking-tight text-foreground">
+                    {label}
+                  </span>
+                </div>
+                <div className="text-[12px] text-muted-foreground leading-relaxed">{desc}</div>
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Top Builds — editorial spread */}
+      <motion.div {...fadeUp(0.18)} className="mb-16">
+        <div className="mb-5 flex items-end justify-between">
+          <div>
+            <p className="slash font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Featured</p>
+            <h2 className="font-display mt-1 text-2xl font-bold tracking-tight text-foreground">Top Builds</h2>
+          </div>
+          <button
+            onClick={() => navigate('/combos')}
+            className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+          >
+            All builds <ArrowUpRight className="h-3 w-3" />
+          </button>
+        </div>
+
+        <div className="space-y-[1px] bg-border/60 border border-border/60">
           {topBuilds.map((combo, i) => (
-            <motion.div key={combo.id} {...fadeUp(0.17 + i * TIMING.stagger)}>
-              <Card
-                onClick={() => navigate('/combos')}
-                className="group cursor-pointer border-border/40 bg-card/60 transition-all duration-200 hover:border-border/80"
-              >
-                <CardContent className="p-5">
-                  <div className="mb-3 flex items-center gap-2.5">
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: 5 }, (_, j) => (
-                        <Star key={j} className="h-3 w-3 fill-[#FFD700] text-[#FFD700]" />
-                      ))}
-                    </div>
-                    <span className="text-sm font-semibold text-foreground">{combo.name}</span>
-                    <Badge variant="mythic" className="ml-auto text-[9px]">TOP BUILD</Badge>
+            <motion.button
+              key={combo.id}
+              {...fadeUp(0.2 + i * TIMING.stagger)}
+              onClick={() => navigate('/combos')}
+              className="group w-full text-left bg-card/80 hover:bg-card transition-colors p-5 sm:p-6"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                {/* Large issue-number style rating */}
+                <div className="flex sm:flex-col sm:items-start items-center gap-2 sm:gap-0 sm:min-w-[80px]">
+                  <div className="font-display text-3xl sm:text-4xl font-black tracking-[-0.05em] text-[#FFD700]">
+                    {String(i + 1).padStart(2, '0')}
                   </div>
-                  <p className="mb-3 text-[13px] text-muted-foreground leading-relaxed">{combo.description}</p>
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <Star key={j} className="h-2.5 w-2.5 fill-[#FFD700] text-[#FFD700]" />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="font-display text-lg font-bold tracking-tight text-foreground">
+                      {combo.name}
+                    </h3>
+                    <Badge variant="mythic" className="text-[9px] font-mono">TOP</Badge>
+                  </div>
+                  <p className="text-[13px] text-muted-foreground leading-relaxed mb-3">{combo.description}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {combo.skills.map(sid => {
                       const skill = SKILLS.find(s => s.id === sid);
                       return skill ? (
-                        <div key={sid} className="flex items-center gap-1.5 rounded-md border border-border/50 bg-secondary/50 px-2 py-1">
+                        <div key={sid} className="flex items-center gap-1.5 border border-border/60 bg-secondary/40 px-2 py-1">
                           <SkillIcon skill={skill} size={14} />
                           <span className="text-[11px] font-medium text-foreground">{skill.name}</span>
                           <SkillTypeBadge type={skill.type} />
@@ -137,42 +220,54 @@ export function HomeScreen() {
                       ) : null;
                     })}
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                </div>
+
+                <ArrowUpRight className="hidden sm:block h-4 w-4 shrink-0 text-muted-foreground/40 transition-all duration-200 group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </div>
+            </motion.button>
           ))}
         </div>
       </motion.div>
 
-      {/* Key Mechanics */}
-      <motion.div {...fadeUp(0.22)}>
-        <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Key Mechanics</h2>
-        <Card className="border-border/40 bg-card/60 overflow-hidden">
-          <CardContent className="p-0">
-            {[
-              { Icon: Link, color: '#00C8FF', title: 'Chain Cards', desc: 'Self-contained upgrades that enhance the skill\'s own mechanics and create internal synergies.' },
-              { Icon: Heart, color: '#FF6B9D', title: 'Combo Cards', desc: 'Cross-skill synergies that only activate when you have a specific second skill equipped.' },
-              { Icon: Layers, color: '#B44FFF', title: 'Debuff Stacking', desc: 'Stack Slow + Paralyze + Vulnerable for Beam\'s Energy Boost (+60% DMG each, max 300%).' },
-              { Icon: Gem, color: '#FFD700', title: 'Ultra Rare Chips', desc: '0.05% drop rate chips that can completely transform your build. Farm them aggressively.' },
-            ].map((tip, i, arr) => (
-              <div key={tip.title}>
-                <div className="flex gap-4 px-5 py-4">
-                  <div
-                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
-                    style={{ backgroundColor: `${tip.color}12` }}
-                  >
-                    <tip.Icon className="h-3.5 w-3.5" style={{ color: tip.color }} />
-                  </div>
-                  <div>
-                    <div className="text-[13px] font-semibold text-foreground">{tip.title}</div>
-                    <div className="mt-0.5 text-[12px] text-muted-foreground leading-relaxed">{tip.desc}</div>
-                  </div>
+      {/* Key Mechanics — numbered chapter layout */}
+      <motion.div {...fadeUp(0.24)} className="mb-8">
+        <div className="mb-5">
+          <p className="slash font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Primer</p>
+          <h2 className="font-display mt-1 text-2xl font-bold tracking-tight text-foreground">Key Mechanics</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[1px] bg-border/60 border border-border/60">
+          {MECHANICS.map((tip, i) => (
+            <div key={tip.title} className="bg-card/80 p-5 sm:p-6 relative">
+              <div className="flex items-baseline gap-3 mb-3">
+                <span
+                  className="font-display text-3xl font-black tracking-[-0.05em] tabular-nums"
+                  style={{ color: tip.color }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <tip.Icon className="h-4 w-4" style={{ color: tip.color }} strokeWidth={1.75} />
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  {`Ch.${i + 1}`}
                 </div>
-                {i < arr.length - 1 && <Separator className="opacity-50" />}
               </div>
-            ))}
-          </CardContent>
-        </Card>
+              <h3 className="font-display text-base font-bold tracking-tight text-foreground mb-1.5">
+                {tip.title}
+              </h3>
+              <p className="text-[12.5px] text-muted-foreground leading-relaxed">{tip.desc}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Colophon */}
+      <motion.div {...fadeUp(0.3)} className="pt-8 border-t border-border/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+          End · Issue 01
+        </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+          Feedback welcome · Never official
+        </div>
       </motion.div>
 
     </div>
