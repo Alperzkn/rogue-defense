@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, ChevronDown, Sparkles, Star, Info, Search, Shield, Swords, Link2, Zap, Save, FolderOpen, Trash2 } from 'lucide-react';
+import { Plus, X, ChevronDown, Sparkles, Star, Info, Search, Shield, Swords, Save, FolderOpen, Trash2 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Tooltip } from '../components/ui/tooltip';
 import { SkillTypeBadge, SkillIcon } from '../components';
-import { SKILLS, CHIP_SOCKETS, COMBOS } from '../data';
+import { SKILLS, CHIP_SOCKETS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
 import type { Skill, SkillCard, ChipSocketData, ChipStat, CardTier } from '../data/types';
@@ -723,31 +723,6 @@ export function BuildPlannerScreen() {
 
   const boosts = useMemo(() => getBoostSummary(allBuildSkills, selectedChips), [allBuildSkills, selectedChips]);
 
-  // Detect combos that match selected skills
-  const matchedCombos = useMemo(() => {
-    if (allBuildSkills.length < 2) return [];
-    const ids = new Set(allBuildSkills.map(s => s.id));
-    return COMBOS
-      .filter(c => c.skills.every(sid => ids.has(sid)))
-      .sort((a, b) => b.rating - a.rating);
-  }, [allBuildSkills]);
-
-  const partialCombos = useMemo(() => {
-    if (allBuildSkills.length < 2) return [];
-    const ids = new Set(allBuildSkills.map(s => s.id));
-    return COMBOS
-      .filter(c => {
-        const matchCount = c.skills.filter(sid => ids.has(sid)).length;
-        return matchCount > 0 && matchCount < c.skills.length;
-      })
-      .map(c => {
-        const missing = c.skills.filter(sid => !ids.has(sid));
-        return { ...c, missing };
-      })
-      .sort((a, b) => b.rating - a.rating || a.missing.length - b.missing.length)
-      .slice(0, 4);
-  }, [selectedSkills]);
-
   const removeSkill = (id: string) => {
     setSelectedSkills(prev => prev.filter(s => s.id !== id));
     setSelectedCards(prev => { const next = { ...prev }; delete next[id]; return next; });
@@ -981,98 +956,6 @@ export function BuildPlannerScreen() {
             </div>
           </motion.div>
 
-          {/* Combo Detection */}
-          {selectedSkills.length > 0 && (matchedCombos.length > 0 || partialCombos.length > 0) && (
-            <motion.div {...fadeUp(0.08)}>
-              {/* Active Combos */}
-              {matchedCombos.length > 0 && (
-                <div className="mb-4">
-                  <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#FFD700]">
-                    <Link2 className="h-3.5 w-3.5" /> Active Synergies
-                  </h2>
-                  <div className="space-y-2">
-                    {matchedCombos.map(combo => (
-                      <div
-                        key={combo.id}
-                        className="rounded-xl border border-[#FFD700]/20 p-4"
-                        style={{ background: 'linear-gradient(135deg, #FFD70010, transparent 50%)', boxShadow: '0 0 30px #FFD70005' }}
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="flex gap-0.5">
-                            {Array.from({ length: 5 }, (_, i) => (
-                              <Star key={i} className={cn('h-3 w-3', i < combo.rating ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border/30')} />
-                            ))}
-                          </div>
-                          <span className="text-sm font-bold text-foreground">{combo.name}</span>
-                          {combo.rating === 5 && <Badge variant="mythic" className="text-[9px]">TOP BUILD</Badge>}
-                        </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed mb-2.5">{combo.synergy}</p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {combo.cards.map(card => (
-                            <span key={card} className="rounded-md border border-[#B44FFF]/15 bg-[#B44FFF]/6 px-2 py-0.5 text-[10px] font-medium text-[#D4A0FF]">
-                              {card}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Partial Combos */}
-              {partialCombos.length > 0 && selectedSkills.length < MAX_SKILLS && (
-                <div className="mb-4">
-                  <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    <Zap className="h-3.5 w-3.5 text-primary" /> Possible Synergies
-                  </h2>
-                  <div className="space-y-2">
-                    {partialCombos.map(combo => (
-                      <div
-                        key={combo.id}
-                        className="rounded-xl border border-border/30 bg-card/40 p-3.5"
-                      >
-                        <div className="flex items-center gap-2 mb-1.5">
-                          <div className="flex gap-0.5">
-                            {Array.from({ length: 5 }, (_, i) => (
-                              <Star key={i} className={cn('h-2.5 w-2.5', i < combo.rating ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border/30')} />
-                            ))}
-                          </div>
-                          <span className="text-[13px] font-semibold text-foreground">{combo.name}</span>
-                        </div>
-                        <p className="text-[11px] text-muted-foreground mb-2">{combo.description}</p>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] text-muted-foreground">Add:</span>
-                          {combo.missing.map(sid => {
-                            const skill = SKILLS.find(s => s.id === sid);
-                            if (!skill) return null;
-                            const color = SkillTypeColors[skill.type];
-                            return (
-                              <button
-                                key={sid}
-                                type="button"
-                                onClick={() => {
-                                  if (selectedSkills.length < MAX_SKILLS && !selectedSkills.some(s => s.id === sid)) {
-                                    setSelectedSkills(prev => [...prev, skill]);
-                                  }
-                                }}
-                                className="flex items-center gap-1 rounded-md border px-2 py-0.5 text-[10px] font-medium transition-colors hover:brightness-125"
-                                style={{ borderColor: `${color}30`, backgroundColor: `${color}08`, color }}
-                              >
-                                <Plus className="h-2.5 w-2.5" />
-                                {skill.name}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          )}
-
           {/* Skill Cards */}
           {allBuildSkills.some(s => s.cards.length > 0) && (
             <motion.div {...fadeUp(0.12)}>
@@ -1185,52 +1068,6 @@ export function BuildPlannerScreen() {
                         })}
                       </div>
                     </div>
-
-                    {/* Active synergies with tooltips */}
-                    {matchedCombos.length > 0 && (
-                      <div>
-                        <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-[#FFD700]">
-                          Active Synergies ({matchedCombos.length})
-                        </p>
-                        <div className="space-y-1.5">
-                          {matchedCombos.map(c => (
-                            <Tooltip
-                              key={c.id}
-                              side="left"
-                              content={
-                                <div>
-                                  <div className="flex items-center gap-2 mb-1.5">
-                                    <div className="flex gap-0.5">
-                                      {Array.from({ length: 5 }, (_, i) => (
-                                        <Star key={i} className={cn('h-2.5 w-2.5', i < c.rating ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border/30')} />
-                                      ))}
-                                    </div>
-                                    <span className="font-bold text-[12px]">{c.name}</span>
-                                    {c.rating === 5 && <span className="text-[8px] font-bold text-[#FFD700]">TOP</span>}
-                                  </div>
-                                  <p className="text-muted-foreground mb-2">{c.synergy}</p>
-                                  <div className="flex flex-wrap gap-1">
-                                    {c.cards.map(card => (
-                                      <span key={card} className="rounded border border-[#B44FFF]/20 bg-[#B44FFF]/8 px-1.5 py-0.5 text-[9px] font-medium text-[#D4A0FF]">{card}</span>
-                                    ))}
-                                  </div>
-                                  <p className="text-muted-foreground/50 mt-2 text-[9px]">{c.playstyle}</p>
-                                </div>
-                              }
-                            >
-                              <div className="flex items-center gap-2 rounded-lg border border-[#FFD700]/10 bg-[#FFD700]/4 px-2.5 py-1.5 cursor-default transition-all hover:border-[#FFD700]/25 hover:bg-[#FFD700]/8">
-                                <div className="flex gap-0.5">
-                                  {Array.from({ length: c.rating }, (_, i) => (
-                                    <Star key={i} className="h-2 w-2 fill-[#FFD700] text-[#FFD700]" />
-                                  ))}
-                                </div>
-                                <span className="text-[11px] font-medium text-foreground">{c.name}</span>
-                              </div>
-                            </Tooltip>
-                          ))}
-                        </div>
-                      </div>
-                    )}
 
                     {/* Selected cards */}
                     {totalSelectedCards > 0 && (

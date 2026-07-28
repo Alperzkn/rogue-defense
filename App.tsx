@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Sword, Cpu, Link2, Sparkles, Wrench, Coffee, Menu, X, Skull } from 'lucide-react';
+import { Home, Sword, Cpu, Sparkles, Wrench, Coffee, Menu, X, Skull } from 'lucide-react';
 import { cn } from './src/lib/utils';
 import { TooltipProvider } from './src/components/ui/tooltip';
 import { TIMING, EASE } from './src/lib/animations';
@@ -10,7 +10,6 @@ import { HomeScreen } from './src/screens/HomeScreen';
 import { SkillsScreen } from './src/screens/SkillsScreen';
 import { SkillDetailScreen } from './src/screens/SkillDetailScreen';
 import { ChipsScreen } from './src/screens/ChipsScreen';
-import { CombosScreen } from './src/screens/CombosScreen';
 import { StatusEffectsScreen } from './src/screens/StatusEffectsScreen';
 import { BuildPlannerScreen } from './src/screens/BuildPlannerScreen';
 import { EnemiesScreen } from './src/screens/EnemiesScreen';
@@ -20,7 +19,6 @@ const NAV_ITEMS = [
   { path: '/', label: 'Home', icon: Home, exact: true },
   { path: '/skills', label: 'Skills', icon: Sword, exact: false },
   { path: '/chips', label: 'Chips', icon: Cpu, exact: true },
-  { path: '/combos', label: 'Combos', icon: Link2, exact: true },
   { path: '/status', label: 'Status Effects', icon: Sparkles, exact: true },
   { path: '/enemies', label: 'Enemies', icon: Skull, exact: true },
   { path: '/build', label: 'Build Planner', icon: Wrench, exact: true },
@@ -171,7 +169,6 @@ function AnimatedRoutes() {
           <Route path="/skills" element={<SkillsScreen />} />
           <Route path="/skills/:skillId" element={<SkillDetailScreen />} />
           <Route path="/chips" element={<ChipsScreen />} />
-          <Route path="/combos" element={<CombosScreen />} />
           <Route path="/status" element={<StatusEffectsScreen />} />
           <Route path="/enemies" element={<EnemiesScreen />} />
           <Route path="/build" element={<BuildPlannerScreen />} />

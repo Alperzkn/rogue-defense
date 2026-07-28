@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Link, Heart, Lightbulb, ChevronRight, Star, Info, X, ArrowDown } from 'lucide-react';
+import { ArrowLeft, Link, Heart, Lightbulb, Star, Info, X, ArrowDown } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Badge } from '../components/ui/badge';
 import { Card, CardContent } from '../components/ui/card';
@@ -9,7 +9,7 @@ import { Separator } from '../components/ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
 import { SkillTypeBadge, SkillIcon } from '../components';
 import { Tooltip } from '../components/ui/tooltip';
-import { SKILLS, COMBOS } from '../data';
+import { SKILLS } from '../data';
 import { SkillTypeColors } from '../theme/colors';
 import type { Skill, SkillCard, CardTier } from '../data/types';
 import { fadeUp, TIMING, EASE } from '../lib/animations';
@@ -351,7 +351,6 @@ export function SkillDetailScreen() {
 
   const typeColor = SkillTypeColors[skill.type];
   const tiers: CardTier[] = [1, 2, 3];
-  const relatedCombos = COMBOS.filter(c => c.skills.includes(skill.id));
   const chainCards = skill.cards.filter(c => c.tag === 'Chain');
   const comboCards = skill.cards.filter(c => c.tag === 'Combo');
   const specialCards = skill.cards.filter(c => c.isSpecial);
@@ -466,38 +465,6 @@ export function SkillDetailScreen() {
               })}
             </Tabs>
           </motion.div>
-
-          {/* Related Combos */}
-          {relatedCombos.length > 0 && (
-            <motion.div {...fadeUp(0.09)}>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Synergy Builds
-              </h2>
-              <div className="flex flex-col gap-2">
-                {relatedCombos.map(combo => (
-                  <motion.div key={combo.id} whileHover={{ x: 2 }} transition={EASE.bounce}>
-                    <Card
-                      onClick={() => navigate('/combos')}
-                      className="cursor-pointer border-border/40 transition-all duration-200 hover:border-border/80"
-                    >
-                      <CardContent className="flex items-center gap-3 p-4">
-                        <div className="flex gap-0.5">
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <Star key={i} className={cn('h-3 w-3', i < combo.rating ? 'fill-[#FFD700] text-[#FFD700]' : 'fill-none text-border')} />
-                          ))}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-[13px] font-semibold text-foreground">{combo.name}</div>
-                          <div className="text-[11px] text-muted-foreground truncate">{combo.synergy}</div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground/40" />
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
         </div>
 
         {/* Right: Pro Tips */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Star } from 'lucide-react';
+import { ChevronDown, Star, Info } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Badge } from '../components/ui/badge';
 import { Card, CardContent } from '../components/ui/card';
@@ -124,7 +124,16 @@ export function ChipsScreen() {
       <div className="mb-6">
         <h1 className="text-2xl font-black tracking-tight text-foreground">Chip Sockets</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Mythic-grade chips with drop rates. Expand each socket to see all available stats.
+          Expand each socket to see all available stats and their drop rates.
+        </p>
+      </div>
+
+      {/* Quality disclaimer */}
+      <div className="mb-6 flex items-start gap-3 border-l-2 border-[#FFD700] bg-[#FFD700]/5 pl-4 pr-4 py-3">
+        <Info className="h-4 w-4 shrink-0 mt-0.5 text-[#FFD700]" />
+        <p className="text-[12px] text-muted-foreground leading-relaxed">
+          <span className="font-semibold text-foreground/90">All stats shown are for Mythic-quality chips.</span> Chips of
+          other qualities can roll the same effects with different values — treat these numbers as the Mythic-tier reference.
         </p>
       </div>
 
