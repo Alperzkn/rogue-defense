@@ -1,7 +1,7 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, X, Clock, ShieldCheck, LineChart } from 'lucide-react';
-import { ARCUS, MODAL_DELAY_MS, arcusStore } from '../lib/arcus';
+import { ARCUS, arcusStore } from '../lib/arcus';
 import { TIMING, EASE } from '../lib/animations';
 
 const FACTS = [
@@ -11,30 +11,26 @@ const FACTS = [
 ];
 
 /**
- * Delayed, frequency-capped promotional dialog for Arcus.
+ * Promotional dialog for Arcus, shown on arrival.
  *
- * Behaviour follows the usual rules for non-intrusive promos:
- * - never on first paint: waits MODAL_DELAY_MS after mount
- * - at most once per cooldown window, and never again after a click-through
+ * Behaviour:
+ * - part of the very first render, so it is the first thing a visitor sees
+ * - once per browser session, and never again after a click-through
  * - bottom sheet on phones, centred card on desktop
  * - closes on Escape, backdrop click, "Not now", or the X; focus moves into the dialog
  */
 export function ArcusModal() {
-  const [open, setOpen] = useState(false);
+  // Decide synchronously so the dialog is present in the first paint, not a frame later.
+  const [open, setOpen] = useState<boolean>(() => arcusStore.shouldShowModal());
   const reduceMotion = useReducedMotion();
   const titleId = useId();
   const descId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
-  // Schedule the first appearance.
+  // Record that this visit has seen the modal, so in-app navigation does not re-open it.
   useEffect(() => {
-    if (!arcusStore.shouldShowModal()) return;
-    const t = window.setTimeout(() => {
-      arcusStore.markModalShown();
-      setOpen(true);
-    }, MODAL_DELAY_MS);
-    return () => window.clearTimeout(t);
+    if (open) arcusStore.markModalShown();
   }, []);
 
   // Keyboard handling and initial focus while open.
