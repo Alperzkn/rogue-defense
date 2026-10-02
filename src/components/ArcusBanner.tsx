@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, X } from 'lucide-react';
 import { ARCUS, arcusStore } from '../lib/arcus';
+import { ArcusMark } from './ArcusMark';
+
+const { brand } = ARCUS;
 
 /**
- * Referral strip for Arcus. Kept deliberately plain and factual:
- * no hype, a clear "referral" label, and a short risk / availability note.
- * The CTA carries a slow, subtle glow so it stands out without flashing.
+ * Minimal one-row referral strip for Arcus, in the Arcus palette so it reads as
+ * a third-party message rather than part of the encyclopedia. The full
+ * explanation and risk note live in ArcusModal; this is only a reminder.
  */
 export function ArcusBanner() {
   const [dismissed, setDismissed] = useState<boolean>(arcusStore.isBannerDismissed);
@@ -19,60 +22,57 @@ export function ArcusBanner() {
 
   return (
     <aside
-      aria-label="Arcus referral"
-      className="relative border-b bg-card/70 backdrop-blur-md"
-      style={{ borderColor: `${ARCUS.accent}33` }}
+      aria-label="Arcus sponsored message"
+      style={{
+        backgroundColor: brand.green,
+        color: brand.cream,
+        fontFamily: 'Inter, Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      }}
     >
-      {/* Left accent rule, mirrors the editorial masthead strip on Home */}
-      <div className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ backgroundColor: ARCUS.accent }} />
-
-      <div className="mx-auto flex max-w-[1180px] flex-col gap-3 px-4 py-3 pl-5 pr-12 sm:flex-row sm:items-center sm:gap-6 sm:px-6 sm:pl-7 sm:pr-14">
-        {/* Copy */}
-        <div className="min-w-0 flex-1">
-          <p className="font-mono text-[9px] uppercase tracking-[0.25em]" style={{ color: ARCUS.accent }}>
-            Referral · Not affiliated with Rogue Defense
-          </p>
-          <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground">
-            <span className="font-semibold text-foreground">Arcus</span> is a self-custodial exchange on Robinhood
-            Chain, built by the dYdX team, for trading tokenized stocks, perpetuals and crypto around the clock.
-            Perpetuals access is currently waitlisted. Signing up through the button applies my referral code
-            automatically.{' '}
-            <a
-              href={ARCUS.aboutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-border underline-offset-2 hover:text-foreground"
-            >
-              About Arcus
-            </a>
-          </p>
-          <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground/60">
-            Trading involves risk and this is not financial advice. Availability depends on your jurisdiction.
-          </p>
+      <div className="mx-auto flex max-w-[1180px] items-center gap-3 px-4 py-2 sm:gap-5 sm:px-6">
+        {/* Wordmark + label */}
+        <div className="flex min-w-0 items-center gap-2">
+          <ArcusMark size={18} />
+          <div className="min-w-0 leading-none">
+            <span className="block text-[19px] leading-none" style={{ fontFamily: brand.serif }}>
+              arcus
+            </span>
+            <span className="mt-0.5 block whitespace-nowrap text-[8px] uppercase tracking-[0.18em]" style={{ color: 'rgba(232,221,190,0.6)' }}>
+              Sponsored · Not affiliated
+            </span>
+          </div>
         </div>
 
-        {/* CTA — full-width tap target on phones, compact on desktop */}
-        <a
-          href={ARCUS.referralUrl}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          onClick={arcusStore.markCtaClicked}
-          className="arcus-glow inline-flex w-full shrink-0 items-center justify-center gap-2 border px-4 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.2em] transition-colors hover:brightness-110 sm:w-auto sm:py-2.5"
-          style={{ borderColor: `${ARCUS.accent}80`, backgroundColor: `${ARCUS.accent}1f`, color: ARCUS.accent }}
-        >
-          Join the waitlist
-          <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
-      </div>
+        {/* Tagline, wider screens only */}
+        <p className="hidden min-w-0 flex-1 truncate text-[12px] sm:block" style={{ color: brand.creamSoft }}>
+          <span style={{ fontFamily: brand.serif, color: brand.cream }}>Trade while the world sleeps.</span>{' '}
+          Tokenized stocks, perpetuals and crypto, 24/7. Referral applied via this link.
+        </p>
 
-      <button
-        type="button"
-        aria-label="Dismiss Arcus referral"
-        onClick={dismiss}
-        className="absolute right-3 top-3 rounded-md p-1.5 text-muted-foreground hover:bg-secondary/60 hover:text-foreground sm:right-4 sm:top-1/2 sm:-translate-y-1/2"
-      >
-        <X className="h-4 w-4" />
-      </button>
+        {/* CTA + close */}
+        <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+          <a
+            href={ARCUS.referralUrl}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            onClick={arcusStore.markCtaClicked}
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[11px] font-semibold transition-all hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a2ee3a]"
+            style={{ backgroundColor: brand.cream, color: brand.greenDeep }}
+          >
+            Join waitlist
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+          <button
+            type="button"
+            aria-label="Dismiss Arcus message"
+            onClick={dismiss}
+            className="rounded-full p-1.5 opacity-70 transition-opacity hover:opacity-100"
+            style={{ color: brand.cream }}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
     </aside>
   );
 }

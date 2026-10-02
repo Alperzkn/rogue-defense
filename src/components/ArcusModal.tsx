@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, X } from 'lucide-react';
 import { ARCUS, arcusStore } from '../lib/arcus';
 import { TIMING, EASE } from '../lib/animations';
+import { ArcusMark } from './ArcusMark';
 
 const { brand } = ARCUS;
 const HAIRLINE = 'rgba(247,241,225,0.12)';
@@ -12,17 +13,6 @@ const FACTS = [
   ['Self-custodial', 'Built by the dYdX team on Robinhood Chain. You keep your keys.'],
   ['95+ markets', 'Zero spot fees on stock tokens. Perpetuals beta is waitlisted.'],
 ] as const;
-
-/** Simplified Arcus mark: a rounded arc with the diagonal cut, in the brand cream. */
-function ArcusMark({ size = 28 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M4 4h12a12 12 0 0 1 12 12v12h-9V16a3 3 0 0 0-3-3H4z" fill={brand.cream} />
-      <path d="M4 14h8l-8 8z" fill={brand.cream} />
-      <path d="M5 28l10-10h3v10z" fill={brand.cream} />
-    </svg>
-  );
-}
 
 /**
  * Promotional dialog for Arcus, shown on arrival.
