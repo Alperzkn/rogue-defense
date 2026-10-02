@@ -1,23 +1,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Sword, Cpu, Sparkles, Link, Heart, Layers, Gem, Wrench, Skull } from 'lucide-react';
-import { SKILLS, CHIP_SOCKETS, ENEMIES } from '../data';
-import { fadeUp, EASE } from '../lib/animations';
+import { ArrowUpRight, Sword, Cpu, Link2, Sparkles, Star, Link, Heart, Layers, Gem, Wrench, Skull } from 'lucide-react';
+import { Badge } from '../components/ui/badge';
+import { SkillTypeBadge, SkillIcon } from '../components';
+import { SKILLS, COMBOS, CHIP_SOCKETS, ENEMIES } from '../data';
+import { fadeUp, TIMING, EASE } from '../lib/animations';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 
 const QUICK_NAV = [
   { path: '/skills', label: 'Skills', icon: Sword, desc: `${SKILLS.length} weapons · upgrade cards`, color: '#FF4500', index: '01' },
   { path: '/chips', label: 'Chip Sockets', icon: Cpu, desc: `${CHIP_SOCKETS.length} socket types · drop rates`, color: '#00C8FF', index: '02' },
-  { path: '/status', label: 'Status Effects', icon: Sparkles, desc: '7 debuffs · interactions', color: '#00FF88', index: '03' },
-  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies · resistances`, color: '#EF4444', index: '04' },
-  { path: '/build', label: 'Build Planner', icon: Wrench, desc: 'Interactive chip planner', color: '#FFD700', index: '05' },
+  { path: '/combos', label: 'Combos', icon: Link2, desc: `${COMBOS.length} curated synergy builds`, color: '#B44FFF', index: '03' },
+  { path: '/status', label: 'Status Effects', icon: Sparkles, desc: '7 debuffs · interactions', color: '#00FF88', index: '04' },
+  { path: '/enemies', label: 'Enemies', icon: Skull, desc: `${ENEMIES.length} enemies · resistances`, color: '#EF4444', index: '05' },
+  { path: '/build', label: 'Build Planner', icon: Wrench, desc: 'Interactive chip planner', color: '#FFD700', index: '06' },
 ];
 
 const STATS = [
   { value: SKILLS.length, label: 'Skills', color: '#FF4500' },
   { value: SKILLS.reduce((a, s) => a + s.cards.length, 0), label: 'Cards', color: '#00C8FF' },
   { value: CHIP_SOCKETS.length, label: 'Chips', color: '#FFD700' },
+  { value: COMBOS.length, label: 'Builds', color: '#B44FFF' },
   { value: ENEMIES.length, label: 'Enemies', color: '#EF4444' },
 ];
 
@@ -31,6 +35,7 @@ const MECHANICS = [
 export function HomeScreen() {
   useDocumentTitle();
   const navigate = useNavigate();
+  const topBuilds = COMBOS.filter(c => c.rating === 5);
 
   return (
     <div className="relative mx-auto max-w-[1180px] px-5 sm:px-10 py-8 sm:py-14">
@@ -38,7 +43,7 @@ export function HomeScreen() {
       {/* Editorial gutter ticker (desktop only) */}
       <div className="pointer-events-none hidden lg:flex absolute right-4 top-0 bottom-0 w-6 flex-col items-center justify-start pt-16 gap-8 text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/40 [writing-mode:vertical-rl]">
         <span>RD // Encyclopedia // 2026</span>
-        <span>Skill · Chip · Enemy</span>
+        <span>Build · Chip · Combo</span>
       </div>
 
       {/* Disclaimer — turned into a print-style masthead strip */}
@@ -80,7 +85,7 @@ export function HomeScreen() {
         </div>
 
         <p className="mt-8 max-w-xl text-[15px] text-muted-foreground leading-relaxed">
-          Complete reference for skills, upgrade cards, chip sockets, and enemies —
+          Complete reference for skills, upgrade cards, chip sockets, and combo synergies —
           written for players, by a player.
         </p>
       </motion.div>
@@ -153,6 +158,71 @@ export function HomeScreen() {
                   </span>
                 </div>
                 <div className="text-[12px] text-muted-foreground leading-relaxed">{desc}</div>
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Top Builds — editorial spread */}
+      <motion.div {...fadeUp(0.18)} className="mb-16">
+        <div className="mb-5 flex items-end justify-between">
+          <div>
+            <p className="slash font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Featured</p>
+            <h2 className="font-display mt-1 text-2xl font-bold tracking-tight text-foreground">Top Builds</h2>
+          </div>
+          <button
+            onClick={() => navigate('/combos')}
+            className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+          >
+            All builds <ArrowUpRight className="h-3 w-3" />
+          </button>
+        </div>
+
+        <div className="space-y-[1px] bg-border/60 border border-border/60">
+          {topBuilds.map((combo, i) => (
+            <motion.button
+              key={combo.id}
+              {...fadeUp(0.2 + i * TIMING.stagger)}
+              onClick={() => navigate('/combos')}
+              className="group w-full text-left bg-card/80 hover:bg-card transition-colors p-5 sm:p-6"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                {/* Large issue-number style rating */}
+                <div className="flex sm:flex-col sm:items-start items-center gap-2 sm:gap-0 sm:min-w-[80px]">
+                  <div className="font-display text-3xl sm:text-4xl font-black tracking-[-0.05em] text-[#FFD700]">
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <Star key={j} className="h-2.5 w-2.5 fill-[#FFD700] text-[#FFD700]" />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="font-display text-lg font-bold tracking-tight text-foreground">
+                      {combo.name}
+                    </h3>
+                    <Badge variant="mythic" className="text-[9px] font-mono">TOP</Badge>
+                  </div>
+                  <p className="text-[13px] text-muted-foreground leading-relaxed mb-3">{combo.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {combo.skills.map(sid => {
+                      const skill = SKILLS.find(s => s.id === sid);
+                      return skill ? (
+                        <div key={sid} className="flex items-center gap-1.5 border border-border/60 bg-secondary/40 px-2 py-1">
+                          <SkillIcon skill={skill} size={14} />
+                          <span className="text-[11px] font-medium text-foreground">{skill.name}</span>
+                          <SkillTypeBadge type={skill.type} />
+                        </div>
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+
+                <ArrowUpRight className="hidden sm:block h-4 w-4 shrink-0 text-muted-foreground/40 transition-all duration-200 group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </div>
             </motion.button>
           ))}
