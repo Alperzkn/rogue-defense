@@ -4,7 +4,20 @@
 export const ARCUS = {
   referralUrl: 'https://waitlist.arcus.xyz/s/INTELLIGENXYZ',
   aboutUrl: 'https://arcus.xyz',
+  /** Cyan used by the in-app banner so it sits with the encyclopedia's own palette. */
   accent: '#00C8FF',
+  /**
+   * Arcus brand palette, sampled from arcus.xyz design tokens and the brand card:
+   * deep forest green surfaces, cream type, lime as a small highlight.
+   */
+  brand: {
+    green: '#1e3b25',
+    greenDeep: '#0f140d',
+    cream: '#f7f1e1',
+    creamSoft: '#e8ddbe',
+    lime: '#a2ee3a',
+    serif: '"Hedvig Letters Serif", Georgia, "Times New Roman", serif',
+  },
 } as const;
 
 const KEYS = {
