@@ -16,6 +16,7 @@ import { BuildPlannerScreen } from './src/screens/BuildPlannerScreen';
 import { EnemiesScreen } from './src/screens/EnemiesScreen';
 import { FeedbackButton } from './src/components/FeedbackForm';
 import { ArcusBanner } from './src/components/ArcusBanner';
+import { ArcusModal } from './src/components/ArcusModal';
 
 const NAV_ITEMS = [
   { path: '/', label: 'Home', icon: Home, exact: true },
@@ -199,6 +200,7 @@ export default function App() {
               <AnimatedRoutes />
             </div>
           </main>
+          <ArcusModal />
           {/* Floating action buttons */}
           <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-3 items-end">
             <a

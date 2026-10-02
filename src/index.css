@@ -177,3 +177,13 @@
     50% { opacity: 0.2; }
   }
 }
+
+/* Arcus CTA: slow, subtle glow so the referral button draws the eye without flashing */
+@keyframes arcus-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 200, 255, 0); }
+  50% { box-shadow: 0 0 18px 0 rgba(0, 200, 255, 0.35); }
+}
+.arcus-glow { animation: arcus-glow 3.2s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .arcus-glow { animation: none; box-shadow: 0 0 14px 0 rgba(0, 200, 255, 0.25); }
+}
