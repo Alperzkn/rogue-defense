@@ -22,7 +22,7 @@ export function ArcusBanner() {
 
   return (
     <aside
-      aria-label="Arcus sponsored message"
+      aria-label="Arcus referral"
       style={{
         backgroundColor: brand.green,
         color: brand.cream,
@@ -38,7 +38,7 @@ export function ArcusBanner() {
               arcus
             </span>
             <span className="mt-0.5 block whitespace-nowrap text-[8px] uppercase tracking-[0.18em]" style={{ color: 'rgba(232,221,190,0.6)' }}>
-              Sponsored · Not affiliated
+              Referral · Not affiliated
             </span>
           </div>
         </div>
@@ -64,7 +64,7 @@ export function ArcusBanner() {
           </a>
           <button
             type="button"
-            aria-label="Dismiss Arcus message"
+            aria-label="Dismiss Arcus referral"
             onClick={dismiss}
             className="rounded-full p-1.5 opacity-70 transition-opacity hover:opacity-100"
             style={{ color: brand.cream }}

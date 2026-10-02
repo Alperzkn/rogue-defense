@@ -19,7 +19,7 @@ const FACTS = [
  *
  * Styled in Arcus's own palette (forest green, cream, serif wordmark) rather than
  * the encyclopedia's black-and-cyan, and framed explicitly as a third-party
- * sponsored message, so nobody mistakes it for part of the app.
+ * referral, so nobody mistakes it for part of the app.
  *
  * Behaviour:
  * - part of the very first render, so it is the first thing a visitor sees
@@ -93,13 +93,13 @@ export function ArcusModal() {
               fontFamily: 'Inter, Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
             }}
           >
-            {/* Third-party strip: the one thing that must read before anything else */}
+            {/* Referral strip: the one thing that must read before anything else */}
             <div
               className="flex items-center justify-between gap-3 px-5 py-2.5 sm:px-7"
               style={{ backgroundColor: brand.greenDeep, color: brand.creamSoft }}
             >
               <p className="text-[10px] font-medium uppercase tracking-[0.18em] opacity-90">
-                Sponsored message · From a third party, not Rogue Defense
+                Personal referral · Arcus is not part of Rogue Defense
               </p>
               <button
                 type="button"
